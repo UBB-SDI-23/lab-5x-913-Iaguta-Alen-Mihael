@@ -36,13 +36,9 @@ export class DetailsPlayerModal extends Component {
     });
   }
 
-  resetChampionsState = () => {
-    this.setState({ champions: [] });
-  }
-
   render() {
     return (
-      <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered onExited={this.resetChampionsState()}>
+      <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered >
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-vcenter'>Player Champions</Modal.Title>
         </Modal.Header>
