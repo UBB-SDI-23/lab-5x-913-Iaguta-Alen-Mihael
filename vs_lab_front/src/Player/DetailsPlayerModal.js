@@ -8,12 +8,11 @@ export class DetailsPlayerModal extends Component {
     this.state = { champions: [] };
   }
 
-  componentDidMount() {
-    this.getChampions();
-  }
-
-  componentDidUpdate(){
-    this.getChampions();
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedPlayerID !== this.props.selectedPlayerID) {
+      this.setState({ champions: [] }); 
+      this.getChampions();
+    }
   }
 
   getChampions(){
