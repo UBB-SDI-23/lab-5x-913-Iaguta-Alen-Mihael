@@ -28,11 +28,12 @@ export class UpdatePlayerModal extends Component {
         .then(res=>res.json())
         .then((result)=>{
             alert(JSON.stringify(result));
-        },
-        (error)=>{
-            alert('Failed');
         })
+        .catch((error) => {
+            console.error('Error:', error);
+          });
     }
+
     render(){
         return (
             <div className="container">

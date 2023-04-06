@@ -40,16 +40,8 @@ export class Player extends Component{
         }
     }
 
-    getChampions(plid){
-        fetch(process.env.REACT_APP_API+'chessplayers'+plid)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({players:data});
-        })
-    }
-
     render(){
-        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear} = this.state;
+        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, selectedPlayerID} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
         let reportModalClose = () => this.setState({reportModalShow:false});
@@ -83,13 +75,15 @@ export class Player extends Component{
                                     <Button className="mr-2" variant="info"
                                         onClick={() => this.setState({
                                             detailsModalShow: true,
-                                        })}>
+                                            selectedPlayerID: player.id})
+                                            }>
                                         Details
                                     </Button>
 
-                                    {/* <DetailsPlayerModal show={this.state.detailsModalShow}>
+                                    <DetailsPlayerModal show={this.state.detailsModalShow}
                                         onHide={detailsModalClose}
-                                    </DetailsPlayerModal>  */}
+                                        selectedPlayerID ={selectedPlayerID}
+                                    />
 
                                     <Button className="mr-2" variant="warning"
                                         onClick={()=>this.setState({
@@ -133,6 +127,7 @@ export class Player extends Component{
                     onClick = {() => this.setState({reportModalShow:true})}>
                         $
                     </Button>
+                    
                     <ReportPlayerModal show={this.state.reportModalShow}
                         onHide={reportModalClose}>
                     </ReportPlayerModal>

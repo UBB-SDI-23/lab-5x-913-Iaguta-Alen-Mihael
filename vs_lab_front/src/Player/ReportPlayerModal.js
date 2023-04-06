@@ -14,7 +14,7 @@ export class ReportPlayerModal extends Component {
 
   componentDidUpdate(){
     this.getTrophies();
-}
+  }
 
   getTrophies = () => {
     fetch(process.env.REACT_APP_API + 'chessplayers/trophies')

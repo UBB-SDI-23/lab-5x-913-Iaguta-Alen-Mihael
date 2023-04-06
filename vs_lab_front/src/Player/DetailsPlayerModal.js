@@ -5,18 +5,50 @@ export class DetailsPlayerModal extends Component {
 
   constructor(props) {
     super(props);
-    this.champs = this.props.chessChampions;
+    this.state = { champions: [] };
+  }
+
+  componentDidMount() {
+    this.getChampions();
+  }
+
+  componentDidUpdate(){
+    this.getChampions();
+  }
+
+  getChampions(){
+    fetch(process.env.REACT_APP_API+'chessplayers/'+this.props.selectedPlayerID)
+    .then(response => response.json())
+    .then( (data) => {
+        const champs = data.chessChampions.map(champion => ({
+        id: champion.id,
+        lastTrophy: champion.lastTrophy,
+        record: champion.record,
+        maxRating: champion.maxRating,
+        consecutiveYears: champion.consecutiveYears,
+        current: champion.current,
+        chessPlayerID: champion.chessPlayerID
+      }));
+        this.setState({ champions: champs });
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
+  resetChampionsState = () => {
+    this.setState({ champions: [] });
   }
 
   render() {
     return (
-      <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
+      <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered onExited={this.resetChampionsState()}>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-vcenter'>Player Trophies</Modal.Title>
+          <Modal.Title id='contained-modal-title-vcenter'>Player Champions</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Table striped bordered hover>
-          <thead>
+              <thead>
                 <tr>
                   <th>ID</th>
                   <th>Last Trophy</th>
@@ -28,7 +60,7 @@ export class DetailsPlayerModal extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.champs.map((champ) => (
+                {this.state.champions.map((champ) => (
                   <tr key={champ.id}>
                     <td>{champ.id}</td>
                     <td>{champ.lastTrophy}</td>
