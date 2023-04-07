@@ -48,26 +48,22 @@ export class Champion extends Component{
                 <Table className="mt-4" striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Last Trophy</th>
                             <th>Record</th>
                             <th>Max Rating</th>
                             <th>Consecutive Years</th>
                             <th>Current</th>
-                            <th>Chess Player ID</th>
                             <th>Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         {champs.map(champ =>
                             <tr key={champ.id}>
-                                <td>{champ.id}</td>
                                 <td>{champ.lastTrophy}</td>
                                 <td>{champ.record}</td>
                                 <td>{champ.maxRating}</td>
                                 <td>{champ.consecutiveYears}</td>
                                 <td>{champ.current}</td>
-                                <td>{champ.chessPlayerID}</td>
                                 <td>
                                 <ButtonToolbar>
                                     <Button className="mr-2" variant="info">

@@ -51,7 +51,6 @@ export class Player extends Component{
                 <Table className="mt-4" striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Country</th>
                             <th>Rating</th>
@@ -63,7 +62,6 @@ export class Player extends Component{
                     <tbody>
                         {players.map(player =>
                             <tr key={player.id}>
-                                <td>{player.id}</td>
                                 <td>{player.name}</td>
                                 <td>{player.country}</td>
                                 <td>{player.rating}</td>

@@ -45,25 +45,21 @@ export class DetailsPlayerModal extends Component {
           <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Last Trophy</th>
                   <th>Record</th>
                   <th>Max Rating</th>
                   <th>Consecutive Years</th>
                   <th>Current</th>
-                  <th>Chess Player ID</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.champions.map((champ) => (
                   <tr key={champ.id}>
-                    <td>{champ.id}</td>
                     <td>{champ.lastTrophy}</td>
                     <td>{champ.record}</td>
                     <td>{champ.maxRating}</td>
                     <td>{champ.consecutiveYears}</td>
                     <td>{champ.current}</td>
-                    <td>{champ.chessPlayerID}</td>
                   </tr>
                 ))}
               </tbody>

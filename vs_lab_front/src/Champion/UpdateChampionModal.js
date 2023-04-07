@@ -50,13 +50,6 @@ export class UpdateChampionModal extends Component {
                         <Row>
                             <Col sm={7}>
                                 <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group controlId="ID">
-                                        <Form.Label>ID</Form.Label>
-                                        <Form.Control type="text" name="id" required
-                                        disabled
-                                        defaultValue={this.props.chid} 
-                                        placeholder="ID"/>
-                                    </Form.Group>
                                     <Form.Group controlId="LastTrophy">
                                         <Form.Label>Last Trophy</Form.Label>
                                         <Form.Control type="text" name="lastTrophy" required 

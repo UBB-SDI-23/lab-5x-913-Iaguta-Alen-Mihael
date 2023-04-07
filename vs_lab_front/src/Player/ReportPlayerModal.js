@@ -45,7 +45,6 @@ export class ReportPlayerModal extends Component {
             <tbody>
               {this.state.trophies.map((trophy) => (
                 <tr key={trophy.id}>
-                  <td>{trophy.id}</td>
                   <td>{trophy.name}</td>
                   <td>{trophy.trophies}</td>
                 </tr>
