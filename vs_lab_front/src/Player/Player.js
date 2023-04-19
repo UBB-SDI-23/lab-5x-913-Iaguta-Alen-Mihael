@@ -11,22 +11,22 @@ export class Player extends Component{
 
     constructor(props){
         super(props);
-        this.state={players:[], addModalShow: false, updateModalShow: false, reportModalShow: false, detailsModalShow: false};
+        this.state={players:[], currentPage: 1, itemsPerPage: 10,
+             addModalShow: false, updateModalShow: false, reportModalShow: false, detailsModalShow: false};
     }
 
     refreshList(){
-        fetch(process.env.REACT_APP_API+'chessplayers')
+        const { currentPage, itemsPerPage } = this.state;
+        const url = `${process.env.REACT_APP_API}chessplayers?page=${currentPage}&limit=${itemsPerPage}`;
+
+        fetch(url)
         .then(response => response.json())
         .then(data => {
-            this.setState({players:data});
+            this.setState({players: data});
         })
     }   
 
     componentDidMount(){
-        this.refreshList();
-    }
-
-    componentDidUpdate(){
         this.refreshList();
     }
 
@@ -40,27 +40,81 @@ export class Player extends Component{
         }
     }
 
+    ratingSort(){
+        let playas = this.state.players;
+        playas.sort((a,b) => b.rating - a.rating);
+        this.setState({players: playas});
+    }
+
+    handlePrevPage = () => {
+        const { currentPage } = this.state;
+        if (currentPage > 1) {
+          this.setState({ currentPage: currentPage - 1 }, () => this.refreshList());
+        }
+      };
+      
+      handleNextPage = () => {
+        const { currentPage } = this.state;
+        this.setState({ currentPage: currentPage + 1 }, () => this.refreshList());
+      };
+      
+      handlePageChange = (pageNumber) => {
+        this.setState({ currentPage: pageNumber }, () => this.refreshList());
+      };
+      
+
     render(){
-        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, selectedPlayerID} = this.state;
+        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, selectedPlayerID, currentPage, itemsPerPage} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
         let reportModalClose = () => this.setState({reportModalShow:false});
         let detailsModalClose = () => this.setState({detailsModalShow:false});
+
+        const indexOfLastItem = currentPage * itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        const currentPlayers = players.slice(indexOfFirstItem, indexOfLastItem);
+
         return(
             <div>
                 <Table className="mt-4" striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Country</th>
-                            <th>Rating</th>
-                            <th>IsMaster</th>
-                            <th>StartYear</th>
-                            <th>Options</th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                   Name
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    Country
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" 
+                                style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}
+                                onClick={() => this.ratingSort()}>
+                                    Rating ⇩
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    IsMaster
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    StartYear
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    Options
+                                </Button>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {players.map(player =>
+                        {currentPlayers.map(player =>
                             <tr key={player.id}>
                                 <td>{player.name}</td>
                                 <td>{player.country}</td>
@@ -91,7 +145,8 @@ export class Player extends Component{
                                         plcountry:player.country,
                                         plrating:player.rating,
                                         plismaster:player.isMaster,
-                                        plstartyear:player.startYear})}>
+                                        plstartyear:player.startYear})
+                                        }>
                                             Update
                                     </Button>
 
@@ -125,6 +180,12 @@ export class Player extends Component{
                     onClick = {() => this.setState({reportModalShow:true})}>
                         $
                     </Button>
+
+                    <div className='ml-auto'>
+                        <Button style={{ marginLeft: '2px' }} onClick={this.handlePrevPage}>Prev</Button>
+                        <Button style={{ marginLeft: '2px' }} onClick={this.handleNextPage}>Next</Button>
+                        <Button style={{ marginLeft: '2px' }} onClick={() => this.handlePageChange(1)}>{currentPage}</Button>
+                    </div>
                     
                     <ReportPlayerModal show={this.state.reportModalShow}
                         onHide={reportModalClose}>

@@ -37,7 +37,6 @@ export class ReportPlayerModal extends Component {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Trophies</th>
               </tr>
