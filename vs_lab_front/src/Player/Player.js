@@ -40,6 +40,16 @@ export class Player extends Component{
         }
     }
 
+    // TODO: Finnish this implementation 
+    getParticipations(plid){
+        fetch(process.env.REACT_APP_API+'chessplayers/'+plid)
+        .then(response => response.json())
+        .then( data => data.playerParticipations.json())
+        .then( participation => {
+            return participation.length;
+        });
+    }
+
     ratingSort(){
         let playas = this.state.players;
         playas.sort((a,b) => b.rating - a.rating);
@@ -108,6 +118,11 @@ export class Player extends Component{
                             </th>
                             <th>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    Participations
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Options
                                 </Button>
                             </th>
@@ -121,6 +136,7 @@ export class Player extends Component{
                                 <td>{player.rating}</td>
                                 <td>{player.isMaster}</td>
                                 <td>{player.startYear}</td>
+                                <td>{this.getParticipations(player.id)}</td>
                                 <td>
                                 <ButtonToolbar>
 
