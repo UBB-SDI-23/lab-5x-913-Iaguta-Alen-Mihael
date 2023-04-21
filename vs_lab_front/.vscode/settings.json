@@ -13,6 +13,7 @@
         "labelledby",
         "Participations",
         "PetarKatic",
+        "plchampions",
         "plcountry",
         "plid",
         "plismaster",
@@ -20,5 +21,6 @@
         "plrating",
         "Pulu",
         "webfonts"
-    ]
+    ],
+    "editor.formatOnType": true
 }

@@ -12,19 +12,37 @@ export class Player extends Component{
     constructor(props){
         super(props);
         this.state={players:[], currentPage: 1, itemsPerPage: 10,
-             addModalShow: false, updateModalShow: false, reportModalShow: false, detailsModalShow: false};
+            addModalShow: false, updateModalShow: false, reportModalShow: false, detailsModalShow: false
+        };
+
     }
 
-    refreshList(){
+    refreshList() {
         const { currentPage, itemsPerPage } = this.state;
         const url = `${process.env.REACT_APP_API}chessplayers?page=${currentPage}&limit=${itemsPerPage}`;
-
+      
         fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({players: data});
-        })
-    }   
+          .then(response => response.json())
+          .then(data => {
+            const updatedPlayers = [];
+            const playerPromises = data.map(player => {
+              // Fetch data for each player using the /chessplayers/{id} endpoint
+              const playerUrl = `${process.env.REACT_APP_API}chessplayers/${player.id}`;
+              return fetch(playerUrl).then(response => response.json());
+            });
+      
+            Promise.all(playerPromises).then(playerData => {
+              // Combine the player data with the original player object
+              for (let i = 0; i < data.length; i++) {
+                updatedPlayers.push({
+                  ...data[i],
+                  ...playerData[i]
+                });
+              }
+              this.setState({ players: updatedPlayers });
+            });
+          });
+      }
 
     componentDidMount(){
         this.refreshList();
@@ -38,16 +56,6 @@ export class Player extends Component{
                         'Content-Type':'application/json'}
             })
         }
-    }
-
-    // TODO: Finnish this implementation 
-    getParticipations(plid){
-        fetch(process.env.REACT_APP_API+'chessplayers/'+plid)
-        .then(response => response.json())
-        .then( data => data.playerParticipations.json())
-        .then( participation => {
-            return participation.length;
-        });
     }
 
     ratingSort(){
@@ -74,7 +82,7 @@ export class Player extends Component{
       
 
     render(){
-        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, selectedPlayerID, currentPage, itemsPerPage} = this.state;
+        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, plchampions, currentPage, itemsPerPage} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
         let reportModalClose = () => this.setState({reportModalShow:false});
@@ -129,61 +137,65 @@ export class Player extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {currentPlayers.map(player =>
-                            <tr key={player.id}>
-                                <td>{player.name}</td>
-                                <td>{player.country}</td>
-                                <td>{player.rating}</td>
-                                <td>{player.isMaster}</td>
-                                <td>{player.startYear}</td>
-                                <td>{this.getParticipations(player.id)}</td>
-                                <td>
-                                <ButtonToolbar>
+                        {currentPlayers.map(player => {
+                            return (
+                                <tr key={player.id}>
+                                    <td>{player.name}</td>
+                                    <td>{player.country}</td>
+                                    <td>{player.rating}</td>
+                                    <td>{player.isMaster}</td>
+                                    <td>{player.startYear}</td>
+                                    <td>{player.playerParticipations.length}</td>
+                                    <td>
+                                        <ButtonToolbar>
 
-                                    <Button className="mr-2" variant="info"
-                                        onClick={() => this.setState({
-                                            detailsModalShow: true,
-                                            selectedPlayerID: player.id})
-                                            }>
-                                        Details
-                                    </Button>
+                                            <Button className="mr-2" variant="info"
+                                                onClick={() =>
+                                                    this.setState({
+                                                        detailsModalShow: true,
+                                                        plchampions: player.chessChampions})}>
+                                                Details
+                                            </Button>
 
-                                    <DetailsPlayerModal show={this.state.detailsModalShow}
-                                        onHide={detailsModalClose}
-                                        selectedPlayerID ={selectedPlayerID}
-                                    />
+                                            <DetailsPlayerModal show={this.state.detailsModalShow}
+                                                onHide={detailsModalClose}
+                                                plchampions = {plchampions}
+                                            />
 
-                                    <Button className="mr-2" variant="warning"
-                                        onClick={()=>this.setState({
-                                        updateModalShow:true,
-                                        plid:player.id,
-                                        plname:player.name,
-                                        plcountry:player.country,
-                                        plrating:player.rating,
-                                        plismaster:player.isMaster,
-                                        plstartyear:player.startYear})
-                                        }>
-                                            Update
-                                    </Button>
+                                            <Button className="mr-2" variant="warning"
+                                                onClick={() => this.setState({
+                                                    updateModalShow: true,
+                                                    plid: player.id,
+                                                    plname: player.name,
+                                                    plcountry: player.country,
+                                                    plrating: player.rating,
+                                                    plismaster: player.isMaster,
+                                                    plstartyear: player.startYear
+                                                })
+                                                }>
+                                                Update
+                                            </Button>
 
-                                    <Button className="mr-2" variant="danger"
-                                        onClick={()=>this.deletePlayer(player.id)}>
-                                            Delete
-                                    </Button>
+                                            <Button className="mr-2" variant="danger"
+                                                onClick={() => this.deletePlayer(player.id)}>
+                                                Delete
+                                            </Button>
 
-                                    <UpdatePlayerModal show={this.state.updateModalShow}
-                                        onHide={updateModalClose}
-                                        plid={plid}
-                                        plname={plname}
-                                        plcountry={plcountry}
-                                        plrating={plrating}
-                                        plismaster={plismaster}
-                                        plstartyear={plstartyear}
-                                        />
-                                </ButtonToolbar>
-                                </td>
-                            </tr>
-                        )}
+                                            <UpdatePlayerModal show={this.state.updateModalShow}
+                                                onHide={updateModalClose}
+                                                plid={plid}
+                                                plname={plname}
+                                                plcountry={plcountry}
+                                                plrating={plrating}
+                                                plismaster={plismaster}
+                                                plstartyear={plstartyear}>
+                                            </UpdatePlayerModal>
+                                            
+                                        </ButtonToolbar>
+                                    </td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </Table>
                 <ButtonToolbar>

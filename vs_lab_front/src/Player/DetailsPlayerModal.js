@@ -2,39 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 
 export class DetailsPlayerModal extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { champions: [] };
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedPlayerID !== this.props.selectedPlayerID) {
-      this.setState({ champions: [] }); 
-      this.getChampions();
-    }
-  }
-
-  getChampions(){
-    fetch(process.env.REACT_APP_API+'chessplayers/'+this.props.selectedPlayerID)
-    .then(response => response.json())
-    .then( (data) => {
-        const champs = data.chessChampions.map(champion => ({
-        id: champion.id,
-        lastTrophy: champion.lastTrophy,
-        record: champion.record,
-        maxRating: champion.maxRating,
-        consecutiveYears: champion.consecutiveYears,
-        current: champion.current,
-        chessPlayerID: champion.chessPlayerID
-      }));
-        this.setState({ champions: champs });
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  }
-
+  
   render() {
     return (
       <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered >
@@ -53,7 +21,7 @@ export class DetailsPlayerModal extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.champions.map((champ) => (
+                {this.props.plchampions && this.props.plchampions.map((champ) => (
                   <tr key={champ.id}>
                     <td>{champ.lastTrophy}</td>
                     <td>{champ.record}</td>
