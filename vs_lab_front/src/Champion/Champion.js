@@ -78,7 +78,7 @@ export class Champion extends Component{
 
 
     render() {
-        const { champions, chid, chlasttrophy, chrecord, chmaxrating, chconsecutiveyears, chcurrent, chplayer, currentPage, itemsPerPage } = this.state;
+        const { champions, chid, chlasttrophy, chrecord, chmaxrating, chconsecutiveyears, chcurrent, chplayerid, chplayer, currentPage, itemsPerPage } = this.state;
         let addModalClose = () => this.setState({ addModalShow: false });
         let updateModalClose = () => this.setState({ updateModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
@@ -174,6 +174,7 @@ export class Champion extends Component{
                                     chmaxrating={chmaxrating}
                                     chconsecutiveyears={chconsecutiveyears}
                                     chcurrent={chcurrent}
+                                    chplayerid={chplayerid}
                                     />
                                 </ButtonToolbar>
                                 </td>

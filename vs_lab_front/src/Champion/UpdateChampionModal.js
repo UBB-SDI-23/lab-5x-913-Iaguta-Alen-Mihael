@@ -5,7 +5,16 @@ export class UpdateChampionModal extends Component {
 
     constructor(props){
         super(props);
+        this.state = { chessPlayers: [] };
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        fetch(process.env.REACT_APP_API+'chessplayers')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({ chessPlayers: data });
+        });
     }
 
     handleSubmit(event){
@@ -80,12 +89,16 @@ export class UpdateChampionModal extends Component {
                                         defaultValue={this.props.chcurrent} 
                                         placeholder="0 or 1"/>
                                     </Form.Group>
+
                                     <Form.Group controlId="ChessPlayerID">
-                                        <Form.Label>Chess Player ID</Form.Label>
-                                        <Form.Control type="number" name="chessPlayerID" required 
-                                        defaultValue={this.props.chplayerid} 
-                                        placeholder="Chess Player ID"/>
+                                        <Form.Label>Chess Players</Form.Label>
+                                            <Form.Select name="chessPlayerID" required defaultValue={this.props.chplayerid}>
+                                                {this.state.chessPlayers.map((player) => (
+                                                    <option key={player.id} value={player.id}>{player.name}</option>
+                                                ))}
+                                            </Form.Select>
                                     </Form.Group>
+
                                     <Form.Group>
                                         <Button variant="primary" type="submit">
                                             Update Chess Champion
