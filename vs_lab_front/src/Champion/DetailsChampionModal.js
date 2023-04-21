@@ -11,24 +11,30 @@ export class DetailsChampionModal extends Component {
         </Modal.Header>
         <Modal.Body>
           <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Country</th>
-                  <th>Rating</th>
-                  <th>Is Master</th>
-                  <th>Start Year</th>
-                </tr>
-              </thead>
-            <tbody>
-                <tr>
-                <td>{this.props.chplayer.name}</td>
-                    <td>{this.props.chplayer.country}</td>
-                    <td>{this.props.chplayer.rating}</td>
-                    <td>{this.props.chplayer.isMaster}</td>
-                    <td>{this.props.chplayer.startYear}</td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Rating</th>
+                    <th>Is Master</th>
+                    <th>Start Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.props.chplayer ? (
+                        <tr>
+                            <td>{this.props.chplayer.name}</td>
+                            <td>{this.props.chplayer.country}</td>
+                            <td>{this.props.chplayer.rating}</td>
+                            <td>{this.props.chplayer.isMaster}</td>
+                            <td>{this.props.chplayer.startYear}</td>
+                        </tr>
+                ) : (
+                    <tr>
+                        <td colSpan="5">Loading...</td>
+                    </tr>
+                )}
+                </tbody>
           </Table>
         </Modal.Body>
         <Modal.Footer>

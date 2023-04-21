@@ -46,6 +46,10 @@ export class Champion extends Component{
         this.refreshList();
     }
 
+    componentDidUpdate(){
+        this.refreshList();
+    }
+
     deleteChampion(chid){
         if(window.confirm('Are you sure?')){
             fetch(process.env.REACT_APP_API+'chesschampions/'+chid,{
