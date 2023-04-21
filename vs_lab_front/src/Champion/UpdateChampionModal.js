@@ -37,7 +37,7 @@ export class UpdateChampionModal extends Component {
         })
         .then(res=>res.json())
         .then((result)=>{
-            alert(JSON.stringify(result));
+            alert("Action completed!");
         },
         (error)=>{
             alert('Failed');
@@ -59,6 +59,9 @@ export class UpdateChampionModal extends Component {
                         <Row>
                             <Col sm={7}>
                                 <Form onSubmit={this.handleSubmit}>
+                                    <Form.Group controlId="Id" hidden>
+                                        <Form.Control type="text" name="id" defaultValue={this.props.chid} />
+                                    </Form.Group>
                                     <Form.Group controlId="LastTrophy">
                                         <Form.Label>Last Trophy</Form.Label>
                                         <Form.Control type="text" name="lastTrophy" required 
