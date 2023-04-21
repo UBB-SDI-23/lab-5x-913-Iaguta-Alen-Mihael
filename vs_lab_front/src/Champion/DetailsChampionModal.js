@@ -22,7 +22,7 @@ export class DetailsChampionModal extends Component {
               </thead>
             <tbody>
                 <tr>
-                    <td>{this.props.chplayer.name}</td>
+                <td>{this.props.chplayer.name}</td>
                     <td>{this.props.chplayer.country}</td>
                     <td>{this.props.chplayer.rating}</td>
                     <td>{this.props.chplayer.isMaster}</td>
