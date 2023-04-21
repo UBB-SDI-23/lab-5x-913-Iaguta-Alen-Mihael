@@ -14,7 +14,6 @@ export class Player extends Component{
         this.state={players:[], currentPage: 1, itemsPerPage: 10,
             addModalShow: false, updateModalShow: false, reportModalShow: false, detailsModalShow: false
         };
-
     }
 
     refreshList() {
@@ -67,17 +66,17 @@ export class Player extends Component{
     handlePrevPage = () => {
         const { currentPage } = this.state;
         if (currentPage > 1) {
-          this.setState({ currentPage: currentPage - 1 }, () => this.refreshList());
+          this.setState({ currentPage: currentPage - 1 });
         }
       };
       
       handleNextPage = () => {
         const { currentPage } = this.state;
-        this.setState({ currentPage: currentPage + 1 }, () => this.refreshList());
+        this.setState({ currentPage: currentPage + 1 });
       };
       
       handlePageChange = (pageNumber) => {
-        this.setState({ currentPage: pageNumber }, () => this.refreshList());
+        this.setState({ currentPage: pageNumber });
       };
       
 
@@ -190,7 +189,7 @@ export class Player extends Component{
                                                 plismaster={plismaster}
                                                 plstartyear={plstartyear}>
                                             </UpdatePlayerModal>
-                                            
+
                                         </ButtonToolbar>
                                     </td>
                                 </tr>

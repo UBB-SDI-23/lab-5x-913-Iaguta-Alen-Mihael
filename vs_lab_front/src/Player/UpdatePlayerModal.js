@@ -33,6 +33,7 @@ export class UpdatePlayerModal extends Component {
             console.error('Error:', error);
           });
     }
+    
 
     render(){
         return (
@@ -88,7 +89,7 @@ export class UpdatePlayerModal extends Component {
                                         placeholder="1701-2023"/>
                                     </Form.Group>
                                     <Form.Group>
-                                        <Button variant="primary" type="submit">
+                                        <Button variant="primary" type="submit" onClick={this.props.onHide}>
                                             Update Chess Player
                                         </Button>
                                     </Form.Group>
