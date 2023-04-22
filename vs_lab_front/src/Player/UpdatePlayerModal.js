@@ -51,7 +51,7 @@ export class UpdatePlayerModal extends Component {
                         <Row>
                             <Col sm={7}>
                                 <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group controlId="ID">
+                                    <Form.Group controlId="ID" hidden>
                                         <Form.Label>ID</Form.Label>
                                         <Form.Control type="text" name="id" required
                                         disabled
@@ -88,7 +88,7 @@ export class UpdatePlayerModal extends Component {
                                         defaultValue={this.props.plstartyear} 
                                         placeholder="1701-2023"/>
                                     </Form.Group>
-                                    <Form.Group>
+                                    <Form.Group className="my-3">
                                         <Button variant="primary" type="submit" onClick={this.props.onHide}>
                                             Update Chess Player
                                         </Button>

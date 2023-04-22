@@ -73,7 +73,7 @@ export class AddPlayerModal extends Component {
                                         <Form.Control type="number" name="startYear" required 
                                         placeholder="1701-2023"/>
                                     </Form.Group>
-                                    <Form.Group>
+                                    <Form.Group className="my-3">
                                         <Button variant="primary" type="submit" onClick={this.props.onHide}>
                                             Add Chess Player
                                         </Button>
