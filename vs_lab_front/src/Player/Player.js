@@ -4,7 +4,8 @@ import { Component } from 'react';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { AddPlayerModal } from './AddPlayerModal';
 import { UpdatePlayerModal } from './UpdatePlayerModal';
-import { ReportPlayerModal } from './ReportPlayerModal';
+import { TrophyReportPlayerModal } from './TrophyReportPlayerModal';
+import { RatingReportPlayerModal } from './RatingReportPlayerModal';
 import { DetailsPlayerModal } from './DetailsPlayerModal';
 
 export class Player extends Component{
@@ -12,7 +13,7 @@ export class Player extends Component{
     constructor(props){
         super(props);
         this.state={players:[], currentPage: 1, itemsPerPage: 10,
-            addModalShow: false, updateModalShow: false, reportModalShow: false, detailsModalShow: false
+            addModalShow: false, updateModalShow: false, detailsModalShow: false, trophyReportModalShow: false, ratingReportModalShow: false
         };
     }
 
@@ -84,7 +85,8 @@ export class Player extends Component{
         const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, plchampions, currentPage, itemsPerPage} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
-        let reportModalClose = () => this.setState({reportModalShow:false});
+        let trophyReportModalClose = () => this.setState({ trophyReportModalShow: false });
+        let ratingReportModalClose = () => this.setState({ ratingReportModalShow: false });
         let detailsModalClose = () => this.setState({detailsModalShow:false});
 
         const indexOfLastItem = currentPage * itemsPerPage;
@@ -204,8 +206,13 @@ export class Player extends Component{
                     </Button>
 
                     <Button variant = 'primary' style={{ marginLeft: '2px' }}
-                    onClick = {() => this.setState({reportModalShow:true})}>
+                    onClick = {() => this.setState({trophyReportModalShow:true})}>
                         $
+                    </Button>
+
+                    <Button variant = 'primary' style={{ marginLeft: '2px' }}
+                    onClick = {() => this.setState({ratingReportModalShow:true})}>
+                        ✰
                     </Button>
 
                     <div className='ml-auto'>
@@ -213,13 +220,18 @@ export class Player extends Component{
                         <Button style={{ marginLeft: '2px' }} onClick={this.handleNextPage}>Next</Button>
                         <Button style={{ marginLeft: '2px' }} onClick={() => this.handlePageChange(1)}>{currentPage}</Button>
                     </div>
-                    
-                    <ReportPlayerModal show={this.state.reportModalShow}
-                        onHide={reportModalClose}>
-                    </ReportPlayerModal>
+
                     <AddPlayerModal show={this.state.addModalShow}
                         onHide={addModalClose}>
                     </AddPlayerModal>
+                    
+                    <TrophyReportPlayerModal show={this.state.trophyReportModalShow}
+                        onHide={trophyReportModalClose}>
+                    </TrophyReportPlayerModal>
+
+                    <RatingReportPlayerModal show={this.state.ratingReportModalShow}
+                        onHide={ratingReportModalClose}>
+                    </RatingReportPlayerModal>
                     
                 </ButtonToolbar>
             </div>

@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import { Modal, Button, Table } from 'react-bootstrap';
 
-export class ReportPlayerModal extends Component {
+export class RatingReportPlayerModal extends Component {
     
   constructor(props) {
     super(props);
-    this.state = { trophies: [] };
+    this.state = { ratings: [] };
   }
 
   componentDidMount() {
-    this.getTrophies();
+    this.getRatings();
   }
 
   componentDidUpdate(){
-    this.getTrophies();
+    this.getRatings();
   }
 
-  getTrophies = () => {
-    fetch(process.env.REACT_APP_API + 'chessplayers/trophies')
+  getRatings = () => {
+    fetch(process.env.REACT_APP_API + 'chessplayers/ratings')
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ trophies: data });
+        this.setState({ ratings: data });
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -31,21 +31,21 @@ export class ReportPlayerModal extends Component {
     return (
       <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-vcenter'>Player Trophies</Modal.Title>
+          <Modal.Title id='contained-modal-title-vcenter'>Player Ratings</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Trophies</th>
+                <th>Rating</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.trophies.map((trophy) => (
-                <tr key={trophy.id}>
-                  <td>{trophy.name}</td>
-                  <td>{trophy.trophies}</td>
+              {this.state.ratings.map((rating) => (
+                <tr key={rating.id}>
+                  <td>{rating.name}</td>
+                  <td>{rating.rating}</td>
                 </tr>
               ))}
             </tbody>
