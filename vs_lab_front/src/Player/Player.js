@@ -7,13 +7,15 @@ import { UpdatePlayerModal } from './UpdatePlayerModal';
 import { TrophyReportPlayerModal } from './TrophyReportPlayerModal';
 import { RatingReportPlayerModal } from './RatingReportPlayerModal';
 import { DetailsPlayerModal } from './DetailsPlayerModal';
+import { DescriptionPlayerModal } from './DescriptionPlayerModal';
 
 export class Player extends Component{
 
     constructor(props){
         super(props);
         this.state={players:[], currentPage: 1, itemsPerPage: 10,
-            addModalShow: false, updateModalShow: false, detailsModalShow: false, trophyReportModalShow: false, ratingReportModalShow: false
+            addModalShow: false, updateModalShow: false, descriptionModalShow:false, detailsModalShow: false,
+            trophyReportModalShow: false, ratingReportModalShow: false
         };
     }
 
@@ -78,16 +80,17 @@ export class Player extends Component{
       
       handlePageChange = (pageNumber) => {
         this.setState({ currentPage: pageNumber });
-      };
+    };
       
 
     render(){
-        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, plchampions, currentPage, itemsPerPage} = this.state;
+        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, pldescription, plchampions, currentPage, itemsPerPage} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
         let trophyReportModalClose = () => this.setState({ trophyReportModalShow: false });
         let ratingReportModalClose = () => this.setState({ ratingReportModalShow: false });
-        let detailsModalClose = () => this.setState({detailsModalShow:false});
+        let detailsModalClose = () => this.setState({ detailsModalShow: false });
+        let descriptionModalClose = () => this.setState({ descriptionModalShow: false });
 
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -149,6 +152,18 @@ export class Player extends Component{
                                     <td>{player.playerParticipations.length}</td>
                                     <td>
                                         <ButtonToolbar>
+
+                                            <Button className="mr-2" onClick={() => this.setState({
+                                                descriptionModalShow: true,
+                                                pldescription: player.description
+                                            })}>
+                                                Description
+                                            </Button>
+
+                                            <DescriptionPlayerModal show={this.state.descriptionModalShow}
+                                                onHide={descriptionModalClose}
+                                                pldescription = {pldescription}
+                                            />
 
                                             <Button className="mr-2" variant="info"
                                                 onClick={() =>

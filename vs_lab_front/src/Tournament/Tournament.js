@@ -133,6 +133,10 @@ export class Tournament extends Component{
                                 <td>
                                 <ButtonToolbar>
                                     
+                                    <Button className="mr-2">
+                                        Description
+                                    </Button>  
+                                        
                                     <Button className="mr-2" variant="info"
                                         onClick={() => 
                                             this.setState({
