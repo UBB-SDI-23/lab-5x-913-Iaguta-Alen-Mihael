@@ -5,13 +5,14 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { AddChampionModal } from './AddChampionModal';
 import { UpdateChampionModal } from './UpdateChampionModal';
 import { DetailsChampionModal } from './DetailsChampionModal';
+import { DescriptionChampionModal } from './DescriptionChampionModal';
 export class Champion extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            champions: [], currentPage: 1, itemsPerPage: 10,
-            addModalShow: false, updateModalShow: false, detailsModalShow: false
+            champions: [], currentPage: 1, itemsPerPage: 5,
+            addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
 
@@ -46,10 +47,6 @@ export class Champion extends Component{
         this.refreshList();
     }
 
-    componentDidUpdate(){
-        this.refreshList();
-    }
-
     deleteChampion(chid){
         if(window.confirm('Are you sure?')){
             fetch(process.env.REACT_APP_API+'chesschampions/'+chid,{
@@ -63,29 +60,26 @@ export class Champion extends Component{
     handlePrevPage = () => {
         const { currentPage } = this.state;
         if (currentPage > 1) {
-          this.setState({ currentPage: currentPage - 1 });
+          this.setState({ currentPage: currentPage - 1 }, this.refreshList);
         }
       };
       
       handleNextPage = () => {
         const { currentPage } = this.state;
-        this.setState({ currentPage: currentPage + 1 });
+        this.setState({ currentPage: currentPage + 1 }, this.refreshList);
       };
       
       handlePageChange = (pageNumber) => {
-        this.setState({ currentPage: pageNumber });
-      };
+        this.setState({ currentPage: pageNumber }, this.refreshList);
+    };
 
 
     render() {
-        const { champions, chid, chlasttrophy, chrecord, chmaxrating, chconsecutiveyears, chcurrent, chplayerid, chplayer, currentPage, itemsPerPage } = this.state;
+        const { champions, chid, chlasttrophy, chrecord, chmaxrating, chconsecutiveyears, chcurrent, chplayerid, chplayer, chdescription, currentPage } = this.state;
         let addModalClose = () => this.setState({ addModalShow: false });
         let updateModalClose = () => this.setState({ updateModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
-
-        const indexOfLastItem = currentPage * itemsPerPage;
-        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        const currentChampions = champions.slice(indexOfFirstItem, indexOfLastItem);
+        let descriptionModalClose = () => this.setState({ descriptionModalShow: false });
 
         return(
             <div>
@@ -125,7 +119,7 @@ export class Champion extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {currentChampions.map(champ =>
+                        {champions.map(champ =>
                             <tr key={champ.id}>
                                 <td>{champ.lastTrophy}</td>
                                 <td>{champ.record}</td>
@@ -135,9 +129,17 @@ export class Champion extends Component{
                                 <td>
                                 <ButtonToolbar>
                                     
-                                    <Button className="mr-2">
+                                    <Button className="mr-2" onClick={() => this.setState({
+                                        descriptionModalShow: true,
+                                        chdescription: champ.description
+                                    })}>
                                         Description
-                                    </Button>    
+                                    </Button>
+
+                                    <DescriptionChampionModal show={this.state.descriptionModalShow}
+                                        onHide={descriptionModalClose}
+                                        chdescription = {chdescription}
+                                    />   
 
                                     <Button className="mr-2" variant="info"
                                         onClick={() => 
@@ -160,7 +162,8 @@ export class Champion extends Component{
                                     chrecord:champ.record,
                                     chmaxrating:champ.maxRating,
                                     chconsecutiveyears:champ.consecutiveYears,
-                                    chcurrent:champ.current,
+                                    chcurrent: champ.current,
+                                    chdescription: champ.description,
                                     chplayerid:champ.chessPlayerID,})}>
                                         Update
                                     </Button>
@@ -178,6 +181,7 @@ export class Champion extends Component{
                                     chmaxrating={chmaxrating}
                                     chconsecutiveyears={chconsecutiveyears}
                                     chcurrent={chcurrent}
+                                    chdescription={chdescription}        
                                     chplayerid={chplayerid}
                                     />
                                 </ButtonToolbar>

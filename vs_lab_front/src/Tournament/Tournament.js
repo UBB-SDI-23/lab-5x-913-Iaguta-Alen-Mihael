@@ -5,49 +5,53 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { AddTournamentModal } from './AddTournamentModal';
 import { UpdateTournamentModal } from './UpdateTournamentModal';
 import { DetailsTournamentModal } from './DetailsTournamentModal';
+import { DescriptionTournamentModal } from './DescriptionTournamentModal';
 
 export class Tournament extends Component{
     
     constructor(props) {
         super(props);
         this.state = {
-            tournaments: [], currentPage: 1, itemsPerPage: 10,
-            addModalShow: false, updateModalShow: false, detailsModalShow: false
+            tournaments: [], currentPage: 1, itemsPerPage: 5,
+            addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
 
-    refreshList() {
+    async refreshList() {
         const { currentPage, itemsPerPage } = this.state;
         const url = `${process.env.REACT_APP_API}chesstournament?page=${currentPage}&limit=${itemsPerPage}`;
-        
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const updatedTournaments = [];
-                const tournamentPromises = data.map(tournament => {
-                    const tournamentUrl = `${process.env.REACT_APP_API}chesstournament/${tournament.id}`;
-                    return fetch(tournamentUrl).then(response => response.json());
-                });
-
-                Promise.all(tournamentPromises).then(tournamentData => {
-                    for (let i = 0; i < data.length; i++) {
-                        updatedTournaments.push({
-                            ...data[i],
-                            ...tournamentData[i]
-                        });
-                    }
-                    this.setState({ tournaments: updatedTournaments });
-                });
+      
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          const updatedTournaments = [];
+      
+          for (let i = 0; i < data.length; i++) {
+            const tournamentUrl = `${process.env.REACT_APP_API}chesstournament/${data[i].id}`;
+            const tournamentResponse = await fetch(tournamentUrl);
+            const tournamentData = await tournamentResponse.json();
+      
+            updatedTournaments.push({
+              ...data[i],
+              ...tournamentData
             });
-    }
+          }
+      
+          this.setState({ tournaments: updatedTournaments });
+        } catch (error) {
+          console.error(error);
+        }
+      }
 
     componentDidMount() {
         this.refreshList();
     }
 
-    componentDidUpdate() {
-        this.refreshList();
-    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.currentPage !== this.state.currentPage) {
+          this.refreshList();
+        }
+      }
 
     deleteTournament(trid) {
         if (window.confirm('Are you sure?')) {
@@ -62,28 +66,28 @@ export class Tournament extends Component{
     handlePrevPage = () => {
         const { currentPage } = this.state;
         if (currentPage > 1) {
-          this.setState({ currentPage: currentPage - 1 });
+            this.setState({ currentPage: currentPage - 1 });
+            this.refreshList();
         }
       };
       
       handleNextPage = () => {
         const { currentPage } = this.state;
         this.setState({ currentPage: currentPage + 1 });
+        this.refreshList();
       };
       
       handlePageChange = (pageNumber) => {
-        this.setState({ currentPage: pageNumber });
+          this.setState({ currentPage: pageNumber });
+          this.refreshList();
       };
 
       render() {
-        const { tournaments, trid, trname, trnumparticipants, trhost, trprizemoney, trtrophy, trparticipations, currentPage, itemsPerPage } = this.state;
+        const { tournaments, trid, trname, trnumparticipants, trhost, trprizemoney, trtrophy, trparticipations, trdescription, currentPage } = this.state;
         let addModalClose = () => this.setState({ addModalShow: false });
         let updateModalClose = () => this.setState({ updateModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
-
-        const indexOfLastItem = currentPage * itemsPerPage;
-        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        const currentTournaments = tournaments.slice(indexOfFirstItem, indexOfLastItem);
+        let descriptionModalClose = () => this.setState({ descriptionModalShow: false });
 
         return(
             <div>
@@ -123,7 +127,7 @@ export class Tournament extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {currentTournaments.map(tournament =>
+                        {tournaments.map(tournament =>
                             <tr key={tournament.id}>
                                 <td>{tournament.name}</td>
                                 <td>{tournament.numParticipants}</td>
@@ -133,9 +137,18 @@ export class Tournament extends Component{
                                 <td>
                                 <ButtonToolbar>
                                     
-                                    <Button className="mr-2">
-                                        Description
-                                    </Button>  
+                                <Button className="mr-2" onClick={() => this.setState({
+                                        descriptionModalShow: true,
+                                        trdescription: tournament.description
+                                })}>
+                                    Description
+                                </Button>
+
+                                <DescriptionTournamentModal show={this.state.descriptionModalShow}
+                                    onHide={descriptionModalClose}
+                                    trdescription = {trdescription}
+                                />
+                                    
                                         
                                     <Button className="mr-2" variant="info"
                                         onClick={() => 
@@ -158,7 +171,8 @@ export class Tournament extends Component{
                                     trnumparticipants: tournament.numParticipants,
                                     trhost: tournament.host,
                                     trprizemoney: tournament.prizeMoney,
-                                    trtrophy: tournament.trophy})}>
+                                    trtrophy: tournament.trophy,
+                                    trdescription: tournament.description})}>
                                         Update
                                     </Button>
 
@@ -175,6 +189,7 @@ export class Tournament extends Component{
                                     trhost={trhost}
                                     trprizemoney={trprizemoney}
                                     trtrophy={trtrophy}
+                                    trdescription = {trdescription}
                                     />
                                 </ButtonToolbar>
                                 </td>

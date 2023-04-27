@@ -10,6 +10,7 @@ export class AddPlayerModal extends Component {
 
     handleSubmit(event){
         event.preventDefault();
+
         fetch(process.env.REACT_APP_API+'chessplayers',{
             method:'POST',
             headers:{
@@ -21,7 +22,8 @@ export class AddPlayerModal extends Component {
                 country:event.target.country.value,
                 rating:event.target.rating.value,
                 isMaster:event.target.isMaster.value,
-                startYear:event.target.startYear.value
+                startYear: event.target.startYear.value,
+                description: event.target.description.value
             })
         })
         .then(res=>res.json())
@@ -72,6 +74,11 @@ export class AddPlayerModal extends Component {
                                         <Form.Label>StartYear</Form.Label>
                                         <Form.Control type="number" name="startYear" required 
                                         placeholder="1701-2023"/>
+                                    </Form.Group>
+                                    <Form.Group controlId="Description">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" name="description" required 
+                                        placeholder="Short description about player"/>
                                     </Form.Group>
                                     <Form.Group className="my-3">
                                         <Button variant="primary" type="submit" onClick={this.props.onHide}>

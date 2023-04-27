@@ -31,7 +31,8 @@ export class UpdateChampionModal extends Component {
                 record:event.target.record.value,
                 maxRating:event.target.maxRating.value,
                 consecutiveYears:event.target.consecutiveYears.value,
-                current:event.target.current.value,
+                current: event.target.current.value,
+                description: event.target.description.value,
                 chessPlayerID:event.target.chessPlayerID.value
             })
         })
@@ -91,6 +92,13 @@ export class UpdateChampionModal extends Component {
                                         <Form.Control type="number" name="current" required 
                                         defaultValue={this.props.chcurrent} 
                                         placeholder="0 or 1"/>
+                                    </Form.Group>
+
+                                    <Form.Group controlId="Description">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" name="description" required 
+                                        defaultValue={this.props.chdescription}
+                                        placeholder="Short champion description"/>
                                     </Form.Group>
 
                                     <Form.Group controlId="ChessPlayerID" className="d-flex flex-column">

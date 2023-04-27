@@ -22,7 +22,8 @@ export class UpdateTournamentModal extends Component {
                 numParticipants:event.target.numParticipants.value,
                 host:event.target.host.value,
                 prizeMoney:event.target.prizeMoney.value,
-                trophy: event.target.trophy.value
+                trophy: event.target.trophy.value,
+                description: event.target.description.value
             })
         })
         .then(res=>res.json())
@@ -49,7 +50,7 @@ export class UpdateTournamentModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col sm={7}>
+                            <Col sm={8}>
                                 <Form onSubmit={this.handleSubmit}>
                                     <Form.Group controlId="ID" hidden>
                                         <Form.Label>ID</Form.Label>
@@ -87,6 +88,12 @@ export class UpdateTournamentModal extends Component {
                                         <Form.Control type="text" name="trophy" required 
                                             defaultValue={this.props.trtrophy}
                                         placeholder="Trophy"/>
+                                    </Form.Group>
+                                    <Form.Group controlId="Description">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" name="description" required 
+                                            defaultValue={this.props.trdescription}
+                                        placeholder="Description"/>
                                     </Form.Group>
 
                                     <Form.Group className="my-3">

@@ -5,8 +5,10 @@ import {Navigation} from './Navigation';
 import {Player} from './Player/Player';
 import {Tournament} from './Tournament/Tournament';
 import {Champion} from './Champion/Champion';
+import { Participation } from './Participation/Participation';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
  
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
       <Route path='/players' Component={Player} />
       <Route path='/champions' Component={Champion} />
       <Route path='/tournaments' Component={Tournament} />
+      <Route path='/participations' Component={Participation} />    
     </Routes>
     </div>
     </BrowserRouter>

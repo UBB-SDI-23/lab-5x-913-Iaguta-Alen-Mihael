@@ -13,7 +13,7 @@ export class Player extends Component{
 
     constructor(props){
         super(props);
-        this.state={players:[], currentPage: 1, itemsPerPage: 10,
+        this.state={players:[], currentPage: 1, itemsPerPage: 5,
             addModalShow: false, updateModalShow: false, descriptionModalShow:false, detailsModalShow: false,
             trophyReportModalShow: false, ratingReportModalShow: false
         };
@@ -22,7 +22,8 @@ export class Player extends Component{
     refreshList() {
         const { currentPage, itemsPerPage } = this.state;
         const url = `${process.env.REACT_APP_API}chessplayers?page=${currentPage}&limit=${itemsPerPage}`;
-      
+        
+        
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -50,6 +51,13 @@ export class Player extends Component{
         this.refreshList();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.currentPage !== this.state.currentPage) {
+          this.refreshList();
+        }
+      }
+      
+
     deletePlayer(plid){
         if(window.confirm('Are you sure?')){
             fetch(process.env.REACT_APP_API+'chessplayers/'+plid,{
@@ -69,32 +77,28 @@ export class Player extends Component{
     handlePrevPage = () => {
         const { currentPage } = this.state;
         if (currentPage > 1) {
-          this.setState({ currentPage: currentPage - 1 });
+          this.setState({ currentPage: currentPage - 1 }, this.refreshList);
         }
       };
       
       handleNextPage = () => {
         const { currentPage } = this.state;
-        this.setState({ currentPage: currentPage + 1 });
+        this.setState({ currentPage: currentPage + 1 }, this.refreshList);
       };
       
       handlePageChange = (pageNumber) => {
-        this.setState({ currentPage: pageNumber });
+        this.setState({ currentPage: pageNumber }, this.refreshList);
     };
       
 
     render(){
-        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, pldescription, plchampions, currentPage, itemsPerPage} = this.state;
+        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, pldescription, plchampions, currentPage} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
         let trophyReportModalClose = () => this.setState({ trophyReportModalShow: false });
         let ratingReportModalClose = () => this.setState({ ratingReportModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
         let descriptionModalClose = () => this.setState({ descriptionModalShow: false });
-
-        const indexOfLastItem = currentPage * itemsPerPage;
-        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        const currentPlayers = players.slice(indexOfFirstItem, indexOfLastItem);
 
         return(
             <div>
@@ -141,7 +145,7 @@ export class Player extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {currentPlayers.map(player => {
+                        {players.map(player => {
                             return (
                                 <tr key={player.id}>
                                     <td>{player.name}</td>
@@ -186,7 +190,8 @@ export class Player extends Component{
                                                     plcountry: player.country,
                                                     plrating: player.rating,
                                                     plismaster: player.isMaster,
-                                                    plstartyear: player.startYear
+                                                    plstartyear: player.startYear,
+                                                    pldescription: player.description
                                                 })
                                                 }>
                                                 Update
@@ -204,7 +209,8 @@ export class Player extends Component{
                                                 plcountry={plcountry}
                                                 plrating={plrating}
                                                 plismaster={plismaster}
-                                                plstartyear={plstartyear}>
+                                                plstartyear={plstartyear}
+                                                pldescription={pldescription}>
                                             </UpdatePlayerModal>
 
                                         </ButtonToolbar>

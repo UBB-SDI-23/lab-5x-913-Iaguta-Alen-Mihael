@@ -22,7 +22,8 @@ export class UpdatePlayerModal extends Component {
                 country:event.target.country.value,
                 rating:event.target.rating.value,
                 isMaster:event.target.isMaster.value,
-                startYear:event.target.startYear.value
+                startYear: event.target.startYear.value,
+                description: event.target.description.value
             })
         })
         .then(res=>res.json())
@@ -87,6 +88,12 @@ export class UpdatePlayerModal extends Component {
                                         <Form.Control type="number" name="startYear" required
                                         defaultValue={this.props.plstartyear} 
                                         placeholder="1701-2023"/>
+                                    </Form.Group>
+                                    <Form.Group controlId="Description">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" name="description" required 
+                                        defaultValue={this.props.pldescription} 
+                                        placeholder="Short description about player"/>
                                     </Form.Group>
                                     <Form.Group className="my-3">
                                         <Button variant="primary" type="submit" onClick={this.props.onHide}>

@@ -30,7 +30,8 @@ export class AddChampionModal extends Component {
                 record:event.target.record.value,
                 maxRating:event.target.maxRating.value,
                 consecutiveYears:event.target.consecutiveYears.value,
-                current:event.target.current.value,
+                current: event.target.current.value,
+                description: event.target.description.value,
                 chessPlayerID:event.target.chessPlayerID.value
             })
         })
@@ -83,6 +84,13 @@ export class AddChampionModal extends Component {
                                         <Form.Control type="number" name="current" required 
                                         placeholder="0 or 1"/>
                                     </Form.Group>
+
+                                    <Form.Group controlId="Description">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" name="description" required 
+                                        placeholder="Short champion description"/>
+                                    </Form.Group>
+
                                     <Form.Group controlId="ChessPlayerID" className="d-flex flex-column">
                                         <Form.Label>Chess Players</Form.Label>
                                             <Form.Select name="chessPlayerID" required defaultValue={this.props.chplayerid}>
@@ -91,6 +99,7 @@ export class AddChampionModal extends Component {
                                                 ))}
                                             </Form.Select>
                                     </Form.Group>
+
                                     <Form.Group className="my-3">
                                         <Button variant="primary" type="submit">
                                             Add Chess Champion

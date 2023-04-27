@@ -6,10 +6,27 @@ export class AddTournamentModal extends Component {
     constructor(props){
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            trophyError: '',
+            prizeError: ''
+        }
     }
 
     handleSubmit(event){
         event.preventDefault();
+
+        const formData = {
+            prizeMoney:event.target.prizeMoney.value,
+            trophy: event.target.trophy.value
+        }
+        const prizeError = formData.prizeMoney && formData.prizeMoney >= 0 ? '' : 'Prize money should be greater than 0';
+        const trophyError = formData.trophy && !/^[a-zA-Z ]+$/.test(formData.trophy) ? '' : 'No numbers in Trophies';
+        
+        if (prizeError || trophyError) {
+            this.setState({ trophyError, prizeError });
+            return;
+        }
+
         fetch(process.env.REACT_APP_API+'chesstournament',{
             method:'POST',
             headers:{
@@ -21,7 +38,8 @@ export class AddTournamentModal extends Component {
                 numParticipants:event.target.numParticipants.value,
                 host:event.target.host.value,
                 prizeMoney:event.target.prizeMoney.value,
-                trophy: event.target.trophy.value
+                trophy: event.target.trophy.value,
+                description: event.target.description.value
             })
         })
         .then(res=>res.json())
@@ -66,12 +84,19 @@ export class AddTournamentModal extends Component {
                                     <Form.Group controlId="PrizeMoney">
                                         <Form.Label>Prize Money</Form.Label>
                                         <Form.Control type="number" name="prizeMoney" required 
-                                        placeholder=">0"/>
+                                            placeholder=">0" />
+                                        {this.state.prizeError && <Form.Text className="text-danger">{this.state.prizeError}</Form.Text>}
                                     </Form.Group>
                                     <Form.Group controlId="Trophy">
                                         <Form.Label>Trophy</Form.Label>
                                         <Form.Control type="text" name="trophy" required 
-                                        placeholder="Trophy"/>
+                                            placeholder="Trophy" />
+                                        {this.state.trophyError && <Form.Text className="text-danger">{this.state.trophyError}</Form.Text>}
+                                    </Form.Group>
+                                    <Form.Group controlId="Description">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" name="description" required 
+                                        placeholder="Short description about tournament"/>
                                     </Form.Group>
 
                                     <Form.Group className="my-3">
