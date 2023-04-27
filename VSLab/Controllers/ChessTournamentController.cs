@@ -1,0 +1,164 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using VSLab.Data;
+
+
+namespace VSLab.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ChessTournamentController : ControllerBase
+    {
+        private readonly ChessDbContext _context;
+        private readonly Validators _validator = new Validators();
+        public ChessTournamentController(ChessDbContext context)
+        {
+            _context = context;
+        }
+
+        private static dtoChessTournament ChessTournamentToDTO(tblChessTournament tournament) =>
+            new dtoChessTournament
+            {
+                ID = tournament.ID,
+                Name = tournament.Name,
+                NumParticipants = tournament.NumParticipants,
+                Host = tournament.Host,
+                PrizeMoney = tournament.PrizeMoney,
+                Trophy = tournament.Trophy,
+                Description = tournament.Description
+                
+            };
+
+        private bool ChessTournamentExists(long id)
+        {
+            return (_context.tblChessTournaments?.Any(e => e.ID == id)).GetValueOrDefault();
+        }
+
+        // GET: api/ChessTournament
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<dtoChessTournament>>> GettblChessTournaments([FromQuery] int page, [FromQuery] int limit = 10)
+        {
+            if(_context.tblChessTournaments == null)
+            {
+                return NotFound();
+            }
+
+            var tournaments = await _context.tblChessTournaments
+               .Select(x => ChessTournamentToDTO(x))
+               .Skip((page - 1) * limit)
+               .Take(limit)
+               .ToListAsync();
+
+            return tournaments;
+        }
+
+        // GET: api/ChessTournament/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<tblChessTournament>> GettblChessTournamentsID(int id)
+        {
+            if(_context.tblChessTournaments == null)
+            {
+                return NotFound();
+            }
+
+            var tournament = await _context.tblChessTournaments
+                .Include(x => x.TournamentParticipations)
+                .Include(x => x.ChessPlayers)
+                .FirstOrDefaultAsync(x => x.ID == id);
+
+            if(tournament == null)
+            {
+                return NotFound();
+            }
+
+            return tournament;
+        }
+
+        // PUT: api/ChessTournament/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PuttblChessTournament(int id, dtoChessTournament dtoChessTournament)
+        {
+            if(_context.tblChessTournaments == null)
+            {
+                return BadRequest();
+            }
+
+            var tournament = await _context.tblChessTournaments.FindAsync(id);
+            if(tournament == null)
+            {
+                return NotFound();
+            }
+
+            tournament.Host = dtoChessTournament.Host;
+            tournament.NumParticipants = dtoChessTournament.NumParticipants;
+            tournament.Name = dtoChessTournament.Name;
+            tournament.PrizeMoney = dtoChessTournament.PrizeMoney;
+            tournament.Trophy = dtoChessTournament.Trophy;
+            tournament.Description = dtoChessTournament.Description;
+
+            if(!_validator.ValidateTournament(tournament))
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateConcurrencyException) when (!ChessTournamentExists(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/ChessTournament
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<dtoChessTournament>> PosttblChessTournament(dtoChessTournament dtoChessTournament)
+        {
+            var tournament = new tblChessTournament
+            {
+                Name = dtoChessTournament.Name,
+                Trophy = dtoChessTournament.Trophy,
+                Host = dtoChessTournament.Host,
+                PrizeMoney = dtoChessTournament.PrizeMoney,
+                NumParticipants = dtoChessTournament.NumParticipants,
+                Description = dtoChessTournament.Description
+            };
+
+            if (!_validator.ValidateTournament(tournament))
+            {
+                return BadRequest();
+            }
+
+            _context.tblChessTournaments.Add(tournament);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GettblChessTournamentsID), new { id = tournament.ID }, ChessTournamentToDTO(tournament));
+        }
+
+        // DELETE: api/ChessTournament/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletetblChessTournament(int id)
+        {
+            if(_context.tblChessTournaments == null)
+            {
+                return NotFound();
+            }
+
+            var tournament = await _context.tblChessTournaments.FindAsync(id);
+            if(tournament == null)
+            {
+                return NotFound();
+            }
+
+            _context.tblChessTournaments.Remove(tournament);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+    }
+}
