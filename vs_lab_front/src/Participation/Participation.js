@@ -150,6 +150,10 @@ export class Participation extends Component {
                         <Button style={{ marginLeft: '2px' }} onClick={() => this.handlePageChange(1)}>{currentPage}</Button>
                     </div>
 
+                    <AddParticipationModal show={this.state.addModalShow}
+                        onHide={addModalClose}>
+                    </AddParticipationModal>
+
                 </ButtonToolbar>
             </div>
         )

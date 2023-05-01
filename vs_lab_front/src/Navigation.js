@@ -22,8 +22,14 @@ export class Navigation extends Component{
                     <NavLink className="d-inline p-2 bg dark text-white" to="/tournaments">
                         Chess Tournaments
                     </NavLink>
-                        <NavLink className="d-inline p-2 bg dark text-white" to="/participations">
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/participations">
                         Chess Participations
+                    </NavLink>
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/trophies">
+                        Trophies Stats
+                    </NavLink>
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/trophies">
+                        Ratings Stats
                     </NavLink>
                 </Nav>
                 </Navbar.Collapse>

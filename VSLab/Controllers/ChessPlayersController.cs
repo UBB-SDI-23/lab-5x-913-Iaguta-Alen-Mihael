@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mysqlx.Crud;
 using System;
 using VSLab.Data;
 using VSLab.Data.Non_Essential;
@@ -215,7 +216,7 @@ namespace VSLab.Controllers
         }
 
         [HttpGet("Ratings")]
-        public async Task<ActionResult<IEnumerable<dtoChessPlayerRatings>>> GetPlayerRatings()
+        public async Task<ActionResult<IEnumerable<dtoChessPlayerRatings>>> GetPlayerRatings([FromQuery] int page = 1, [FromQuery] int limit = 10)
         {
             if (_context.tblChessPlayers == null)
             {
@@ -252,7 +253,12 @@ namespace VSLab.Controllers
 
             }
 
-            players = players.OrderByDescending(x => x.Rating).ToList();
+            players = players
+                .OrderByDescending(x => x.Rating)
+                .Skip((page - 1) * limit)
+                .Take(limit)
+                .ToList();
+
             return players;
         }
 

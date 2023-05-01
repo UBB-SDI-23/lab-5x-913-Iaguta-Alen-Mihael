@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/Qhm4pihrW7lyvzMYaNfrsfLQI4S/BAo0R0zIyfBfipJEbIlV1o8RNwRQV73Qu95N1UBgOLzNXbWmKJOzkDr9A==",
+  "dgSpecHash": "BBDNJh3ioEnPwTkbulYD6lcu/iQpRNEJYTc+ZS/1zz2i69CKmQ3dIOVJ037myviutNZVA4A0zcWwrdYRI6LSRw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alen\\Documents\\UBB\\4thSemester\\SDI\\VSLab\\VSLab.csproj",
+  "projectFilePath": "C:\\Users\\Alen\\Documents\\GitHub\\lab-5x-913-Iaguta-Alen-Mihael\\VSLab\\VSLab.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alen\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
