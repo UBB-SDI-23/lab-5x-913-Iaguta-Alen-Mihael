@@ -183,83 +183,45 @@ namespace VSLab.Controllers
         }
 
         [HttpGet("Trophies")]
-        public async Task<IEnumerable<dtoChessPlayerTrophies>> GetPlayerTrophies()
+        public async Task<ActionResult<IEnumerable<dtoChessPlayerTrophies>>> GetPlayerTrophies([FromQuery] int page = 1, [FromQuery] int limit = 10)
         {
-            var champs = await _context.tblChessChampions
+            var query = _context.tblChessChampions
                 .Include(a => a.ChessPlayer)
-                .ToListAsync();
-
-            var players = new List<dtoChessPlayerTrophies>();
-
-            foreach (var champ in champs)
-            {
-                var player = players.FirstOrDefault(x => x.Id == champ.ChessPlayer.ID);
-                
-                if(player == null)
+                .GroupBy(a => a.ChessPlayer.ID)
+                .Select(g => new dtoChessPlayerTrophies
                 {
-                    player = new dtoChessPlayerTrophies
-                    {
-                        Id = champ.ChessPlayer.ID,
-                        Name = champ.ChessPlayer.Name,
-                        Trophies = 1,
-                    };
-                    players.Add(player);
-                }
-                else
-                {
-                    player.Trophies++;
-                }
-            }
+                    Id = g.Key,
+                    Name = g.First().ChessPlayer.Name,
+                    Trophies = g.Count(),
+                })
+                .OrderByDescending(x => x.Trophies);
 
-            players = players.OrderByDescending(x => x.Trophies).ToList();
-            return players;
+            var pagedQuery = query
+                .Skip((page - 1) * limit)
+                .Take(limit);
+
+            return await pagedQuery.ToListAsync();
         }
 
         [HttpGet("Ratings")]
         public async Task<ActionResult<IEnumerable<dtoChessPlayerRatings>>> GetPlayerRatings([FromQuery] int page = 1, [FromQuery] int limit = 10)
         {
-            if (_context.tblChessPlayers == null)
-            {
-                return NotFound();
-            }
-
-            var champs = await _context.tblChessChampions
+            var query = _context.tblChessChampions
                 .Include(a => a.ChessPlayer)
-                .ToListAsync();
-
-            var players = new List<dtoChessPlayerRatings>();
-
-            foreach (var champ in champs)
-            {
-                var player = players.FirstOrDefault(x => x.Id == champ.ChessPlayer.ID);
-
-                if (player == null)
+                .GroupBy(a => a.ChessPlayer.ID)
+                .Select(g => new dtoChessPlayerRatings
                 {
-                    player = new dtoChessPlayerRatings
-                    {
-                        Id = champ.ChessPlayer.ID,
-                        Name = champ.ChessPlayer.Name,
-                        Rating = champ.ChessPlayer.Rating,
-                    };
-                    players.Add(player);
-                }
-                else
-                {
-                    if(player.Rating < champ.MaxRating)
-                    {
-                        player.Rating = champ.MaxRating;
-                    }
-                }
+                    Id = g.Key,
+                    Name = g.First().ChessPlayer.Name,
+                    Rating = g.Max(x => x.MaxRating),
+                })
+                .OrderByDescending(x => x.Rating);
 
-            }
-
-            players = players
-                .OrderByDescending(x => x.Rating)
+            var pagedQuery = query
                 .Skip((page - 1) * limit)
-                .Take(limit)
-                .ToList();
+                .Take(limit);
 
-            return players;
+            return await pagedQuery.ToListAsync();
         }
 
         [HttpGet("participations")]

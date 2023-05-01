@@ -14,8 +14,7 @@ export class Player extends Component{
     constructor(props){
         super(props);
         this.state={players:[], currentPage: 1, itemsPerPage: 5,
-            addModalShow: false, updateModalShow: false, descriptionModalShow:false, detailsModalShow: false,
-            trophyReportModalShow: false, ratingReportModalShow: false
+            addModalShow: false, updateModalShow: false, descriptionModalShow:false, detailsModalShow: false
         };
     }
 
@@ -50,12 +49,6 @@ export class Player extends Component{
     componentDidMount(){
         this.refreshList();
     }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.currentPage !== this.state.currentPage) {
-          this.refreshList();
-        }
-      }
       
 
     deletePlayer(plid){
@@ -95,8 +88,6 @@ export class Player extends Component{
         const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, pldescription, plchampions, currentPage} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
-        let trophyReportModalClose = () => this.setState({ trophyReportModalShow: false });
-        let ratingReportModalClose = () => this.setState({ ratingReportModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
         let descriptionModalClose = () => this.setState({ descriptionModalShow: false });
 
@@ -226,16 +217,6 @@ export class Player extends Component{
                         +
                     </Button>
 
-                    <Button variant = 'primary' style={{ marginLeft: '2px' }}
-                    onClick = {() => this.setState({trophyReportModalShow:true})}>
-                        $
-                    </Button>
-
-                    <Button variant = 'primary' style={{ marginLeft: '2px' }}
-                    onClick = {() => this.setState({ratingReportModalShow:true})}>
-                        ✰
-                    </Button>
-
                     <div className='ml-auto'>
                         <Button style={{ marginLeft: '2px' }} onClick={this.handlePrevPage}>Prev</Button>
                         <Button style={{ marginLeft: '2px' }} onClick={this.handleNextPage}>Next</Button>
@@ -245,14 +226,6 @@ export class Player extends Component{
                     <AddPlayerModal show={this.state.addModalShow}
                         onHide={addModalClose}>
                     </AddPlayerModal>
-                    
-                    <TrophyReportPlayerModal show={this.state.trophyReportModalShow}
-                        onHide={trophyReportModalClose}>
-                    </TrophyReportPlayerModal>
-
-                    <RatingReportPlayerModal show={this.state.ratingReportModalShow}
-                        onHide={ratingReportModalClose}>
-                    </RatingReportPlayerModal>
                     
                 </ButtonToolbar>
             </div>

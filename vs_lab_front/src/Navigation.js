@@ -28,7 +28,7 @@ export class Navigation extends Component{
                     <NavLink className="d-inline p-2 bg dark text-white" to="/trophies">
                         Trophies Stats
                     </NavLink>
-                    <NavLink className="d-inline p-2 bg dark text-white" to="/trophies">
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/ratings">
                         Ratings Stats
                     </NavLink>
                 </Nav>
