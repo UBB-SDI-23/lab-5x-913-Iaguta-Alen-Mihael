@@ -7,7 +7,7 @@ export class TrophyStats extends Component{
 
     constructor(props){
         super(props);
-        this.state={ champs:[], currentPage: 1, itemsPerPage: 10 };
+        this.state={ champs:[], currentPage: 1, itemsPerPage: 5, totalPages: 0 };
     }
   
     componentDidMount(){
@@ -21,28 +21,116 @@ export class TrophyStats extends Component{
         fetch(url)
           .then(response => response.json())
           .then(data => {
-              this.setState({ champs: data })
+              this.setState({ champs: data.data, totalPages: data.totalPages })
           });
     }
-    
-    handlePrevPage = () => {
-        const { currentPage } = this.state;
-        if (currentPage > 1) {
-          this.setState({ currentPage: currentPage - 1 }, this.refreshList);
-        }
-      };
+
       
-      handleNextPage = () => {
-        const { currentPage } = this.state;
-        this.setState({ currentPage: currentPage + 1 }, this.refreshList);
-      };
-      
-      handlePageChange = (pageNumber) => {
+    handlePageChange = (pageNumber) => {
         this.setState({ currentPage: pageNumber }, this.refreshList);
     };
 
     render() {
-        const { champs, currentPage } = this.state;
+        const { champs, currentPage, totalPages } = this.state;
+
+        let pageButtons = [];
+        if (totalPages <= 10) {
+          // less than 10 pages, show all buttons
+          for (let i = 1; i <= totalPages; i++) {
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant={i === currentPage ? "primary" : "outline-primary"}
+                onClick={() => this.handlePageChange(i)}
+              >
+                {i}
+              </Button>
+            );
+          }
+        } else {
+          // more than 10 pages, show current page, 2 before and 2 after,
+          // and first and last page buttons
+          if (currentPage <= 3) {
+            // show first 5 buttons and "..." button
+            for (let i = 1; i <= 5; i++) {
+              pageButtons.push(
+                <Button
+                  style={{ marginLeft: "2px" }}
+                  variant={i === currentPage ? "primary" : "outline-primary"}
+                  onClick={() => this.handlePageChange(i)}
+                >
+                  {i}
+                </Button>
+              );
+            }
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(totalPages)}
+              >
+                {totalPages}
+              </Button>
+            );
+          } else if (currentPage >= totalPages - 2) {
+            // show last 5 buttons and "..." button
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(1)}
+              >
+                1
+              </Button>
+            );
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            for (let i = totalPages - 4; i <= totalPages; i++) {
+              pageButtons.push(
+                <Button
+                  style={{ marginLeft: "2px" }}
+                  variant={i === currentPage ? "primary" : "outline-primary"}
+                  onClick={() => this.handlePageChange(i)}
+                >
+                  {i}
+                </Button>
+              );
+            }
+          } else {
+            // show current page, 2 before and 2 after, and first and last page buttons
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(1)}
+              >
+                1
+              </Button>
+            );
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+              pageButtons.push(
+                <Button
+                  style={{ marginLeft: "2px" }}
+                  variant={i === currentPage ? "primary" : "outline-primary"}
+                  onClick={() => this.handlePageChange(i)}
+                >
+                  {i}
+                </Button>
+              );
+            }
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(totalPages)}
+              >
+                {totalPages}
+              </Button>
+            );
+          }
+        }
 
         return (
             <div>
@@ -70,14 +158,44 @@ export class TrophyStats extends Component{
                         )}
                     </tbody>
                 </Table>
-                <ButtonToolbar>
-
-                    <div className='ml-auto'>
-                        <Button style={{ marginLeft: '2px' }} onClick={this.handlePrevPage}>Prev</Button>
-                        <Button style={{ marginLeft: '2px' }} onClick={this.handleNextPage}>Next</Button>
-                        <Button style={{ marginLeft: '2px' }} onClick={() => this.handlePageChange(1)}>{currentPage}</Button>
-                    </div>
-
+                <ButtonToolbar style={{ display: 'flex', justifyContent: 'center' }}>
+                    {currentPage !== 1 && (
+                        <Button
+                        style={{ marginLeft: '2px', marginRight: '2px' }}
+                        onClick={() => this.handlePageChange(1)}
+                        >
+                        1
+                        </Button>
+                    )}
+                    {currentPage > 3 && <span style={{ fontSize: '1.5em' }}>...</span>}
+                    {currentPage > 2 && (
+                        <Button
+                        style={{ marginLeft: '2px', marginRight: '2px' }}
+                        onClick={() => this.handlePageChange(currentPage - 1)}
+                        >
+                        {currentPage - 1}
+                        </Button>
+                    )}
+                    <Button style={{ marginLeft: '2px', marginRight: '2px' }} disabled>
+                        {currentPage}
+                    </Button>
+                    {currentPage < totalPages - 1 && (
+                        <Button
+                        style={{ marginLeft: '2px', marginRight: '2px' }}
+                        onClick={() => this.handlePageChange(currentPage + 1)}
+                        >
+                        {currentPage + 1}
+                        </Button>
+                    )}
+                    {currentPage < totalPages - 2 && <span style={{ fontSize: '1.5em' }}>...</span>}
+                    {currentPage !== totalPages && (
+                        <Button
+                        style={{ marginLeft: '2px', marginRight: '2px' }}
+                        onClick={() => this.handlePageChange(totalPages)}
+                        >
+                        {totalPages}
+                        </Button>
+                    )}
                 </ButtonToolbar>
             </div>
         )

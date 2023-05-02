@@ -11,7 +11,7 @@ export class Champion extends Component{
     constructor(props){
         super(props);
         this.state = {
-            champions: [], currentPage: 1, itemsPerPage: 5,
+            champions: [], currentPage: 1, itemsPerPage: 5, totalPages: 0,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
@@ -24,7 +24,8 @@ export class Champion extends Component{
           .then(response => response.json())
           .then(data => {
             const updatedChampions = [];
-            const championPromises = data.map(champ => {
+            this.setState({ totalPages: data.totalPages });
+            const championPromises = data.data.map(champ => {
               // Fetch data for each player using the /chessplayers/{id} endpoint
               const champUrl = `${process.env.REACT_APP_API}chesschampions/${champ.id}`;
               return fetch(champUrl).then(response => response.json());
@@ -32,9 +33,9 @@ export class Champion extends Component{
       
             Promise.all(championPromises).then(champData => {
               // Combine the player data with the original player object
-              for (let i = 0; i < data.length; i++) {
+              for (let i = 0; i < data.data.length; i++) {
                 updatedChampions.push({
-                  ...data[i],
+                  ...data.data[i],
                   ...champData[i]
                 });
               }
@@ -75,11 +76,110 @@ export class Champion extends Component{
 
 
     render() {
-        const { champions, chid, chlasttrophy, chrecord, chmaxrating, chconsecutiveyears, chcurrent, chplayerid, chplayer, chdescription, currentPage } = this.state;
+        const { champions, chid, chlasttrophy, chrecord, chmaxrating, chconsecutiveyears, chcurrent, chplayerid, chplayer, chdescription, currentPage, totalPages } = this.state;
         let addModalClose = () => this.setState({ addModalShow: false });
         let updateModalClose = () => this.setState({ updateModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
         let descriptionModalClose = () => this.setState({ descriptionModalShow: false });
+        
+        let pageButtons = [];
+        if (totalPages <= 10) {
+          // less than 10 pages, show all buttons
+          for (let i = 1; i <= totalPages; i++) {
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant={i === currentPage ? "primary" : "outline-primary"}
+                onClick={() => this.handlePageChange(i)}
+              >
+                {i}
+              </Button>
+            );
+          }
+        } else {
+          // more than 10 pages, show current page, 2 before and 2 after,
+          // and first and last page buttons
+          if (currentPage <= 3) {
+            // show first 5 buttons and "..." button
+            for (let i = 1; i <= 5; i++) {
+              pageButtons.push(
+                <Button
+                  style={{ marginLeft: "2px" }}
+                  variant={i === currentPage ? "primary" : "outline-primary"}
+                  onClick={() => this.handlePageChange(i)}
+                >
+                  {i}
+                </Button>
+              );
+            }
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(totalPages)}
+              >
+                {totalPages}
+              </Button>
+            );
+          } else if (currentPage >= totalPages - 2) {
+            // show last 5 buttons and "..." button
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(1)}
+              >
+                1
+              </Button>
+            );
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            for (let i = totalPages - 4; i <= totalPages; i++) {
+              pageButtons.push(
+                <Button
+                  style={{ marginLeft: "2px" }}
+                  variant={i === currentPage ? "primary" : "outline-primary"}
+                  onClick={() => this.handlePageChange(i)}
+                >
+                  {i}
+                </Button>
+              );
+            }
+          } else {
+            // show current page, 2 before and 2 after, and first and last page buttons
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(1)}
+              >
+                1
+              </Button>
+            );
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+              pageButtons.push(
+                <Button
+                  style={{ marginLeft: "2px" }}
+                  variant={i === currentPage ? "primary" : "outline-primary"}
+                  onClick={() => this.handlePageChange(i)}
+                >
+                  {i}
+                </Button>
+              );
+            }
+            pageButtons.push(<Button variant="outline-primary" style={{ marginLeft: '2px', marginRight: '2px' }}>.....</Button>);
+            pageButtons.push(
+              <Button
+                style={{ marginLeft: "2px" }}
+                variant="outline-primary"
+                onClick={() => this.handlePageChange(totalPages)}
+              >
+                {totalPages}
+              </Button>
+            );
+          }
+        }
 
         return(
             <div>
@@ -196,16 +296,51 @@ export class Champion extends Component{
                         +
                     </Button>
 
-                    <div className='ml-auto'>
-                        <Button style={{ marginLeft: '2px' }} onClick={this.handlePrevPage}>Prev</Button>
-                        <Button style={{ marginLeft: '2px' }} onClick={this.handleNextPage}>Next</Button>
-                        <Button style={{ marginLeft: '2px' }} onClick={() => this.handlePageChange(1)}>{currentPage}</Button>
-                    </div>
-
                     <AddChampionModal show={this.state.addModalShow}
                         onHide={addModalClose}>
                     </AddChampionModal>
+
                 </ButtonToolbar>
+
+                <ButtonToolbar style={{ display: 'flex', justifyContent: 'center' }}>
+                {currentPage !== 1 && (
+                    <Button
+                    style={{ marginLeft: '2px', marginRight: '2px' }}
+                    onClick={() => this.handlePageChange(1)}
+                    >
+                    1
+                    </Button>
+                )}
+                {currentPage > 3 && <span style={{ fontSize: '1.5em' }}>...</span>}
+                {currentPage > 2 && (
+                    <Button
+                    style={{ marginLeft: '2px', marginRight: '2px' }}
+                    onClick={() => this.handlePageChange(currentPage - 1)}
+                    >
+                    {currentPage - 1}
+                    </Button>
+                )}
+                <Button style={{ marginLeft: '2px', marginRight: '2px' }} disabled>
+                    {currentPage}
+                </Button>
+                {currentPage < totalPages - 1 && (
+                    <Button
+                    style={{ marginLeft: '2px', marginRight: '2px' }}
+                    onClick={() => this.handlePageChange(currentPage + 1)}
+                    >
+                    {currentPage + 1}
+                    </Button>
+                )}
+                {currentPage < totalPages - 2 && <span style={{ fontSize: '1.5em' }}>...</span>}
+                {currentPage !== totalPages && (
+                    <Button
+                    style={{ marginLeft: '2px', marginRight: '2px' }}
+                    onClick={() => this.handlePageChange(totalPages)}
+                    >
+                    {totalPages}
+                    </Button>
+                )}
+            </ButtonToolbar>
             </div>
         )
     }

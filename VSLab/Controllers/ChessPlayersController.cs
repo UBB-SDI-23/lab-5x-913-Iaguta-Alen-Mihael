@@ -5,6 +5,7 @@ using Mysqlx.Crud;
 using System;
 using VSLab.Data;
 using VSLab.Data.Non_Essential;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace VSLab.Controllers
 {
@@ -51,15 +52,23 @@ namespace VSLab.Controllers
             return (_context.tblChessParticipations?.Any(e => e.ChessPlayerID == playerid && e.ChessTournamentID == tournamentid)).GetValueOrDefault();
         }
 
-        // GET: api/ChessPlayers
+        public class PagedResult<T>
+        {
+            public IEnumerable<T>? Data { get; set; }
+            public int TotalPages { get; set; }
+        }
+
         // GET: api/ChessPlayers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<dtoChessPlayer>>> GettblChessPlayers([FromQuery] int page = 1, [FromQuery] int limit = 10)
+        public async Task<ActionResult<PagedResult<dtoChessPlayer>>> GettblChessPlayers([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
-            if (_context.tblChessChampions == null)
+            if (_context.tblChessPlayers == null)
             {
                 return NotFound();
             }
+
+            var totalItems = await _context.tblChessPlayers.CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalItems / limit);
 
             var players = await _context.tblChessPlayers
                 .Select(x => ChessPlayerToDTO(x))
@@ -67,7 +76,13 @@ namespace VSLab.Controllers
                 .Take(limit)
                 .ToListAsync();
 
-            return players;
+            var result = new PagedResult<dtoChessPlayer>
+            {
+                Data = players,
+                TotalPages = totalPages
+            };
+
+            return result;
         }
 
         // GET: api/ChessPlayers/5
@@ -183,7 +198,7 @@ namespace VSLab.Controllers
         }
 
         [HttpGet("Trophies")]
-        public async Task<ActionResult<IEnumerable<dtoChessPlayerTrophies>>> GetPlayerTrophies([FromQuery] int page = 1, [FromQuery] int limit = 10)
+        public async Task<ActionResult<PagedResult<dtoChessPlayerTrophies>>> GetPlayerTrophies([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
             var query = _context.tblChessChampions
                 .Include(a => a.ChessPlayer)
@@ -196,15 +211,26 @@ namespace VSLab.Controllers
                 })
                 .OrderByDescending(x => x.Trophies);
 
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalItems / limit);
+
             var pagedQuery = query
                 .Skip((page - 1) * limit)
                 .Take(limit);
 
-            return await pagedQuery.ToListAsync();
+            var result = new PagedResult<dtoChessPlayerTrophies>
+            {
+                Data = await pagedQuery.ToListAsync(),
+                TotalPages = totalPages
+            };
+
+            return result;
         }
 
+        
+
         [HttpGet("Ratings")]
-        public async Task<ActionResult<IEnumerable<dtoChessPlayerRatings>>> GetPlayerRatings([FromQuery] int page = 1, [FromQuery] int limit = 10)
+        public async Task<ActionResult<PagedResult<dtoChessPlayerRatings>>> GetPlayerRatings([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
             var query = _context.tblChessChampions
                 .Include(a => a.ChessPlayer)
@@ -217,20 +243,33 @@ namespace VSLab.Controllers
                 })
                 .OrderByDescending(x => x.Rating);
 
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalItems / limit);
+
             var pagedQuery = query
                 .Skip((page - 1) * limit)
                 .Take(limit);
 
-            return await pagedQuery.ToListAsync();
+            var result = new PagedResult<dtoChessPlayerRatings>
+            {
+                Data = await pagedQuery.ToListAsync(),
+                TotalPages = totalPages
+            };
+
+            return result;
         }
 
+
         [HttpGet("participations")]
-        public async Task<ActionResult<IEnumerable<dtoChessParticipation>>> GettblChessParticipations([FromQuery] int page = 1, [FromQuery] int limit = 10)
+        public async Task<ActionResult<PagedResult<dtoChessParticipation>>> GettblChessParticipations([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
             if (_context.tblChessParticipations == null)
             {
                 return NotFound();
             }
+
+            var totalItems = await _context.tblChessParticipations.CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalItems / limit);
 
             var participations = await _context.tblChessParticipations
                 .Select(x => ChessParticipationToDTO(x))
@@ -238,7 +277,13 @@ namespace VSLab.Controllers
                 .Take(limit)
                 .ToListAsync();
 
-            return participations;
+            var result = new PagedResult<dtoChessParticipation>
+            {
+                Data = participations,
+                TotalPages = totalPages
+            };
+
+            return result;
 
         }
 

@@ -13,7 +13,7 @@ export class UpdateChampionModal extends Component {
         fetch(process.env.REACT_APP_API+'chessplayers')
         .then(response => response.json())
         .then(data => {
-            this.setState({ chessPlayers: data });
+            this.setState({ chessPlayers: data.data });
         });
     }
 

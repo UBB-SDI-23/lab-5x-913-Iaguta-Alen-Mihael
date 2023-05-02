@@ -5,7 +5,7 @@ export class DetailsParticipationModal extends Component {
     
     constructor(props) {
         super(props);
-        this.state = { chessPlayer: Object, chessTournament: Object }
+        this.state = { chessPlayer: [], chessTournament: [] }
     }
     
     componentDidMount() {
@@ -26,7 +26,7 @@ export class DetailsParticipationModal extends Component {
         return (
           <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered >
             <Modal.Header closeButton>
-              <Modal.Title id='contained-modal-title-vcenter'>Player Champion</Modal.Title>
+              <Modal.Title id='contained-modal-title-vcenter'>Participation Details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Table striped bordered hover>

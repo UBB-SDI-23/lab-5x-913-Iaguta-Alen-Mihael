@@ -34,15 +34,23 @@ namespace VSLab.Controllers
         {
             return (_context.tblChessChampions?.Any(e => e.ID == id)).GetValueOrDefault();
         }
+        public class PagedResult<T>
+        {
+            public IEnumerable<T>? Data { get; set; }
+            public int TotalPages { get; set; }
+        }
 
         // GET: api/ChessChampions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<dtoChessChampion>>> GettblChessChampions([FromQuery] int page = 1, [FromQuery] int limit = 10)
+        public async Task<ActionResult<PagedResult<dtoChessChampion>>> GettblChessChampions([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
             if(_context.tblChessChampions == null)
             {
                 return NotFound();
             }
+
+            var totalItems = await _context.tblChessChampions.CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalItems / limit);
 
             var champs = await _context.tblChessChampions
                 .Select(x => ChessChampionToDTO(x))
@@ -50,7 +58,13 @@ namespace VSLab.Controllers
                 .Take(limit)
                 .ToListAsync();
 
-            return champs;
+            var result = new PagedResult<dtoChessChampion>
+            {
+                Data = champs,
+                TotalPages = totalPages
+            };
+
+            return result;
         }
 
         // GET: api/ChessChampions/5
