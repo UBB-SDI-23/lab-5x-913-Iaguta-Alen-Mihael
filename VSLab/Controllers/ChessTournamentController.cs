@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using VSLab.Data;
 
-
 namespace VSLab.Controllers
 {
     [ApiController]
@@ -31,7 +30,7 @@ namespace VSLab.Controllers
 
         private bool ChessTournamentExists(long id)
         {
-            return (_context.tblChessTournaments?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.tblChessTournaments.Any(e => e.ID == id));
         }
         public class PagedResult<T>
         {
@@ -43,11 +42,6 @@ namespace VSLab.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedResult<dtoChessTournament>>> GettblChessTournaments([FromQuery] int page, [FromQuery] int limit = 5)
         {
-            if(_context.tblChessTournaments == null)
-            {
-                return NotFound();
-            }
-
             var totalItems = await _context.tblChessTournaments.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalItems / limit);
 
@@ -70,11 +64,6 @@ namespace VSLab.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<tblChessTournament>> GettblChessTournamentsID(int id)
         {
-            if(_context.tblChessTournaments == null)
-            {
-                return NotFound();
-            }
-
             var tournament = await _context.tblChessTournaments
                 .Include(x => x.TournamentParticipations)
                 .Include(x => x.ChessPlayers)
@@ -89,15 +78,10 @@ namespace VSLab.Controllers
         }
 
         // PUT: api/ChessTournament/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PuttblChessTournament(int id, dtoChessTournament dtoChessTournament)
         {
-            if(_context.tblChessTournaments == null)
-            {
-                return BadRequest();
-            }
-
             var tournament = await _context.tblChessTournaments.FindAsync(id);
             if(tournament == null)
             {
@@ -129,7 +113,7 @@ namespace VSLab.Controllers
         }
 
         // POST: api/ChessTournament
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<dtoChessTournament>> PosttblChessTournament(dtoChessTournament dtoChessTournament)
         {
@@ -158,11 +142,6 @@ namespace VSLab.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletetblChessTournament(int id)
         {
-            if(_context.tblChessTournaments == null)
-            {
-                return NotFound();
-            }
-
             var tournament = await _context.tblChessTournaments.FindAsync(id);
             if(tournament == null)
             {

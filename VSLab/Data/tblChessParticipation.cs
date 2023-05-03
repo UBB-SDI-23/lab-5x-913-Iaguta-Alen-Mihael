@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace VSLab.Data
+﻿namespace VSLab.Data
 {
     public class tblChessParticipation
     {

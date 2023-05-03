@@ -1,9 +1,5 @@
 ﻿using VSLab.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using System.Text.RegularExpressions;
-using System;
 
 namespace VSLab.Controllers
 {

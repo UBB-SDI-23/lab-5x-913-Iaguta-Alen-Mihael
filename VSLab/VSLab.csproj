@@ -36,6 +36,9 @@
     <None Remove="Properties\serviceDependencies.VSLab - Web Deploy.json" />
     <None Remove="Properties\serviceDependencies.VSSDIChess - Web Deploy.json" />
     <None Remove="Properties\serviceDependencies.VSSDIChess - Web Deploy1.json" />
+    <None Remove="Properties\PublishProfiles\VSLab - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\VSSDIChess - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\VSSDIChess - Web Deploy1.pubxml" />
   </ItemGroup>
 
 </Project>

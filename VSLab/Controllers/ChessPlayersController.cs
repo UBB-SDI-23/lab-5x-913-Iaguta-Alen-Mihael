@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mysqlx.Crud;
-using System;
 using VSLab.Data;
 using VSLab.Data.Non_Essential;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace VSLab.Controllers
 {
@@ -44,17 +40,17 @@ namespace VSLab.Controllers
 
         private bool ChessPlayerExists(long id)
         {
-            return (_context.tblChessPlayers?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.tblChessPlayers.Any(e => e.ID == id));
         }
 
         private bool ChessParticipationExists(long playerid, long tournamentid)
         {
-            return (_context.tblChessParticipations?.Any(e => e.ChessPlayerID == playerid && e.ChessTournamentID == tournamentid)).GetValueOrDefault();
+            return (_context.tblChessParticipations.Any(e => e.ChessPlayerID == playerid && e.ChessTournamentID == tournamentid));
         }
 
         public class PagedResult<T>
         {
-            public IEnumerable<T>? Data { get; set; }
+            public IEnumerable<T>? Data { get; init; }
             public int TotalPages { get; set; }
         }
 
@@ -62,11 +58,6 @@ namespace VSLab.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedResult<dtoChessPlayer>>> GettblChessPlayers([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
-            if (_context.tblChessPlayers == null)
-            {
-                return NotFound();
-            }
-
             var totalItems = await _context.tblChessPlayers.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalItems / limit);
 
@@ -89,11 +80,6 @@ namespace VSLab.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<tblChessPlayer>> GettblChessPlayerID(int id)
         {
-            if (_context.tblChessChampions == null)
-            {
-                return NotFound();
-            }
-
             var player = await _context.tblChessPlayers
                 .Include(x => x.PlayerParticipations)
                 .Include(x => x.ChessChampions)
@@ -109,7 +95,7 @@ namespace VSLab.Controllers
         }
 
         // PUT: api/ChessPlayers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PuttblChessPlayer(int id, dtoChessPlayer dtoChessPlayer)
         {
@@ -150,7 +136,7 @@ namespace VSLab.Controllers
         }
 
         // POST: api/ChessPlayers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<tblChessPlayer>> PosttblChessPlayer(dtoChessPlayer dtoChessPlayer)
         {
@@ -180,11 +166,6 @@ namespace VSLab.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletetblChessPlayer(int id)
         {
-            if(_context.tblChessPlayers == null)
-            {
-                return NotFound();
-            }
-
             var player = await _context.tblChessPlayers.FindAsync(id);
             if(player == null)
             {
@@ -263,11 +244,6 @@ namespace VSLab.Controllers
         [HttpGet("participations")]
         public async Task<ActionResult<PagedResult<dtoChessParticipation>>> GettblChessParticipations([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
-            if (_context.tblChessParticipations == null)
-            {
-                return NotFound();
-            }
-
             var totalItems = await _context.tblChessParticipations.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalItems / limit);
 
@@ -290,15 +266,6 @@ namespace VSLab.Controllers
         [HttpPost("{ChessTournamentID}/participation/{ChessPlayerID}")]
         public async Task<ActionResult<dtoChessParticipation>> PosttblChessParticipation(int ChessTournamentID, int ChessPlayerID, dtoChessParticipation dtoChessParticipation)
         {
-            if(_context.tblChessPlayers == null)
-            {
-                return Problem("Entity set 'tblChessPlayers' is null.");
-            }
-            if (_context.tblChessTournaments == null)
-            {
-                return Problem("Entity set 'tblChessTournaments' is null.");
-            }
-
             var player = await _context.tblChessPlayers.FindAsync(ChessPlayerID);
             var tournament = await _context.tblChessTournaments.FindAsync(ChessTournamentID);
 
@@ -367,11 +334,6 @@ namespace VSLab.Controllers
         [HttpDelete("{ChessTournamentID}/participation/{ChessPlayerID}")]
         public async Task<IActionResult> DeletetblChessParticipation(int ChessTournamentID, int ChessPlayerID)
         {
-            if (_context.tblChessParticipations == null)
-            {
-                return NotFound();
-            }
-
             var participation = await _context.tblChessParticipations.FindAsync(ChessTournamentID, ChessPlayerID);
             if (participation == null)
             {

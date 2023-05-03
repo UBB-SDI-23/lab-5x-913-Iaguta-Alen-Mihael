@@ -1,12 +1,11 @@
-﻿using MessagePack;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace VSLab.Data
 {
     public class tblChessPlayer
     {
-        [System.ComponentModel.DataAnnotations.Key]
-        public int ID { get; set; }
+        [Key]
+        public int ID { get; init; }
         public string Name { get; set; } = string.Empty;
         public string Country { get; set; } = string.Empty;
         public int Rating { get; set; }

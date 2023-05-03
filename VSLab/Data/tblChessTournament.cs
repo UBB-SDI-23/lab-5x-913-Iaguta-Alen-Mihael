@@ -1,8 +1,10 @@
-﻿namespace VSLab.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VSLab.Data
 {
     public class tblChessTournament
     {
-        [System.ComponentModel.DataAnnotations.Key]
+        [Key]
         public int ID { get; set; }
         public string Name { get; set; } = string.Empty;
         public int NumParticipants { get; set; }
