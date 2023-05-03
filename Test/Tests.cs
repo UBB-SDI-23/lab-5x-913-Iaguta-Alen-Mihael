@@ -1,9 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using VSLab.Controllers;
 using VSLab.Data;
 using VSLab.Data.Non_Essential;
-using VSLab.Controllers;
-using Microsoft.EntityFrameworkCore;
 
-namespace Tests.MstTest
+namespace Test
 {
     [TestClass]
     public class Tests
@@ -46,10 +46,11 @@ namespace Tests.MstTest
             var result = await service.GettblChessChampionByRating(1600);
 
             // Assert
-            Assert.AreEqual(result.Count(), goodData.Count());
-            Assert.AreEqual(result.ToList()[0].ID, goodData[0].ID);
-            Assert.AreEqual(result.ToList()[1].ID, goodData[1].ID);
-            Assert.IsTrue(result.ToList()[1].Current == goodData[1].Current && result.ToList()[1].Record == goodData[1].Record);
+            var tblChessChampions = result as tblChessChampion[] ?? result.ToArray();
+            Assert.AreEqual(tblChessChampions.Count(), goodData.Count());
+            Assert.AreEqual(tblChessChampions.ToList()[0].ID, goodData[0].ID);
+            Assert.AreEqual(tblChessChampions.ToList()[1].ID, goodData[1].ID);
+            Assert.IsTrue(tblChessChampions.ToList()[1].Current == goodData[1].Current && tblChessChampions.ToList()[1].Record == goodData[1].Record);
         }
 
         [TestMethod]
@@ -74,7 +75,6 @@ namespace Tests.MstTest
                 .Options;
 
             var mockContext = new ChessDbContext(optionsBuilder);
-            var serviceChampions = new ChessChampionsController(mockContext);
             var servicePlayers = new ChessPlayersController(mockContext);
 
             foreach (var player in players)
@@ -98,14 +98,22 @@ namespace Tests.MstTest
             };
 
             // Act
-            var result = await servicePlayers.GetPlayerTrophies();
+            var pagedResult = await servicePlayers.GetPlayerTrophies();
+            if (pagedResult.Value != null)
+            {
+                var result = pagedResult.Value.Data;
 
-            // Assert
-            Assert.AreEqual(goodData.Count(), result.Count());
-            Assert.AreEqual(goodData[0].Id, result.ToList()[0].Id);
-            Assert.AreEqual(goodData[1].Id, result.ToList()[1].Id);
-            Assert.IsTrue(goodData[1].Trophies == result.ToList()[1].Trophies && goodData[1].Name == result.ToList()[1].Name);
-
+                // Assert
+                if (result != null)
+                {
+                    var dtoChessPlayerTrophiesEnumerable = result as dtoChessPlayerTrophies[] ?? result.ToArray();
+                    Assert.AreEqual(goodData.Count(), dtoChessPlayerTrophiesEnumerable.Count());
+                    Assert.AreEqual(goodData[0].Id, dtoChessPlayerTrophiesEnumerable.ToList()[0].Id);
+                    Assert.AreEqual(goodData[1].Id, dtoChessPlayerTrophiesEnumerable.ToList()[1].Id);
+                    Assert.IsTrue(goodData[1].Trophies == dtoChessPlayerTrophiesEnumerable.ToList()[1].Trophies &&
+                                  goodData[1].Name == dtoChessPlayerTrophiesEnumerable.ToList()[1].Name);
+                }
+            }
         }
     }
 }

@@ -217,6 +217,11 @@ export class Player extends Component{
                             </th>
                             <th>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    Championships
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Options
                                 </Button>
                             </th>
@@ -232,6 +237,7 @@ export class Player extends Component{
                                     <td>{player.isMaster}</td>
                                     <td>{player.startYear}</td>
                                     <td>{player.playerParticipations.length}</td>
+                                    <td>{player.chessChampions.length}</td>
                                     <td>
                                         <ButtonToolbar>
 

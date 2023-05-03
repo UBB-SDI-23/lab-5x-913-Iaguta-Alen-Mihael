@@ -32,4 +32,10 @@
     <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Properties\serviceDependencies.VSLab - Web Deploy.json" />
+    <None Remove="Properties\serviceDependencies.VSSDIChess - Web Deploy.json" />
+    <None Remove="Properties\serviceDependencies.VSSDIChess - Web Deploy1.json" />
+  </ItemGroup>
+
 </Project>

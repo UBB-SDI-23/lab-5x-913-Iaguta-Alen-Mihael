@@ -221,6 +221,11 @@ export class Tournament extends Component{
                             </th>
                             <th>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    Participations
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Options
                                 </Button>
                             </th>
@@ -234,6 +239,7 @@ export class Tournament extends Component{
                                 <td>{tournament.host}</td>
                                 <td>{tournament.prizeMoney}</td>
                                 <td>{tournament.trophy}</td>
+                                <td>{tournament.tournamentParticipations.length}</td>
                                 <td>
                                 <ButtonToolbar>
                                     

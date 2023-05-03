@@ -21,15 +21,15 @@ function App() {
     
     <Navigation/>
     
-    <Routes>
-      <Route path='/' Component={Home} exact/>
-      <Route path='/players' Component={Player} />
-      <Route path='/champions' Component={Champion} />
-      <Route path='/tournaments' Component={Tournament} />
-      <Route path='/participations' Component={Participation} />    
-      <Route path='/trophies' Component={TrophyStats} />  
-      <Route path='/ratings' Component={RatingStats} />  
-    </Routes>
+      <Routes>
+        <Route path='/' Component={Home} exact/>
+        <Route path='/players' Component={Player} />
+        <Route path='/champions' Component={Champion} />
+        <Route path='/tournaments' Component={Tournament} />
+        <Route path='/participations' Component={Participation} />
+        <Route path='/trophies' Component={TrophyStats} />
+        <Route path='/ratings' Component={RatingStats} />
+      </Routes>
     </div>
     </BrowserRouter>
   );
