@@ -262,6 +262,22 @@ namespace VSLab.Controllers
             return result;
 
         }
+        
+        [HttpGet("{ChessTournamentID}/participation/{ChessPlayerID}")]
+        public async Task<ActionResult<tblChessPlayer>> GettblChessParticipationsID(int ChessTournamentID, int ChessPlayerID)
+        {
+            var participation = await _context.tblChessParticipations
+                .Include(x => x.ChessPlayer)
+                .Include(x => x.ChessTournament)
+                .FirstOrDefaultAsync(x => x.ChessPlayerID == ChessPlayerID && x.ChessTournamentID == ChessTournamentID);
+
+            if (participation == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(participation);
+        }
 
         [HttpPost("{ChessTournamentID}/participation/{ChessPlayerID}")]
         public async Task<ActionResult<dtoChessParticipation>> PosttblChessParticipation(int ChessTournamentID, int ChessPlayerID, dtoChessParticipation dtoChessParticipation)
