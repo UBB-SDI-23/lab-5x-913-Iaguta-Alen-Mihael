@@ -8,7 +8,6 @@ import { UpdateParticipationModal } from './UpdateParticipationModal';
 import { DescriptionParticipationModal } from './DescriptionParticipationModal';
 
 export class Participation extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -20,12 +19,29 @@ export class Participation extends Component {
     refreshList() {
         const { currentPage, itemsPerPage } = this.state;
         const url = `${process.env.REACT_APP_API}chessplayers/participations?page=${currentPage}&limit=${itemsPerPage}`;
-      
+
         fetch(url)
-          .then(response => response.json())
-          .then(data => {
-              this.setState({ participations: data.data, totalPages: data.totalPages });
-          });
+            .then(response => response.json())
+            .then(data => {
+                const updatedParticipations = [];
+                this.setState({totalPages: data.totalPages })
+                const partyPromises = data.data.map(party => {
+                    // Fetch data for each player using the /chessplayers/{id} endpoint
+                    const partyUrl = `${process.env.REACT_APP_API}chessplayers/${party.chessTournamentID}/participations/${party.chessPlayerID}`;
+                    return fetch(partyUrl).then(response => response.json());
+                });
+
+                Promise.all(partyPromises).then(partyData => {
+                    // Combine the player data with the original player object
+                    for (let i = 0; i < data.data.length; i++) {
+                        updatedParticipations.push({
+                            ...data.data[i],
+                            ...partyData[i]
+                        });
+                    }
+                    this.setState({ participations: updatedParticipations });
+                });
+            });
     }
 
     componentDidMount(){
@@ -34,10 +50,12 @@ export class Participation extends Component {
 
     deleteParticipation(playerID, tournamentID){
         if(window.confirm('Are you sure?')){
-            fetch(process.env.REACT_APP_API+'chessplayers/'+tournamentID+'/participation/'+playerID ,{
-                method:'DELETE',
-                header:{'Accept':'application/json',
-                        'Content-Type':'application/json'}
+            fetch(process.env.REACT_APP_API + 'chessplayers/' + tournamentID + '/participation/' + playerID, {
+                method: 'DELETE',
+                header: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/js on'
+                }
             })
         }
     }
@@ -46,9 +64,8 @@ export class Participation extends Component {
         this.setState({ currentPage: pageNumber }, this.refreshList);
     };
 
-
     render() {
-        const { participations, prdate, prtime, prplayerid, prtournamentid, prdescription, currentPage, totalPages } = this.state;
+        const { participations, prdate, prtime, prplayerid, prplayer, prtournament, prtournamentid, prdescription, currentPage, totalPages } = this.state;
         let addModalClose = () => this.setState({ addModalShow: false });
         let updateModalClose = () => this.setState({ updateModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
@@ -199,15 +216,15 @@ export class Participation extends Component {
                                         onClick={() => 
                                             this.setState({
                                                 detailsModalShow: true,
-                                                prplayerid: party.chessPlayerID,
-                                                prtournamentid: party.chessTournamentID })}>
+                                                prplayer: party.chessPlayer,
+                                                prtournament: party.chessTournament })}>
                                         Details
                                     </Button>
                                         
                                     <DetailsParticipationModal show={this.state.detailsModalShow}
                                         onHide={detailsModalClose}
-                                        prplayerid={prplayerid}
-                                        prtournamentid={prtournamentid}    
+                                        prplayer={prplayer}
+                                        prtournament={prtournament}
                                     />                   
 
                                     <Button className="mr-2" variant="warning"
@@ -225,8 +242,6 @@ export class Participation extends Component {
                                     onClick={()=>this.deleteParticipation(party.chessPlayerID, party.chessTournamentID)}>
                                         Delete
                                     </Button>
-                                        
-                                    
 
                                 </ButtonToolbar>
                                 </td>

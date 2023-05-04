@@ -2,25 +2,6 @@ import { Component } from 'react';
 import { Button, Modal, Table } from "react-bootstrap";
 
 export class DetailsParticipationModal extends Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = { chessPlayer: [], chessTournament: [] }
-    }
-    
-    componentDidMount() {
-        fetch(process.env.REACT_APP_API+'chessplayers/'+this.props.prplayerid)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ chessPlayer: data });
-        });
-
-        fetch(process.env.REACT_APP_API+'chesstournament/'+this.props.prtournamentid)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ chessTournament: data });
-        });
-    }
 
     render() {
         return (
@@ -40,13 +21,13 @@ export class DetailsParticipationModal extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.chessPlayer ? (
+                        {this.state.prplayer ? (
                             <tr>
-                                <td>{this.state.chessPlayer.name}</td>
-                                <td>{this.state.chessPlayer.country}</td>
-                                <td>{this.state.chessPlayer.rating}</td>
-                                <td>{this.state.chessPlayer.isMaster}</td>
-                                <td>{this.state.chessPlayer.startYear}</td>
+                                <td>{this.state.prplayer.name}</td>
+                                <td>{this.state.prplayer.country}</td>
+                                <td>{this.state.prplayer.rating}</td>
+                                <td>{this.state.prplayer.isMaster}</td>
+                                <td>{this.state.prplayer.startYear}</td>
                             </tr>
                     ) : (
                         <tr>
@@ -66,13 +47,13 @@ export class DetailsParticipationModal extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.chessTournament ? (
+                        {this.state.prtournament ? (
                             <tr>
-                                <td>{this.state.chessTournament.name}</td>
-                                <td>{this.state.chessTournament.numParticipants}</td>
-                                <td>{this.state.chessTournament.host}</td>
-                                <td>{this.state.chessTournament.prizeMoney}</td>
-                                <td>{this.state.chessTournament.trophy}</td>
+                                <td>{this.state.prtournament.name}</td>
+                                <td>{this.state.prtournament.numParticipants}</td>
+                                <td>{this.state.prtournament.host}</td>
+                                <td>{this.state.prtournament.prizeMoney}</td>
+                                <td>{this.state.prtournament.trophy}</td>
                             </tr>
                     ) : (
                         <tr>
