@@ -6,11 +6,11 @@ namespace VSLab.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ChessTournamentController : ControllerBase
+    public class ChessTournamentsController : ControllerBase
     {
         private readonly ChessDbContext _context;
         private readonly Validators _validator = new Validators();
-        public ChessTournamentController(ChessDbContext context)
+        public ChessTournamentsController(ChessDbContext context)
         {
             _context = context;
         }
@@ -24,8 +24,8 @@ namespace VSLab.Controllers
                 Host = tournament.Host,
                 PrizeMoney = tournament.PrizeMoney,
                 Trophy = tournament.Trophy,
-                Description = tournament.Description
-                
+                Description = tournament.Description,
+                UserID = tournament.UserID
             };
 
         private bool ChessTournamentExists(long id)
@@ -67,6 +67,7 @@ namespace VSLab.Controllers
             var tournament = await _context.tblChessTournaments
                 .Include(x => x.TournamentParticipations)
                 .Include(x => x.ChessPlayers)
+                .Include(x => x.TblUser)
                 .FirstOrDefaultAsync(x => x.ID == id);
 
             if(tournament == null)
@@ -88,12 +89,20 @@ namespace VSLab.Controllers
                 return NotFound();
             }
 
+            var user = await _context.tblUserProfiles.FindAsync(dtoChessTournament.UserID);
+            if(user == null)
+            {
+                return NotFound();
+            }
+
             tournament.Host = dtoChessTournament.Host;
             tournament.NumParticipants = dtoChessTournament.NumParticipants;
             tournament.Name = dtoChessTournament.Name;
             tournament.PrizeMoney = dtoChessTournament.PrizeMoney;
             tournament.Trophy = dtoChessTournament.Trophy;
             tournament.Description = dtoChessTournament.Description;
+            tournament.UserID = dtoChessTournament.UserID;
+            tournament.TblUser = user;
 
             if(!_validator.ValidateTournament(tournament))
             {
@@ -117,6 +126,12 @@ namespace VSLab.Controllers
         [HttpPost]
         public async Task<ActionResult<dtoChessTournament>> PosttblChessTournament(dtoChessTournament dtoChessTournament)
         {
+            var user = await _context.tblUserProfiles.FindAsync(dtoChessTournament.UserID);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            
             var tournament = new tblChessTournament
             {
                 Name = dtoChessTournament.Name,
@@ -124,7 +139,9 @@ namespace VSLab.Controllers
                 Host = dtoChessTournament.Host,
                 PrizeMoney = dtoChessTournament.PrizeMoney,
                 NumParticipants = dtoChessTournament.NumParticipants,
-                Description = dtoChessTournament.Description
+                Description = dtoChessTournament.Description,
+                UserID = dtoChessTournament.UserID,
+                TblUser = user
             };
 
             if (!_validator.ValidateTournament(tournament))

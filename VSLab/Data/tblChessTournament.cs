@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using VSLab.Data.Security;
 
 namespace VSLab.Data
 {
@@ -14,7 +15,8 @@ namespace VSLab.Data
         public string Description { get; set; } = string.Empty;
         public ICollection<tblChessParticipation> TournamentParticipations { get; set; } = null!;
         public ICollection<tblChessPlayer> ChessPlayers { get; set;} = null!;
-
+        public int UserID { get; set; }
+        public tblUserProfile TblUser { get; set; } = null!;
 
     }
 }

@@ -9,6 +9,7 @@
         public int PrizeMoney { get; init; }
         public string Trophy { get; init; } = string.Empty;
         public string Description { get; init; } = string.Empty;
+        public int UserID { get; set; }
 
     }
 }
