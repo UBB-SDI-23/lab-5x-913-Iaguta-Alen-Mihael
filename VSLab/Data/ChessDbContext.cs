@@ -16,11 +16,6 @@ namespace VSLab.Data
                 .HasOne<tblChessPlayer>(s => s.ChessPlayer)
                 .WithMany(g => g.ChessChampions)
                 .HasForeignKey(s => s.ChessPlayerID);
-            
-            modelBuilder.Entity<tblChessChampion>()
-                .HasOne<tblUserProfile>(s => s.TblUser)
-                .WithMany(g => g.ChessChampions)
-                .HasForeignKey(s => s.UserID);
 
             modelBuilder.Entity<tblChessParticipation>()
                 .HasKey(c => new { c.ChessTournamentID, c.ChessPlayerID});

@@ -318,12 +318,9 @@ namespace VSLab.Controllers
                 Description = dtoChessParticipation.Description
             };
 
-            var playerUser = _context.tblUserProfiles.FindAsync(player.UserID);
-            var tournamentUser = _context.tblUserProfiles.FindAsync(tournament.UserID);
+            if (player.UserID != tournament.UserID)
+                return BadRequest("Cannot create participation with different users!");
 
-            if (playerUser != tournamentUser)
-                return BadRequest();
-                    
             _context.tblChessParticipations.Add(participation);
             await _context.SaveChangesAsync();
 

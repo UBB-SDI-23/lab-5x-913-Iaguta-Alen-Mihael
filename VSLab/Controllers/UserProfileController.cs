@@ -65,9 +65,7 @@ namespace VSLab.Controllers
         {
             var user = await _context.tblUserProfiles
                 .Include(x => x.ChessPlayers)
-                .Include(x => x.ChessChampions)
                 .Include(x => x.ChessTournaments)
-                .Include(x => x.ChessParticipations)
                 .FirstOrDefaultAsync(x => x.ID == id);
 
             if(user == null)
@@ -145,13 +143,5 @@ namespace VSLab.Controllers
             return NoContent();
         }
         
-        public ICollection<tblChessParticipation> GetParticipations(int id)
-        {
-            var participations = _context.tblChessParticipations
-                .Where(p => p.ChessPlayer.UserID == id && p.ChessTournament.UserID == id)
-                .ToList();
-        
-            return participations;
-        }
     }
 }

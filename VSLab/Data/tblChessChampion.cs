@@ -14,7 +14,5 @@ namespace VSLab.Data
         public string Description { get; set; } = string.Empty;
         public int ChessPlayerID { get; set; }
         public tblChessPlayer ChessPlayer { get; set; } = null!;
-        public int UserID { get; set; }
-        public tblUserProfile TblUser { get; set; } = null!;
     }
 }

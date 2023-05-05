@@ -48,6 +48,12 @@
     <Compile Remove="Migrations\20230504201357_TestMigrations.Designer.cs" />
     <Compile Remove="Migrations\20230505195854_Test2Migrations.cs" />
     <Compile Remove="Migrations\20230505195854_Test2Migrations.Designer.cs" />
+    <Compile Remove="Migrations\20230505205623_TestMigrations.cs" />
+    <Compile Remove="Migrations\20230505205623_TestMigrations.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

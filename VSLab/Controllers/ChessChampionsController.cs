@@ -26,8 +26,7 @@ namespace VSLab.Controllers
                 ConsecutiveYears = champion.ConsecutiveYears,
                 Current = champion.Current,
                 Description = champion.Description,
-                ChessPlayerID = champion.ChessPlayerID,
-                UserID = champion.UserID
+                ChessPlayerID = champion.ChessPlayerID
             };
 
         private bool ChessChampionExists(int id)
@@ -69,7 +68,6 @@ namespace VSLab.Controllers
         {
             var champion = await _context.tblChessChampions
                 .Include(x => x.ChessPlayer)
-                .Include(x => x.TblUser)
                 .FirstOrDefaultAsync(x => x.ID == id);
 
             if(champion == null)
@@ -101,12 +99,6 @@ namespace VSLab.Controllers
             {
                 return BadRequest();
             }
-            
-            var user = await _context.tblUserProfiles.FindAsync(dtoChessChampion.UserID);
-            if (user == null)
-            {
-                return BadRequest();
-            }
 
             champion.ConsecutiveYears = dtoChessChampion.ConsecutiveYears;
             champion.Record = dtoChessChampion.Record;
@@ -116,8 +108,6 @@ namespace VSLab.Controllers
             champion.Description = dtoChessChampion.Description;
             champion.ChessPlayerID = dtoChessChampion.ChessPlayerID;
             champion.ChessPlayer = player;
-            champion.UserID = dtoChessChampion.UserID;
-            champion.TblUser = user;
 
             if (!_validator.ValidateChampion(champion))
             {
@@ -146,12 +136,6 @@ namespace VSLab.Controllers
             {
                 return BadRequest();
             }
-            
-            var user = await _context.tblUserProfiles.FindAsync(dtoChessChampion.UserID);
-            if (user == null)
-            {
-                return BadRequest();
-            }
 
             var newChamp = new tblChessChampion
             { 
@@ -162,9 +146,7 @@ namespace VSLab.Controllers
                 MaxRating = dtoChessChampion.MaxRating,
                 Description = dtoChessChampion.Description,
                 ChessPlayerID = dtoChessChampion.ChessPlayerID,
-                ChessPlayer = player,
-                UserID = user.ID,
-                TblUser = user
+                ChessPlayer = player
             };
 
             if (!_validator.ValidateChampion(newChamp))
@@ -230,8 +212,7 @@ namespace VSLab.Controllers
                     Current = champ.Current,
                     Description = champ.Description,
                     LastTrophy = champ.LastTrophy,
-                    ChessPlayerID = id,
-                    UserID = champ.UserID
+                    ChessPlayerID = id
                 };
 
                 await PuttblChessChampion(champId, dtoChamp);
@@ -261,8 +242,7 @@ namespace VSLab.Controllers
                     Current = champ.Current,
                     Description = champ.Description,
                     LastTrophy = champ.LastTrophy,
-                    ChessPlayerID = id,
-                    UserID = champ.UserID
+                    ChessPlayerID = id
                 };
 
                 await PosttblChessChampion(dtoChamp);
