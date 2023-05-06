@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1" date="1683407486015" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 07/05/2023 00:11 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="obj/Debug/net7.0/VSLab.pdb" />
+    <option name="AFTER_PATH" value="obj/Debug/net7.0/VSLab.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/VSLab.pdb" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/Test.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Test/obj/Debug/net7.0/Test.pdb" />
+    <option name="AFTER_PATH" value="../Test/obj/Debug/net7.0/Test.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/Test.pdb" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../Test/bin/Debug/net7.0/Test.dll" />
+    <option name="AFTER_PATH" value="../Test/bin/Debug/net7.0/Test.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/Test.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="bin/Debug/net7.0/VSLab.dll" />
+    <option name="AFTER_PATH" value="bin/Debug/net7.0/VSLab.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/VSLab.dll" />
+  </binary>
+</changelist>
