@@ -1,4 +1,6 @@
-﻿namespace VSLab.Data
+﻿using VSLab.Data.Security;
+
+namespace VSLab.Data
 {
     public class tblChessParticipation
     {
@@ -9,6 +11,5 @@
         public string Description { get; set; } = string.Empty;
         public tblChessPlayer ChessPlayer { get; set; } = null!;
         public tblChessTournament ChessTournament { get; set; } = null!;
-
     }
 }

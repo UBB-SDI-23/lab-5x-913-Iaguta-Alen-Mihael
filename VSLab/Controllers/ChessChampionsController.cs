@@ -31,8 +31,9 @@ namespace VSLab.Controllers
 
         private bool ChessChampionExists(int id)
         {
-            return (_context.tblChessChampions?.Any(e => e.ID == id)).GetValueOrDefault();
+            return _context.tblChessChampions.Any(e => e.ID == id);
         }
+        
         public class PagedResult<T>
         {
             public IEnumerable<T>? Data { get; set; }
@@ -43,11 +44,6 @@ namespace VSLab.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedResult<dtoChessChampion>>> GettblChessChampions([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
-            if(_context.tblChessChampions == null)
-            {
-                return NotFound();
-            }
-
             var totalItems = await _context.tblChessChampions.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalItems / limit);
 
@@ -70,11 +66,6 @@ namespace VSLab.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<tblChessChampion>> GettblChessChampionID(int id)
         {
-            if(_context.tblChessChampions == null)
-            { 
-                return NotFound(); 
-            }
-
             var champion = await _context.tblChessChampions
                 .Include(x => x.ChessPlayer)
                 .FirstOrDefaultAsync(x => x.ID == id);
@@ -88,7 +79,7 @@ namespace VSLab.Controllers
         }
 
         // PUT: api/ChessChampions/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PuttblChessChampion(int id, dtoChessChampion dtoChessChampion)
         {
@@ -136,15 +127,10 @@ namespace VSLab.Controllers
         }
 
         // POST: api/ChessChampions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<dtoChessChampion>> PosttblChessChampion(dtoChessChampion dtoChessChampion)
         {
-            if(_context.tblChessChampions == null)
-            {
-                return Problem("Entity set 'tblChessChampions is null.");
-            }
-
             var player = await _context.tblChessPlayers.FindAsync(dtoChessChampion.ChessPlayerID);
             if(player == null)
             {
@@ -163,10 +149,10 @@ namespace VSLab.Controllers
                 ChessPlayer = player
             };
 
-            /*if (!_validator.ValidateChampion(newChamp))
+            if (!_validator.ValidateChampion(newChamp))
             {
                 return BadRequest();
-            }*/
+            }
 
             _context.tblChessChampions.Add(newChamp);
             await _context.SaveChangesAsync();
@@ -178,11 +164,6 @@ namespace VSLab.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletetblChessChampion(int id)
         {
-            if(_context.tblChessChampions == null)
-            {
-                return NotFound();
-            }
-
             var champion = await _context.tblChessChampions.FindAsync(id);
             if(champion == null)
             {
@@ -213,8 +194,6 @@ namespace VSLab.Controllers
                 return BadRequest();
             }
 
-
-
             foreach (var champId in ChessChampionIds)
             {
                 var champ = await _context.tblChessChampions.FindAsync(champId);
@@ -242,7 +221,7 @@ namespace VSLab.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id}/listchamps")]
+        [HttpPost("{id}/champions/list")]
         public async Task<IActionResult> PosttblChessChampionsList(int id, List<dtoChessChampion> chessChampions)
         {
             var player = await _context.tblChessPlayers.FindAsync(id);
@@ -254,12 +233,6 @@ namespace VSLab.Controllers
 
             foreach (var champ in chessChampions)
             {
-
-                if (champ == null)
-                {
-                    return BadRequest();
-                }
-
                 var dtoChamp = new dtoChessChampion
                 {
                     ID = champ.ID,

@@ -10,6 +10,5 @@
         public int Current { get; init; }
         public string Description { get; init; } = string.Empty;
         public int ChessPlayerID { get; init; }
-
     }
 }

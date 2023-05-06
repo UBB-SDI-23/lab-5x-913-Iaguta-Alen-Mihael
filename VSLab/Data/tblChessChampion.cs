@@ -1,4 +1,6 @@
-﻿namespace VSLab.Data
+﻿using VSLab.Data.Security;
+
+namespace VSLab.Data
 {
     public class tblChessChampion
     {

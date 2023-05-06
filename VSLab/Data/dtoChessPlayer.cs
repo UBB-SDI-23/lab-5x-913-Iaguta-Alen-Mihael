@@ -9,6 +9,7 @@
         public int IsMaster { get; init; }
         public int StartYear { get; init; }
         public string Description { get; init; } = string.Empty;
+        public int UserID { get; init; }
 
     }
 }

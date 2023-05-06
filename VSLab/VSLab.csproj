@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
@@ -18,6 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.6" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
     <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
     <PackageReference Include="MySql.Data" Version="8.0.32.1" />
@@ -39,6 +41,19 @@
     <None Remove="Properties\PublishProfiles\VSLab - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\VSSDIChess - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\VSSDIChess - Web Deploy1.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20230504201357_TestMigrations.cs" />
+    <Compile Remove="Migrations\20230504201357_TestMigrations.Designer.cs" />
+    <Compile Remove="Migrations\20230505195854_Test2Migrations.cs" />
+    <Compile Remove="Migrations\20230505195854_Test2Migrations.Designer.cs" />
+    <Compile Remove="Migrations\20230505205623_TestMigrations.cs" />
+    <Compile Remove="Migrations\20230505205623_TestMigrations.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

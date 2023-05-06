@@ -26,9 +26,10 @@ namespace VSLab.Controllers
                 Rating = player.Rating,
                 IsMaster = player.IsMaster,
                 StartYear = player.StartYear,
-                Description = player.Description
+                Description = player.Description,
+                UserID = player.UserID
             };
-
+        
         private static dtoChessParticipation ChessParticipationToDTO(tblChessParticipation participation) =>
             new dtoChessParticipation
             {
@@ -83,7 +84,7 @@ namespace VSLab.Controllers
             var player = await _context.tblChessPlayers
                 .Include(x => x.PlayerParticipations)
                 .Include(x => x.ChessChampions)
-                .Include(x => x.ChessTournaments)
+                .Include(x => x.TblUser)
                 .FirstOrDefaultAsync(x => x.ID == id);
 
             if (player == null) 
@@ -105,8 +106,13 @@ namespace VSLab.Controllers
             }
 
             var playerToUpdate = await _context.tblChessPlayers.FindAsync(id);
-
             if(playerToUpdate == null)
+            {
+                return NotFound();
+            }
+            
+            var user = await _context.tblUserProfiles.FindAsync(dtoChessPlayer.UserID);
+            if(user == null)
             {
                 return NotFound();
             }
@@ -117,6 +123,8 @@ namespace VSLab.Controllers
             playerToUpdate.IsMaster = dtoChessPlayer.IsMaster;
             playerToUpdate.StartYear = dtoChessPlayer.StartYear;
             playerToUpdate.Description = dtoChessPlayer.Description;
+            playerToUpdate.UserID = dtoChessPlayer.UserID;
+            playerToUpdate.TblUser = user;
 
             if (!_validator.ValidatePlayer(playerToUpdate))
             {
@@ -140,6 +148,12 @@ namespace VSLab.Controllers
         [HttpPost]
         public async Task<ActionResult<tblChessPlayer>> PosttblChessPlayer(dtoChessPlayer dtoChessPlayer)
         {
+            var user = await _context.tblUserProfiles.FindAsync(dtoChessPlayer.UserID);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            
             var player = new tblChessPlayer
             {
                 Name = dtoChessPlayer.Name,
@@ -147,7 +161,9 @@ namespace VSLab.Controllers
                 Rating = dtoChessPlayer.Rating,
                 IsMaster = dtoChessPlayer.IsMaster,
                 StartYear = dtoChessPlayer.StartYear,
-                Description = dtoChessPlayer.Description
+                Description = dtoChessPlayer.Description,
+                UserID = dtoChessPlayer.UserID,
+                TblUser = user
             };
 
             if (!_validator.ValidatePlayer(player))
@@ -208,8 +224,6 @@ namespace VSLab.Controllers
             return result;
         }
 
-        
-
         [HttpGet("Ratings")]
         public async Task<ActionResult<PagedResult<dtoChessPlayerRatings>>> GetPlayerRatings([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
@@ -263,8 +277,8 @@ namespace VSLab.Controllers
 
         }
         
-        [HttpGet("{ChessTournamentID}/participation/{ChessPlayerID}")]
-        public async Task<ActionResult<tblChessPlayer>> GettblChessParticipationsID(int ChessTournamentID, int ChessPlayerID)
+        [HttpGet("{ChessTournamentID}/participations/{ChessPlayerID}")]
+        public async Task<ActionResult<tblChessParticipation>> GettblChessParticipationsID(int ChessTournamentID, int ChessPlayerID)
         {
             var participation = await _context.tblChessParticipations
                 .Include(x => x.ChessPlayer)
@@ -279,17 +293,16 @@ namespace VSLab.Controllers
             return Ok(participation);
         }
 
-        [HttpPost("{ChessTournamentID}/participation/{ChessPlayerID}")]
+        [HttpPost("{ChessTournamentID}/participations/{ChessPlayerID}")]
         public async Task<ActionResult<dtoChessParticipation>> PosttblChessParticipation(int ChessTournamentID, int ChessPlayerID, dtoChessParticipation dtoChessParticipation)
         {
             var player = await _context.tblChessPlayers.FindAsync(ChessPlayerID);
-            var tournament = await _context.tblChessTournaments.FindAsync(ChessTournamentID);
-
             if (player == null)
             {
                 return NotFound();
             }
-
+            
+            var tournament = await _context.tblChessTournaments.FindAsync(ChessTournamentID);
             if (tournament == null)
             {
                 return NotFound();
@@ -304,6 +317,10 @@ namespace VSLab.Controllers
                 Description = dtoChessParticipation.Description
             };
 
+            /*
+            if (player.UserID != tournament.UserID)
+                return BadRequest("Cannot create participation with different users!");
+                */
 
             _context.tblChessParticipations.Add(participation);
             await _context.SaveChangesAsync();
@@ -311,7 +328,7 @@ namespace VSLab.Controllers
             return CreatedAtAction(nameof(PosttblChessParticipation), dtoChessParticipation);
         }
 
-        [HttpPut("{ChessTournamentID}/participation/{ChessPlayerID}")]
+        [HttpPut("{ChessTournamentID}/participations/{ChessPlayerID}")]
         public async Task<IActionResult> PutttblChessParticipation(int ChessTournamentID, int ChessPlayerID, dtoChessParticipation dtoChessParticipation)
         {
             if (ChessTournamentID != dtoChessParticipation.ChessTournamentID)
@@ -325,7 +342,6 @@ namespace VSLab.Controllers
             }
 
             var participationToUpdate = await _context.tblChessParticipations.FindAsync(ChessTournamentID, ChessPlayerID);
-
             if (participationToUpdate == null)
             {
                 return NotFound();
@@ -333,7 +349,7 @@ namespace VSLab.Controllers
 
             participationToUpdate.DateSigned = dtoChessParticipation.DateSigned;
             participationToUpdate.DurationPlayed = dtoChessParticipation.DurationPlayed;
-            participationToUpdate.Description = dtoChessParticipation.Description;  
+            participationToUpdate.Description = dtoChessParticipation.Description;
 
             try
             {
@@ -347,7 +363,7 @@ namespace VSLab.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{ChessTournamentID}/participation/{ChessPlayerID}")]
+        [HttpDelete("{ChessTournamentID}/participations/{ChessPlayerID}")]
         public async Task<IActionResult> DeletetblChessParticipation(int ChessTournamentID, int ChessPlayerID)
         {
             var participation = await _context.tblChessParticipations.FindAsync(ChessTournamentID, ChessPlayerID);
@@ -361,8 +377,6 @@ namespace VSLab.Controllers
 
             return NoContent();
         }
-
         
-
     }
 }
