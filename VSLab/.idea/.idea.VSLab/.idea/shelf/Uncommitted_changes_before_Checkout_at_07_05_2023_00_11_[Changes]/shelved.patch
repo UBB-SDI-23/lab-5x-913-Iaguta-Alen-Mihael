@@ -1,0 +1,164 @@
+Index: Controllers/UserProfileController.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.EntityFrameworkCore;\r\nusing VSLab.Data;\r\nusing VSLab.Data.Security;\r\n\r\nnamespace VSLab.Controllers\r\n{\r\n    [ApiController]\r\n    [Route(\"api/[controller]\")]\r\n    public class UserProfileController : ControllerBase\r\n    {\r\n        private readonly ChessDbContext _context;\r\n        public UserProfileController(ChessDbContext context)\r\n        {\r\n            _context = context;\r\n        }\r\n\r\n        private static dtoUserProfile UserProfileToDTO(tblUserProfile user) =>\r\n            new dtoUserProfile\r\n            {\r\n                ID = user.ID,\r\n                Email = user.Email,\r\n                Password = user.Password,\r\n                UserName = user.UserName,\r\n                Bio = user.Bio,\r\n                BirthDate = user.BirthDate,\r\n                PhoneNumber = user.PhoneNumber\r\n            };\r\n\r\n        private bool UserProfileExists(long id)\r\n        {\r\n            return (_context.tblUserProfiles.Any(e => e.ID == id));\r\n        }\r\n        public class PagedResult<T>\r\n        {\r\n            public IEnumerable<T>? Data { get; set; }\r\n            public int TotalPages { get; set; }\r\n        }\r\n\r\n        // GET: api/UserProfiles\r\n        [HttpGet]\r\n        public async Task<ActionResult<PagedResult<dtoUserProfile>>> GettblUserProfiles([FromQuery] int page, [FromQuery] int limit = 5)\r\n        {\r\n            var totalItems = await _context.tblUserProfiles.CountAsync();\r\n            var totalPages = (int)Math.Ceiling((double)totalItems / limit);\r\n\r\n            var users = await _context.tblUserProfiles\r\n               .Select(x => UserProfileToDTO(x))\r\n               .Skip((page - 1) * limit)\r\n               .Take(limit)\r\n               .ToListAsync();\r\n\r\n            var result = new PagedResult<dtoUserProfile>\r\n            {\r\n                Data = users,\r\n                TotalPages = totalPages\r\n            };\r\n\r\n            return result;\r\n        }\r\n\r\n        // GET: api/UserProfiles/5\r\n        [HttpGet(\"{id}\")]\r\n        public async Task<ActionResult<tblUserProfile>> GettblUserProfilesID(int id)\r\n        {\r\n            var user = await _context.tblUserProfiles\r\n                .Include(x => x.ChessPlayers)\r\n                .Include(x => x.ChessTournaments)\r\n                .FirstOrDefaultAsync(x => x.ID == id);\r\n\r\n            if(user == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n            return user;\r\n        }\r\n\r\n        // PUT: api/UserProfiles/5\r\n        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754\r\n        [HttpPut(\"{id}\")]\r\n        public async Task<IActionResult> PuttblUserProfile(int id, dtoUserProfile dtoUserProfile)\r\n        {\r\n            var user = await _context.tblUserProfiles.FindAsync(id);\r\n            if(user == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n            user.Email = dtoUserProfile.Email;\r\n            user.UserName = dtoUserProfile.UserName;\r\n            user.Password = dtoUserProfile.Password;\r\n            user.Bio = dtoUserProfile.Bio;\r\n            user.BirthDate = dtoUserProfile.BirthDate;\r\n            user.PhoneNumber = dtoUserProfile.PhoneNumber;\r\n\r\n            try\r\n            {\r\n                await _context.SaveChangesAsync();\r\n            }\r\n            catch(DbUpdateConcurrencyException) when (!UserProfileExists(id))\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n            return NoContent();\r\n        }\r\n\r\n        // POST: api/userProfile\r\n        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754\r\n        [HttpPost]\r\n        public async Task<ActionResult<dtoUserProfile>> PosttblUserProfile(dtoUserProfile dtoUserProfile)\r\n        {\r\n            var user = new tblUserProfile\r\n            {\r\n                Email = dtoUserProfile.Email,\r\n                UserName = dtoUserProfile.UserName,\r\n                Password = dtoUserProfile.Password,\r\n                Bio = dtoUserProfile.Bio,\r\n                BirthDate = dtoUserProfile.BirthDate,\r\n                PhoneNumber = dtoUserProfile.PhoneNumber\r\n            };\r\n\r\n            _context.tblUserProfiles.Add(user);\r\n            await _context.SaveChangesAsync();\r\n\r\n            return CreatedAtAction(nameof(GettblUserProfilesID), new { id = user.ID }, UserProfileToDTO(user));\r\n        }\r\n\r\n        // DELETE: api/UserProfile/5\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task<IActionResult> DeletetblUserProfile(int id)\r\n        {\r\n            var user = await _context.tblUserProfiles.FindAsync(id);\r\n            if(user == null)\r\n            {\r\n                return NotFound();\r\n            }\r\n\r\n            _context.tblUserProfiles.Remove(user);\r\n            await _context.SaveChangesAsync();\r\n\r\n            return NoContent();\r\n        }\r\n        \r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Controllers/UserProfileController.cs b/Controllers/UserProfileController.cs
+--- a/Controllers/UserProfileController.cs	
++++ b/Controllers/UserProfileController.cs	
+@@ -111,6 +111,11 @@
+         [HttpPost]
+         public async Task<ActionResult<dtoUserProfile>> PosttblUserProfile(dtoUserProfile dtoUserProfile)
+         {
++            if (await _context.tblUserProfiles.AnyAsync(u => u.Email == dtoUserProfile.Email))
++            {
++                return Conflict("Email already exists");
++            }
++            
+             var user = new tblUserProfile
+             {
+                 Email = dtoUserProfile.Email,
+Index: ../vs_lab_front/src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './App.css';\r\n\r\nimport {Home} from  './Home';\r\nimport {Navigation} from './Navigation';\r\nimport {Player} from './Player/Player';\r\nimport {Tournament} from './Tournament/Tournament';\r\nimport {Champion} from './Champion/Champion';\r\nimport { Participation } from './Participation/Participation';\r\n\r\nimport { BrowserRouter, Route, Routes } from 'react-router-dom';\r\nimport { TrophyStats } from './Reports/TrophyStats';\r\nimport { RatingStats } from './Reports/RatingStats';\r\n\r\nfunction App() {\r\n  return (\r\n    <BrowserRouter>\r\n    <div className=\"container\">\r\n      <h3 className=\"m-3 d-flex justify-content-center\">\r\n        Chess SDI\r\n      </h3>\r\n    \r\n    <Navigation/>\r\n    \r\n      <Routes>\r\n        <Route path='/' Component={Home} exact/>\r\n        <Route path='/players' Component={Player} />\r\n        <Route path='/champions' Component={Champion} />\r\n        <Route path='/tournaments' Component={Tournament} />\r\n        <Route path='/participations' Component={Participation} />\r\n        <Route path='/trophies' Component={TrophyStats} />\r\n        <Route path='/ratings' Component={RatingStats} />\r\n      </Routes>\r\n    </div>\r\n    </BrowserRouter>\r\n  );\r\n}\r\n\r\nexport default App;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../vs_lab_front/src/App.js b/../vs_lab_front/src/App.js
+--- a/../vs_lab_front/src/App.js	
++++ b/../vs_lab_front/src/App.js	
+@@ -6,6 +6,8 @@
+ import {Tournament} from './Tournament/Tournament';
+ import {Champion} from './Champion/Champion';
+ import { Participation } from './Participation/Participation';
++import { Login } from './Login/Login'
++import { Register } from './Login/Register'
+ 
+ import { BrowserRouter, Route, Routes } from 'react-router-dom';
+ import { TrophyStats } from './Reports/TrophyStats';
+@@ -22,13 +24,16 @@
+     <Navigation/>
+     
+       <Routes>
++
+         <Route path='/' Component={Home} exact/>
+         <Route path='/players' Component={Player} />
+         <Route path='/champions' Component={Champion} />
+         <Route path='/tournaments' Component={Tournament} />
+         <Route path='/participations' Component={Participation} />
+-        <Route path='/trophies' Component={TrophyStats} />
+-        <Route path='/ratings' Component={RatingStats} />
++        <Route path='/players/trophies' Component={TrophyStats} />
++        <Route path='/players/ratings' Component={RatingStats} />
++        <Route path='/login' Component={Login} />
++        <Route path='/register' Component={Register} />
+       </Routes>
+     </div>
+     </BrowserRouter>
+Index: ../vs_lab_front/src/Home.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React,{Component} from 'react';\r\n\r\nexport class Home extends Component{\r\n\r\n    render(){\r\n        return(\r\n            <div className=\"justify-content-center\">\r\n                <h1 className=\"justify-content-center\">Hello muhfuckas</h1>\r\n                <p className=\"justify-content-center\">This is my SDI chess project in my 4th semester.I wish you all Ramadan Kareem.</p>\r\n            </div>\r\n        )\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../vs_lab_front/src/Home.js b/../vs_lab_front/src/Home.js
+--- a/../vs_lab_front/src/Home.js	
++++ b/../vs_lab_front/src/Home.js	
+@@ -4,7 +4,7 @@
+ 
+     render(){
+         return(
+-            <div className="justify-content-center">
++            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '65vh' }}>
+                 <h1 className="justify-content-center">Hello muhfuckas</h1>
+                 <p className="justify-content-center">This is my SDI chess project in my 4th semester.I wish you all Ramadan Kareem.</p>
+             </div>
+Index: ../vs_lab_front/src/Login/Login.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../vs_lab_front/src/Login/Login.js b/../vs_lab_front/src/Login/Login.js
+new file mode 100644
+--- /dev/null	
++++ b/../vs_lab_front/src/Login/Login.js	
+@@ -0,0 +1,5 @@
++import {Component} from "react";
++
++export class Login extends Component{
++
++}
+\ No newline at end of file
+Index: ../vs_lab_front/src/Login/Register.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../vs_lab_front/src/Login/Register.js b/../vs_lab_front/src/Login/Register.js
+new file mode 100644
+--- /dev/null	
++++ b/../vs_lab_front/src/Login/Register.js	
+@@ -0,0 +1,2 @@
++import React, { Component } from 'react';
++import { Button, Form, Modal } from "r
+\ No newline at end of file
+Index: ../vs_lab_front/src/Navigation.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {Component} from 'react';\r\nimport {NavLink} from 'react-router-dom';\r\nimport {Navbar, Nav} from 'react-bootstrap';\r\n\r\nexport class Navigation extends Component{\r\n\r\n    render(){\r\n        return(\r\n            <Navbar bg=\"dark\" expand=\"lg\">\r\n                <Navbar.Toggle aria-controls=\"basic-navbar-nav\"/>\r\n                <Navbar.Collapse id=\"basic-navbar-nav\">\r\n                <Nav>\r\n                    <NavLink className=\"d-inline p-2 bg dark text-white\" to=\"/\">\r\n                        Home\r\n                    </NavLink>\r\n                    <NavLink className=\"d-inline p-2 bg dark text-white\" to=\"/players\">\r\n                        Chess Players\r\n                    </NavLink>\r\n                    <NavLink className=\"d-inline p-2 bg dark text-white\" to=\"/champions\">\r\n                        Chess Champions\r\n                    </NavLink>\r\n                    <NavLink className=\"d-inline p-2 bg dark text-white\" to=\"/tournaments\">\r\n                        Chess Tournaments\r\n                    </NavLink>\r\n                    <NavLink className=\"d-inline p-2 bg dark text-white\" to=\"/participations\">\r\n                        Chess Participations\r\n                    </NavLink>\r\n                    <NavLink className=\"d-inline p-2 bg dark text-white\" to=\"/trophies\">\r\n                        Trophies Stats\r\n                    </NavLink>\r\n                    <NavLink className=\"d-inline p-2 bg dark text-white\" to=\"/ratings\">\r\n                        Ratings Stats\r\n                    </NavLink>\r\n                </Nav>\r\n                </Navbar.Collapse>\r\n            </Navbar>\r\n        )\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../vs_lab_front/src/Navigation.js b/../vs_lab_front/src/Navigation.js
+--- a/../vs_lab_front/src/Navigation.js	
++++ b/../vs_lab_front/src/Navigation.js	
+@@ -5,6 +5,8 @@
+ export class Navigation extends Component{
+ 
+     render(){
++        const isLoggedIn = this.props.isLoggedIn;
++
+         return(
+             <Navbar bg="dark" expand="lg">
+                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+@@ -31,9 +33,12 @@
+                     <NavLink className="d-inline p-2 bg dark text-white" to="/ratings">
+                         Ratings Stats
+                     </NavLink>
+-                </Nav>
+-                </Navbar.Collapse>
+-            </Navbar>
+-        )
+-    }
+-}
+\ No newline at end of file
++
++                    <Nav className="ml-auto">
++                        {isLoggedIn ? (
++                            <>
++                                <NavLink className="d-inline p-2 bg dark text-white" to="/home">
++                                    {this.props.username}
++                                </NavLink>
++                                <NavLink
++      
+\ No newline at end of file
+Index: ../vs_lab_front/.idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"InspectionProjectProfileManager\">\r\n  <profile version=\"1.0\">\r\n    <option name=\"myName\" value=\"Project Default\" />\r\n    <inspection_tool class=\"DuplicatedCode\" enabled=\"true\" level=\"WEAK WARNING\" enabled_by_default=\"true\">\r\n      <Languages>\r\n        <language minSize=\"259\" name=\"JavaScript\" />\r\n      </Languages>\r\n    </inspection_tool>\r\n    <inspection_tool class=\"Eslint\" enabled=\"true\" level=\"WARNING\" enabled_by_default=\"true\" />\r\n  </profile>\r\n</component>
+===================================================================
+diff --git a/../vs_lab_front/.idea/inspectionProfiles/Project_Default.xml b/../vs_lab_front/.idea/inspectionProfiles/Project_Default.xml
+--- a/../vs_lab_front/.idea/inspectionProfiles/Project_Default.xml	
++++ b/../vs_lab_front/.idea/inspectionProfiles/Project_Default.xml	
+@@ -7,5 +7,6 @@
+       </Languages>
+     </inspection_tool>
+     <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
++    <inspection_tool class="JSCheckFunctionSignatures" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+   </profile>
+ </component>
+\ No newline at end of file
