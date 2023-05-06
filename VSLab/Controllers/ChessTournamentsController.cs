@@ -66,7 +66,6 @@ namespace VSLab.Controllers
         {
             var tournament = await _context.tblChessTournaments
                 .Include(x => x.TournamentParticipations)
-                .Include(x => x.ChessPlayers)
                 .Include(x => x.TblUser)
                 .FirstOrDefaultAsync(x => x.ID == id);
 

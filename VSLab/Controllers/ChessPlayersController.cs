@@ -84,7 +84,6 @@ namespace VSLab.Controllers
             var player = await _context.tblChessPlayers
                 .Include(x => x.PlayerParticipations)
                 .Include(x => x.ChessChampions)
-                .Include(x => x.ChessTournaments)
                 .Include(x => x.TblUser)
                 .FirstOrDefaultAsync(x => x.ID == id);
 
@@ -318,8 +317,10 @@ namespace VSLab.Controllers
                 Description = dtoChessParticipation.Description
             };
 
+            /*
             if (player.UserID != tournament.UserID)
                 return BadRequest("Cannot create participation with different users!");
+                */
 
             _context.tblChessParticipations.Add(participation);
             await _context.SaveChangesAsync();
