@@ -10,6 +10,7 @@ import { Participation } from './Participation/Participation';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { TrophyStats } from './Reports/TrophyStats';
 import { RatingStats } from './Reports/RatingStats';
+import { Register } from "./Login/Register";
 
 function App() {
   return (
@@ -27,8 +28,10 @@ function App() {
         <Route path='/champions' Component={Champion} />
         <Route path='/tournaments' Component={Tournament} />
         <Route path='/participations' Component={Participation} />
-        <Route path='/trophies' Component={TrophyStats} />
-        <Route path='/ratings' Component={RatingStats} />
+        <Route path='/players/trophies' Component={TrophyStats} />
+        <Route path='/players/ratings' Component={RatingStats} />
+        <Route path='/login' />
+        <Route path='/register' Component={Register} />
       </Routes>
     </div>
     </BrowserRouter>
