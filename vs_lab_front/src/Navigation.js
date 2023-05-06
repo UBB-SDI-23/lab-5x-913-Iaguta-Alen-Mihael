@@ -25,11 +25,17 @@ export class Navigation extends Component{
                     <NavLink className="d-inline p-2 bg dark text-white" to="/participations">
                         Chess Participations
                     </NavLink>
-                    <NavLink className="d-inline p-2 bg dark text-white" to="/trophies">
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/players/trophies">
                         Trophies Stats
                     </NavLink>
-                    <NavLink className="d-inline p-2 bg dark text-white" to="/ratings">
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/players/ratings">
                         Ratings Stats
+                    </NavLink>
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/login">
+                        Login
+                    </NavLink>
+                    <NavLink className="d-inline p-2 bg dark text-white" to="/register">
+                        Register
                     </NavLink>
                 </Nav>
                 </Navbar.Collapse>
