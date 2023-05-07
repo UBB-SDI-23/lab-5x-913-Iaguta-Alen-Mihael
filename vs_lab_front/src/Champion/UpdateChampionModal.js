@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Modal,Button, Row, Col, Form} from 'react-bootstrap';
+import {Typeahead} from "react-bootstrap-typeahead";
 
 export class UpdateChampionModal extends Component {
 
     constructor(props){
         super(props);
-        this.state = { chessPlayers: [] };
+        this.state = { chessPlayers: [], chessPlayerID: 0 };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -33,16 +34,17 @@ export class UpdateChampionModal extends Component {
                 consecutiveYears:event.target.consecutiveYears.value,
                 current: event.target.current.value,
                 description: event.target.description.value,
-                chessPlayerID:event.target.chessPlayerID.value
+                chessPlayerID: this.state.chessPlayerID
             })
         })
         .then(res=>res.json())
-        .then((result)=>{
-            alert("Action completed!");
-        },
-        (error)=>{
-            alert('Failed');
-        })
+        .then(
+            ()=>{
+                alert('Updated successfully!');
+            },
+            ()=>{
+                alert('Failed');
+            })
     }
     render(){
         return (
@@ -101,13 +103,27 @@ export class UpdateChampionModal extends Component {
                                         placeholder="Short champion description"/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="ChessPlayerID" className="d-flex flex-column">
-                                        <Form.Label>Chess Players</Form.Label>
-                                            <Form.Select name="chessPlayerID" required defaultValue={this.props.chplayerid}>
-                                                {this.state.chessPlayers.map((player) => (
-                                                    <option key={player.id} value={player.id}>{player.name}</option>
-                                                ))}
-                                            </Form.Select>
+                                    <Form.Group controlId="PlayerID">
+                                        <Form.Label>User ID</Form.Label>
+                                        <Typeahead
+                                            labelKey="name"
+                                            id="player-id-input"
+                                            options={this.state.chessPlayers}
+                                            placeholder="Select a Chess Player..."
+                                            onChange={(selected) => {
+                                                if (selected && selected.length > 0) {
+                                                    this.setState({ chessPlayerID: selected[0].id });
+                                                } else {
+                                                    this.setState({ chessPlayerID: null });
+                                                }
+                                            }}
+                                            filterBy={['name']}
+                                            renderMenuItemChildren={(option, props, idx) => (
+                                                <div key={option.id}>
+                                                    {option.name}
+                                                </div>
+                                            )}
+                                        />
                                     </Form.Group>
 
                                     <Form.Group className="my-3">

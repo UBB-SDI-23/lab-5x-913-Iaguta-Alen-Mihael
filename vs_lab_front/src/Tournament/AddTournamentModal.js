@@ -1,33 +1,32 @@
 import React, {Component} from 'react';
 import {Modal,Button, Row, Col, Form} from 'react-bootstrap';
+import {Typeahead} from "react-bootstrap-typeahead";
 
 export class AddTournamentModal extends Component {
 
     constructor(props){
         super(props);
+        this.state = {userID: 0, currentPage: 1, itemsPerPage: 5, searchResults: []};
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {
-            trophyError: '',
-            prizeError: ''
-        }
+    }
+
+    componentDidMount() {
+        const { currentPage, itemsPerPage } = this.state;
+        const url = `${process.env.REACT_APP_API}userprofiles?page=${currentPage}&limit=${itemsPerPage}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    searchResults: data.data.map(user => ({ id: user.id, email: user.email }))
+                });
+            });
     }
 
     handleSubmit(event){
         event.preventDefault();
 
-        const formData = {
-            prizeMoney:event.target.prizeMoney.value,
-            trophy: event.target.trophy.value
-        }
-        const prizeError = formData.prizeMoney && formData.prizeMoney >= 0 ? '' : 'Prize money should be greater than 0';
-        const trophyError = formData.trophy && !/^[a-zA-Z ]+$/.test(formData.trophy) ? '' : 'No numbers in Trophies';
-        
-        if (prizeError || trophyError) {
-            this.setState({ trophyError, prizeError });
-            return;
-        }
-
-        fetch(process.env.REACT_APP_API+'chesstournament',{
+        fetch(process.env.REACT_APP_API+'chesstournaments',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
@@ -39,14 +38,15 @@ export class AddTournamentModal extends Component {
                 host:event.target.host.value,
                 prizeMoney:event.target.prizeMoney.value,
                 trophy: event.target.trophy.value,
-                description: event.target.description.value
+                description: event.target.description.value,
+                userId: this.state.userID
             })
         })
         .then(res=>res.json())
-        .then((result)=>{
-            alert("Action completed!");
+        .then(()=>{
+            alert('Added successfully!');
         },
-        (error)=>{
+        ()=>{
             alert('Failed');
         })
     }
@@ -97,6 +97,29 @@ export class AddTournamentModal extends Component {
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" name="description" required 
                                         placeholder="Short description about tournament"/>
+                                    </Form.Group>
+
+                                    <Form.Group controlId="UserID">
+                                        <Form.Label>User ID</Form.Label>
+                                        <Typeahead
+                                            labelKey="email"
+                                            id="user-id-input"
+                                            options={this.state.searchResults}
+                                            placeholder="Select a User..."
+                                            onChange={(selected) => {
+                                                if (selected && selected.length > 0) {
+                                                    this.setState({ userID: selected[0].id });
+                                                } else {
+                                                    this.setState({ userID: null });
+                                                }
+                                            }}
+                                            filterBy={['email']}
+                                            renderMenuItemChildren={(option, props, idx) => (
+                                                <div key={option.id}>
+                                                    {option.email}
+                                                </div>
+                                            )}
+                                        />
                                     </Form.Group>
 
                                     <Form.Group className="my-3">

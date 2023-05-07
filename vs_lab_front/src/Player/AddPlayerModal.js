@@ -1,11 +1,26 @@
 import React, {Component} from 'react';
 import {Modal,Button, Row, Col, Form} from 'react-bootstrap';
+import { Typeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 export class AddPlayerModal extends Component {
 
     constructor(props){
         super(props);
+        this.state = {userID: 0, searchResults: []};
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        const url = `${process.env.REACT_APP_API}userprofiles`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    searchResults: data.data.map(user => ({ id: user.id, email: user.email }))
+                });
+            });
     }
 
     handleSubmit(event){
@@ -23,14 +38,16 @@ export class AddPlayerModal extends Component {
                 rating:event.target.rating.value,
                 isMaster:event.target.isMaster.value,
                 startYear: event.target.startYear.value,
-                description: event.target.description.value
+                description: event.target.description.value,
+                userId: this.state.userID
             })
         })
         .then(res=>res.json())
-        .then((result)=>{
-            alert(JSON.stringify(result));
+        .then(
+            ()=>{
+            alert('Added successfully!');
         },
-        (error)=>{
+        ()=>{
             alert('Failed');
         })
     }
@@ -75,11 +92,36 @@ export class AddPlayerModal extends Component {
                                         <Form.Control type="number" name="startYear" required 
                                         placeholder="1701-2023"/>
                                     </Form.Group>
+
                                     <Form.Group controlId="Description">
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" name="description" required 
                                         placeholder="Short description about player"/>
                                     </Form.Group>
+
+                                    <Form.Group controlId="UserID">
+                                        <Form.Label>User ID</Form.Label>
+                                        <Typeahead
+                                            labelKey="email"
+                                            id="user-id-input"
+                                            options={this.state.searchResults}
+                                            placeholder="Select a User..."
+                                            onChange={(selected) => {
+                                                if (selected && selected.length > 0) {
+                                                    this.setState({ userID: selected[0].id });
+                                                } else {
+                                                    this.setState({ userID: null });
+                                                }
+                                            }}
+                                            filterBy={['email']}
+                                            renderMenuItemChildren={(option, props, idx) => (
+                                                <div key={option.id}>
+                                                    {option.email}
+                                                </div>
+                                            )}
+                                        />
+                                    </Form.Group>
+
                                     <Form.Group className="my-3">
                                         <Button variant="primary" type="submit" onClick={this.props.onHide}>
                                             Add Chess Player

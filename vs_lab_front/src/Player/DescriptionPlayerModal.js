@@ -11,7 +11,7 @@ export class DescriptionPlayerModal extends Component {
         </Modal.Header>
         <Modal.Body>
           <Table striped bordered hover>
-                    <p>{this.props.pldescription}</p>
+              <p>{this.props.pldescription}</p>
           </Table>
         </Modal.Body>
         <Modal.Footer>
