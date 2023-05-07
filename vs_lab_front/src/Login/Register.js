@@ -29,6 +29,10 @@ export class Register extends Component {
     handleStep1Submit(event) {
         event.preventDefault();
         const {password, confirmPassword} = this.state;
+        if (password.length < 8) {
+            alert("Passwords do short!");
+            return;
+        }
         if (password !== confirmPassword) {
             alert("Passwords do not match!");
             return;

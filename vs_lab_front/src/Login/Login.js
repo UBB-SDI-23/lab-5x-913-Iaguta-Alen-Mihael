@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Form } from "react-bootstrap";
+import { createBrowserHistory } from 'history';
+
+
 
 export class Login extends Component {
     constructor(props) {
@@ -25,16 +28,19 @@ export class Login extends Component {
         fetch(process.env.REACT_APP_API + 'userprofiles/login/' + this.state.email + '/' + this.state.password)
             .then(response => response.json())
             .then(data => {
-                this.setState({ user: data });
-            })
-            .then(() => {
-                alert("Successfully logged in!");
-            })
-            .catch(error => {
-                alert('Failed to log in');
-                console.log(error);
+                this.setState({ user: data }, () => {
+                    // Redirect to the "users" page with the user data as a parameter if the login was successful
+                    if (this.state.user) {
+                        const history = createBrowserHistory();
+                        history.push('/users/' + this.state.user.id);
+                        window.location.reload();
+                    } else {
+                        alert('Login failed');
+                    }
+                });
             });
     }
+
 
     render() {
         const { email, password } = this.state;
