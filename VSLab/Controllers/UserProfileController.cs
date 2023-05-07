@@ -7,10 +7,10 @@ namespace VSLab.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserProfileController : ControllerBase
+    public class UserProfilesController : ControllerBase
     {
         private readonly ChessDbContext _context;
-        public UserProfileController(ChessDbContext context)
+        public UserProfilesController(ChessDbContext context)
         {
             _context = context;
         }
@@ -39,24 +39,19 @@ namespace VSLab.Controllers
 
         // GET: api/UserProfiles
         [HttpGet]
-        public async Task<ActionResult<PagedResult<dtoUserProfile>>> GettblUserProfiles([FromQuery] int page, [FromQuery] int limit = 5)
+        public async Task<ActionResult<PagedResult<dtoUserProfile>>> GettblUserProfiles()
         {
-            var totalItems = await _context.tblUserProfiles.CountAsync();
-            var totalPages = (int)Math.Ceiling((double)totalItems / limit);
-
             var users = await _context.tblUserProfiles
                .Select(x => UserProfileToDTO(x))
-               .Skip((page - 1) * limit)
-               .Take(limit)
                .ToListAsync();
 
             var result = new PagedResult<dtoUserProfile>
             {
                 Data = users,
-                TotalPages = totalPages
+                TotalPages = 0
             };
 
-            return result;
+            return Ok(result);
         }
 
         // GET: api/UserProfiles/5
@@ -74,6 +69,22 @@ namespace VSLab.Controllers
             }
 
             return user;
+        }
+        
+        [HttpGet("login/{email}/{password}")]
+        public async Task<ActionResult<tblUserProfile>> GettblUserProfilesEmailPassword(string  email, string password)
+        {
+            var user = await _context.tblUserProfiles
+                .Include(x => x.ChessPlayers)
+                .Include(x => x.ChessTournaments)
+                .FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+
+            if(user == null)
+            {
+                return NotFound("Noting here!");
+            }
+
+            return Ok(user);
         }
 
         // PUT: api/UserProfiles/5

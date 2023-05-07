@@ -4,29 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Again commited">
-      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Finna commit cuz mans hunger level started">
+      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Champion/AddChampionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Champion/AddChampionModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Champion/UpdateChampionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Champion/UpdateChampionModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Participation/AddParticipationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/AddParticipationModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Participation/DetailsParticipationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/DetailsParticipationModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Participation/Participation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/Participation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Participation/UpdateParticipationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/UpdateParticipationModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/AddPlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/AddPlayerModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/DescriptionPlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/DescriptionPlayerModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/DetailsPlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/DetailsPlayerModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/UpdatePlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/UpdatePlayerModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tournament/AddTournamentModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/AddTournamentModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tournament/Tournament.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/Tournament.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tournament/UpdateTournamentModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/UpdateTournamentModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +25,19 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="9d1de82f-f2e4-44bd-a80d-bd488da16d0e" />
+        <option name="url" value="https://github.com/UBB-SDI-23/lab-5x-913-Iaguta-Alen-Mihael.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -49,20 +46,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alen/Documents/GitHub/lab-5x-913-Iaguta-Alen-Mihael/vs_lab_front&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Alen/Documents/GitHub/lab-5x-913-Iaguta-Alen-Mihael/vs_lab_front",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -73,7 +71,8 @@
       <updated>1683376378387</updated>
       <workItem from="1683376379407" duration="3728000" />
       <workItem from="1683403831980" duration="3639000" />
-      <workItem from="1683411010166" duration="8108000" />
+      <workItem from="1683411010166" duration="8459000" />
+      <workItem from="1683454900724" duration="9406000" />
     </task>
     <task id="LOCAL-00001" summary="Again commited">
       <created>1683411037375</created>
@@ -82,7 +81,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683411037375</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updated Front End, Still no error messages">
+      <created>1683419454922</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683419454922</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Created Login / Register pages now only My profile page and Log out page">
+      <created>1683461912057</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683461912058</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +114,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Again commited" />
-    <option name="LAST_COMMIT_MESSAGE" value="Again commited" />
+    <MESSAGE value="Updated Front End, Still no error messages" />
+    <MESSAGE value="Created Login / Register pages now only My profile page and Log out page" />
+    <MESSAGE value="Finna commit cuz mans hunger level started" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finna commit cuz mans hunger level started" />
   </component>
 </project>

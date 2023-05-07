@@ -140,7 +140,7 @@ namespace VSLab.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(GettblChessPlayerID), new { id = playerToUpdate.ID }, ChessPlayerToDTO(playerToUpdate));
         }
 
         // POST: api/ChessPlayers
@@ -360,7 +360,7 @@ namespace VSLab.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(PosttblChessParticipation), participationToUpdate);
         }
 
         [HttpDelete("{ChessTournamentID}/participations/{ChessPlayerID}")]

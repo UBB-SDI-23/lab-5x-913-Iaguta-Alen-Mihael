@@ -123,7 +123,7 @@ namespace VSLab.Controllers
                 return BadRequest();
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(GettblChessChampionID), new { id = champion.ID }, ChessChampionToDTO(champion));
         }
 
         // POST: api/ChessChampions

@@ -12,8 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="040547b5-1e50-4eb2-8e1a-c35fc1bae29a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../vs_lab_front/src/Login/Login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../vs_lab_front/src/Login/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/Login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/Navigation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +29,9 @@
       </map>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/17.5.0/build/netcoreapp3.1/Microsoft.NET.Test.Sdk.Program.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProjectId" id="2PQ9RUuUytjJ4LWHt5DjzN09BiC" />
   <component name="ProjectViewState">
@@ -35,12 +40,15 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -51,6 +59,23 @@
     ]
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="VSLab" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/VSLab.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="VSLab" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,6 +86,8 @@
       <updated>1683378433798</updated>
       <workItem from="1683378435467" duration="1345000" />
       <workItem from="1683407004581" duration="488000" />
+      <workItem from="1683411184164" duration="7036000" />
+      <workItem from="1683454983476" duration="5232000" />
     </task>
     <servers />
   </component>

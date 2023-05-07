@@ -40,7 +40,7 @@ namespace VSLab.Controllers
 
         // GET: api/ChessTournaments
         [HttpGet]
-        public async Task<ActionResult<PagedResult<dtoChessTournament>>> GettblChessTournaments([FromQuery] int page, [FromQuery] int limit = 5)
+        public async Task<ActionResult<PagedResult<dtoChessTournament>>> GettblChessTournaments([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {
             var totalItems = await _context.tblChessTournaments.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalItems / limit);
@@ -117,7 +117,7 @@ namespace VSLab.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(GettblChessTournamentsID), new { id = tournament.ID }, ChessTournamentToDTO(tournament));
         }
 
         // POST: api/ChessTournament
