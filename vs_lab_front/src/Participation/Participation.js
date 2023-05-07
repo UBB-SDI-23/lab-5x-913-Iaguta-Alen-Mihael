@@ -65,7 +65,7 @@ export class Participation extends Component {
     };
 
     render() {
-        const { participations, prdate, prtime, prplayerid, prplayer, prtournament, prtournamentid, prdescription, currentPage, totalPages } = this.state;
+        const { participations, prdate, prtime, prplayer, prplayerid, prtournament, prtournamentid, prdescription, currentPage, totalPages } = this.state;
         let addModalClose = () => this.setState({ addModalShow: false });
         let updateModalClose = () => this.setState({ updateModalShow: false });
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
@@ -237,6 +237,15 @@ export class Participation extends Component {
                                     prtournamentid: party.chessTournamentID})}>
                                         Update
                                     </Button>
+
+                                    <UpdateParticipationModal show={this.state.updateModalShow}
+                                    onHide={updateModalClose}
+                                    prdate={prdate}
+                                    prtime={prtime}
+                                    prdescription={prdescription}
+                                    prplayerid={prplayerid}
+                                    prtournamentid={prtournamentid}
+                                    />
 
                                     <Button className="mr-2" variant="danger" 
                                     onClick={()=>this.deleteParticipation(party.chessPlayerID, party.chessTournamentID)}>

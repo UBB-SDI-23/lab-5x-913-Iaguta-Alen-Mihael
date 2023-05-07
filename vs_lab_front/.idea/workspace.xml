@@ -4,18 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/.suo" afterDir="false" />
+    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Again commited">
       <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Champion/AddChampionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Champion/AddChampionModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Champion/UpdateChampionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Champion/UpdateChampionModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Participation/AddParticipationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/AddParticipationModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Participation/DetailsParticipationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/DetailsParticipationModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Participation/Participation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/Participation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Participation/UpdateParticipationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/UpdateParticipationModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/AddPlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/AddPlayerModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/DescriptionPlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/DescriptionPlayerModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/DetailsPlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/DetailsPlayerModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/UpdatePlayerModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/UpdatePlayerModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tournament/AddTournamentModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/AddTournamentModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tournament/Tournament.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/Tournament.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tournament/UpdateTournamentModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/UpdateTournamentModal.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +34,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="user" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -57,7 +73,16 @@
       <updated>1683376378387</updated>
       <workItem from="1683376379407" duration="3728000" />
       <workItem from="1683403831980" duration="3639000" />
+      <workItem from="1683411010166" duration="8108000" />
     </task>
+    <task id="LOCAL-00001" summary="Again commited">
+      <created>1683411037375</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683411037375</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,5 +98,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Again commited" />
+    <option name="LAST_COMMIT_MESSAGE" value="Again commited" />
   </component>
 </project>

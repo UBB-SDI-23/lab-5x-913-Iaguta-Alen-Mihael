@@ -19,7 +19,7 @@ export class Tournament extends Component{
 
     async refreshList() {
         const { currentPage, itemsPerPage } = this.state;
-        const url = `${process.env.REACT_APP_API}chesstournament?page=${currentPage}&limit=${itemsPerPage}`;
+        const url = `${process.env.REACT_APP_API}chesstournaments?page=${currentPage}&limit=${itemsPerPage}`;
       
         try {
           const response = await fetch(url);
@@ -28,7 +28,7 @@ export class Tournament extends Component{
           this.setState({ totalPages: data.totalPages });
       
           for (let i = 0; i < data.data.length; i++) {
-            const tournamentUrl = `${process.env.REACT_APP_API}chesstournament/${data.data[i].id}`;
+            const tournamentUrl = `${process.env.REACT_APP_API}chesstournaments/${data.data[i].id}`;
             const tournamentResponse = await fetch(tournamentUrl);
             const tournamentData = await tournamentResponse.json();
       
@@ -56,7 +56,7 @@ export class Tournament extends Component{
 
     deleteTournament(trid) {
         if (window.confirm('Are you sure?')) {
-            fetch(process.env.REACT_APP_API + 'chesstournament/'+trid, {
+            fetch(process.env.REACT_APP_API + 'chesstournaments/'+trid, {
                 method: 'DELETE',
                 header:{'Accept':'application/json',
                         'Content-Type':'application/json'}
@@ -226,6 +226,11 @@ export class Tournament extends Component{
                             </th>
                             <th>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    Added By
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Options
                                 </Button>
                             </th>
@@ -240,6 +245,7 @@ export class Tournament extends Component{
                                 <td>{tournament.prizeMoney}</td>
                                 <td>{tournament.trophy}</td>
                                 <td>{tournament.tournamentParticipations.length}</td>
+                                <td>{tournament.tblUser.userName}</td>
                                 <td>
                                 <ButtonToolbar>
                                     

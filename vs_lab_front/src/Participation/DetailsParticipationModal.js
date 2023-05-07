@@ -7,7 +7,7 @@ export class DetailsParticipationModal extends Component {
         return (
           <Modal {...this.props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered >
             <Modal.Header closeButton>
-              <Modal.Title id='contained-modal-title-vcenter'>Participation Details</Modal.Title>
+              <Modal.Title id='contained-modal-title-vcenter'>Participation Player & Tournament</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Table striped bordered hover>
@@ -21,13 +21,13 @@ export class DetailsParticipationModal extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.prplayer ? (
+                        {this.props.prplayer ? (
                             <tr>
-                                <td>{this.state.prplayer.name}</td>
-                                <td>{this.state.prplayer.country}</td>
-                                <td>{this.state.prplayer.rating}</td>
-                                <td>{this.state.prplayer.isMaster}</td>
-                                <td>{this.state.prplayer.startYear}</td>
+                                <td>{this.props.prplayer.name}</td>
+                                <td>{this.props.prplayer.country}</td>
+                                <td>{this.props.prplayer.rating}</td>
+                                <td>{this.props.prplayer.isMaster}</td>
+                                <td>{this.props.prplayer.startYear}</td>
                             </tr>
                     ) : (
                         <tr>
@@ -47,13 +47,13 @@ export class DetailsParticipationModal extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.prtournament ? (
+                        {this.props.prtournament ? (
                             <tr>
-                                <td>{this.state.prtournament.name}</td>
-                                <td>{this.state.prtournament.numParticipants}</td>
-                                <td>{this.state.prtournament.host}</td>
-                                <td>{this.state.prtournament.prizeMoney}</td>
-                                <td>{this.state.prtournament.trophy}</td>
+                                <td>{this.props.prtournament.name}</td>
+                                <td>{this.props.prtournament.numParticipants}</td>
+                                <td>{this.props.prtournament.host}</td>
+                                <td>{this.props.prtournament.prizeMoney}</td>
+                                <td>{this.props.prtournament.trophy}</td>
                             </tr>
                     ) : (
                         <tr>

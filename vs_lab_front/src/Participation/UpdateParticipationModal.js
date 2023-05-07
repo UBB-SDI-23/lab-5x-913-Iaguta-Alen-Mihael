@@ -5,27 +5,12 @@ export class UpdateParticipationModal extends Component {
 
     constructor(props){
         super(props);
-        this.state = { chessPlayers: [], chessTournament: [] };
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentDidMount() {
-        fetch(process.env.REACT_APP_API+'chessplayers')
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ chessPlayers: data.data });
-        });
-
-        fetch(process.env.REACT_APP_API+'chesstournament')
-        .then(response => response.json())
-        .then(data => {
-            this.setState({ chessTournament: data.data });
-        });
     }
 
     handleSubmit(event){
         event.preventDefault();
-        fetch(process.env.REACT_APP_API+'chessplayers/' + event.target.chessPlayerID.value + '/participations/' + event.target.chessTournamentID.value,{
+        fetch(process.env.REACT_APP_API+'chessplayers/' + this.props.prtournamentid + '/participations/' + this.props.prplayerid,{
             method:'PUT',
             headers:{
                 'Accept':'application/json',
@@ -34,16 +19,16 @@ export class UpdateParticipationModal extends Component {
             body:JSON.stringify({
                 dateSigned: event.target.dateSigned.value,
                 durationPlayed: event.target.durationPlayed.value,
-                chessPlayerID: event.target.chessPlayerID.value,
-                chessTournamentID:event.target.chessTournamentID.value,
-                description: event.target.description.value
+                description: event.target.description.value,
+                chessPlayerID: this.props.prplayerid,
+                chessTournamentID: this.props.prtournamentid
             })
         })
         .then(res=>res.json())
-        .then((result)=>{
-            alert("Action completed!");
+        .then(()=>{
+            alert('Updated successfully!');
         },
-        (error)=>{
+        ()=>{
             alert('Failed');
         })
     }
@@ -78,24 +63,6 @@ export class UpdateParticipationModal extends Component {
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" name="description" required 
                                         placeholder={this.props.prdescription} />
-                                    </Form.Group>
-
-                                    <Form.Group controlId="ChessPlayerID" className="d-flex flex-column">
-                                        <Form.Label>Chess Players</Form.Label>
-                                            <Form.Select name="chessPlayerID" required defaultValue={this.props.prplayerid}>
-                                                {this.state.chessPlayers.map((player) => (
-                                                    <option key={player.id} value={player.id}>{player.name}</option>
-                                                ))}
-                                            </Form.Select>
-                                    </Form.Group>
-
-                                    <Form.Group controlId="ChessTournamentID" className="d-flex flex-column">
-                                        <Form.Label>Chess Tournaments</Form.Label>
-                                            <Form.Select name="chessTournamentID" required defaultValue={this.props.prtournamentid}>
-                                                {this.state.chessTournaments.map((tournament) => (
-                                                    <option key={tournament.id} value={tournament.id}>{tournament.name}</option>
-                                                ))}
-                                            </Form.Select>
                                     </Form.Group>
 
                                     <Form.Group className="my-3">

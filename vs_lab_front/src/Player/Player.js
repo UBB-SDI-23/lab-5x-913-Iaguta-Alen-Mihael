@@ -20,7 +20,6 @@ export class Player extends Component{
         const { currentPage, itemsPerPage } = this.state;
         const url = `${process.env.REACT_APP_API}chessplayers?page=${currentPage}&limit=${itemsPerPage}`;
         
-        
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -48,7 +47,6 @@ export class Player extends Component{
     componentDidMount(){
         this.refreshList();
     }
-      
 
     deletePlayer(plid){
         if(window.confirm('Are you sure?')){
@@ -66,14 +64,12 @@ export class Player extends Component{
         this.setState({players: playas});
     }
 
-    
     handlePageChange = (pageNumber) => {
         this.setState({ currentPage: pageNumber }, this.refreshList);
     };
-    
 
     render(){
-        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, pldescription, plchampions, currentPage, totalPages} = this.state;
+        const {players, plid, plname, plcountry, plrating, plismaster, plstartyear, pldescription, plchampions, plparticipations, currentPage, totalPages} = this.state;
         let addModalClose = () => this.setState({addModalShow:false});
         let updateModalClose = () => this.setState({updateModalShow:false});
         let detailsModalClose = () => this.setState({ detailsModalShow: false });
@@ -222,6 +218,11 @@ export class Player extends Component{
                             </th>
                             <th>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
+                                    Added By
+                                </Button>
+                            </th>
+                            <th>
+                                <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Options
                                 </Button>
                             </th>
@@ -238,6 +239,7 @@ export class Player extends Component{
                                     <td>{player.startYear}</td>
                                     <td>{player.playerParticipations.length}</td>
                                     <td>{player.chessChampions.length}</td>
+                                    <td>{player.tblUser.userName}</td>
                                     <td>
                                         <ButtonToolbar>
 
@@ -257,13 +259,15 @@ export class Player extends Component{
                                                 onClick={() =>
                                                     this.setState({
                                                         detailsModalShow: true,
-                                                        plchampions: player.chessChampions})}>
+                                                        plchampions: player.chessChampions,
+                                                        plparticipations: player.playerParticipations})}>
                                                 Details
                                             </Button>
 
                                             <DetailsPlayerModal show={this.state.detailsModalShow}
                                                 onHide={detailsModalClose}
                                                 plchampions = {plchampions}
+                                                plparticipations={plparticipations}
                                             />
 
                                             <Button className="mr-2" variant="warning"

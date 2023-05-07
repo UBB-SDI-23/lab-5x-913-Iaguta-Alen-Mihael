@@ -1,18 +1,19 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Button, Modal } from "react-bootstrap";
 import { Row, Col, Form} from 'react-bootstrap';
+import {Typeahead} from "react-bootstrap-typeahead";
 
 export class AddParticipationModal extends Component {
 
     constructor(props){
         super(props);
+        this.state = { chessPlayers: [], chessTournaments: [], chessPlayerID: 0, chessTournamentID: 0 };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = { chessPlayers: [], chessTournaments: [] };
     }
 
     componentDidMount() {
 
-        fetch(process.env.REACT_APP_API+'chesstournament')
+        fetch(process.env.REACT_APP_API+'chesstournaments')
         .then(response => response.json())
         .then(data => {
             this.setState({ chessTournaments: data.data });
@@ -26,12 +27,10 @@ export class AddParticipationModal extends Component {
 
     }
 
-
-
     handleSubmit(event){
         event.preventDefault();
 
-        fetch(process.env.REACT_APP_API+'chessplayers/' + event.target.chessPlayerID.value + '/participations/' + event.target.chessTournamentID.value,{
+        fetch(process.env.REACT_APP_API+'chessplayers/' + this.state.chessTournamentID + '/participations/' + this.state.chessPlayerID,{
             method:'POST',
             headers:{
                 'Accept':'application/json',
@@ -40,18 +39,19 @@ export class AddParticipationModal extends Component {
             body:JSON.stringify({
                 dateSigned: event.target.dateSigned.value,
                 durationPlayed: event.target.durationPlayed.value,
-                chessPlayerID: event.target.chessPlayerID.value,
-                chessTournamentID:event.target.chessTournamentID.value,
+                chessPlayerID: this.state.chessPlayerID,
+                chessTournamentID: this.state.chessTournamentID,
                 description: event.target.description.value
             })
         })
         .then(res=>res.json())
-        .then((result)=>{
-            alert(JSON.stringify(result));
-        },
-        (error)=>{
-            alert('Failed');
-        })
+        .then(
+            ()=>{
+                alert('Added successfully!');
+            },
+            ()=>{
+                alert('Failed');
+            })
     }
     render(){
         return (
@@ -86,22 +86,50 @@ export class AddParticipationModal extends Component {
                                         placeholder="Short description about participation"/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="ChessPlayerID" className="d-flex flex-column">
-                                        <Form.Label>Chess Players</Form.Label>
-                                            <Form.Select name="chessPlayerID" required defaultValue={this.props.prplayerid}>
-                                                {this.state.chessPlayers.map((player) => (
-                                                    <option key={player.id} value={player.id}>{player.name}</option>
-                                                ))}
-                                            </Form.Select>
+                                    <Form.Group controlId="PlayerID">
+                                        <Form.Label>User ID</Form.Label>
+                                        <Typeahead
+                                            labelKey="name"
+                                            id="player-id-input"
+                                            options={this.state.chessPlayers}
+                                            placeholder="Select a Chess Player..."
+                                            onChange={(selected) => {
+                                                if (selected && selected.length > 0) {
+                                                    this.setState({ chessPlayerID: selected[0].id });
+                                                } else {
+                                                    this.setState({ chessPlayerID: null });
+                                                }
+                                            }}
+                                            filterBy={['name']}
+                                            renderMenuItemChildren={(option, props, idx) => (
+                                                <div key={option.id}>
+                                                    {option.name}
+                                                </div>
+                                            )}
+                                        />
                                     </Form.Group>
 
-                                    <Form.Group controlId="ChessTournamentID" className="d-flex flex-column">
-                                        <Form.Label>Chess Tournaments</Form.Label>
-                                            <Form.Select name="chessTournamentID" required defaultValue={this.props.prtournamentid}>
-                                                {this.state.chessTournaments.map((tournament) => (
-                                                    <option key={tournament.id} value={tournament.id}>{tournament.name}</option>
-                                                ))}
-                                            </Form.Select>
+                                    <Form.Group controlId="PlayerID">
+                                        <Form.Label>User ID</Form.Label>
+                                        <Typeahead
+                                            labelKey="name"
+                                            id="player-id-input"
+                                            options={this.state.chessTournaments}
+                                            placeholder="Select a Chess Tournament..."
+                                            onChange={(selected) => {
+                                                if (selected && selected.length > 0) {
+                                                    this.setState({ chessTournamentID: selected[0].id });
+                                                } else {
+                                                    this.setState({ chessTournamentID: null });
+                                                }
+                                            }}
+                                            filterBy={['name']}
+                                            renderMenuItemChildren={(option, props, idx) => (
+                                                <div key={option.id}>
+                                                    {option.name}
+                                                </div>
+                                            )}
+                                        />
                                     </Form.Group>
 
                                     <Form.Group className="my-3">
