@@ -29,7 +29,6 @@ export class Login extends Component {
             })
             .then(() => {
                 alert("Successfully logged in!");
-                this.props.history.push(`/users/${this.state.user.userName}`);
             })
             .catch(error => {
                 alert('Failed to log in');

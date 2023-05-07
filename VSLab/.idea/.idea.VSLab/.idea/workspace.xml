@@ -12,25 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="040547b5-1e50-4eb2-8e1a-c35fc1bae29a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ChessChampionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ChessChampionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ChessPlayersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ChessPlayersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ChessTournamentsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ChessTournamentsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/UserProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserProfileController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VSLab.sln" beforeDir="false" afterPath="$PROJECT_DIR$/VSLab.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/ref/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/ref/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/refint/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/refint/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/setupTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/Navigation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +87,7 @@
       <workItem from="1683378435467" duration="1345000" />
       <workItem from="1683407004581" duration="488000" />
       <workItem from="1683411184164" duration="7036000" />
-      <workItem from="1683454983476" duration="4453000" />
+      <workItem from="1683454983476" duration="5232000" />
     </task>
     <servers />
   </component>

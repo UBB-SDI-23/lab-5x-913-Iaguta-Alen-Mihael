@@ -34,7 +34,7 @@ function App() {
         <Route path='/players/ratings' Component={RatingStats} />
         <Route path='/login' Component={Login}/>
         <Route path='/register' Component={Register} />
-        <Route exact path="/users/:username" component={User} />
+        <Route path='/user' Component={User} />
       </Routes>
     </div>
     </BrowserRouter>

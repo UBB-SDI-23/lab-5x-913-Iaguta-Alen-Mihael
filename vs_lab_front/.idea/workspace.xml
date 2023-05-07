@@ -4,29 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Updated Front End, Still no error messages">
-      <change afterPath="$PROJECT_DIR$/src/Login/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_1.xml" afterDir="false" />
+    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Finna commit cuz mans hunger level started">
       <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/Controllers/ChessChampionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/Controllers/ChessChampionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/Controllers/ChessPlayersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/Controllers/ChessPlayersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/Controllers/ChessTournamentsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/Controllers/ChessTournamentsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/Controllers/UserProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/Controllers/UserProfileController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/VSLab.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/VSLab.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/ref/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/ref/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/refint/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/refint/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +72,7 @@
       <workItem from="1683376379407" duration="3728000" />
       <workItem from="1683403831980" duration="3639000" />
       <workItem from="1683411010166" duration="8459000" />
-      <workItem from="1683454900724" duration="6864000" />
+      <workItem from="1683454900724" duration="9406000" />
     </task>
     <task id="LOCAL-00001" summary="Again commited">
       <created>1683411037375</created>
@@ -104,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683419454922</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Created Login / Register pages now only My profile page and Log out page">
+      <created>1683461912057</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683461912058</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +115,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Again commited" />
     <MESSAGE value="Updated Front End, Still no error messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Front End, Still no error messages" />
+    <MESSAGE value="Created Login / Register pages now only My profile page and Log out page" />
+    <MESSAGE value="Finna commit cuz mans hunger level started" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finna commit cuz mans hunger level started" />
   </component>
 </project>
