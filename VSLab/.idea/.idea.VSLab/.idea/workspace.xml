@@ -12,10 +12,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="040547b5-1e50-4eb2-8e1a-c35fc1bae29a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vs_lab_front/src/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/src/Navigation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +90,8 @@
       <workItem from="1683378435467" duration="1345000" />
       <workItem from="1683407004581" duration="488000" />
       <workItem from="1683411184164" duration="7036000" />
-      <workItem from="1683454983476" duration="5232000" />
+      <workItem from="1683454983476" duration="5829000" />
+      <workItem from="1683484563796" duration="2123000" />
     </task>
     <servers />
   </component>

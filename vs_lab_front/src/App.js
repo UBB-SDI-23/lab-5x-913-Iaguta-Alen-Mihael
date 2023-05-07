@@ -14,6 +14,7 @@ import { Register } from "./Login/Register";
 import { Login } from "./Login/Login";
 import { User } from "./Login/User";
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -34,7 +35,7 @@ function App() {
         <Route path='/players/ratings' Component={RatingStats} />
         <Route path='/login' Component={Login}/>
         <Route path='/register' Component={Register} />
-        <Route path='/user' Component={User} />
+        <Route path="/users/:userid" Component={User} />
       </Routes>
     </div>
     </BrowserRouter>

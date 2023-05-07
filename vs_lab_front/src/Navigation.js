@@ -54,7 +54,7 @@ export class Navigation extends Component{
 
                         {loggedIn ? (
                             <>
-                                <NavLink className="d-inline p-2 bg-dark text-white" to={`/users`}>
+                                <NavLink className="d-inline p-2 bg-dark text-white" to={`/users/${username}`}>
                                     {username}
                                 </NavLink>
 
