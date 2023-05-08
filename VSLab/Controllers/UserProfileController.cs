@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using VSLab.Data;
 using VSLab.Data.Security;
 
@@ -16,7 +16,7 @@ namespace VSLab.Controllers
     public class UserProfilesController : ControllerBase
     {
         private readonly ChessDbContext _context;
-        private IConfiguration _config;
+        private readonly IConfiguration _config;
 
         public UserProfilesController(ChessDbContext context, IConfiguration config)
         {
@@ -28,41 +28,61 @@ namespace VSLab.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] dtoUserProfile model)
         {
-            if (_context.tblUserProfiles.Any(x => x.Email == model.Email))
+            if (_context.tblUserProfiles.Any(x => x.UserName == model.UserName))
             {
-                return BadRequest("Email already exists");
+                return BadRequest("Username already exists");
             }
+
+            var confirmationCode = Guid.NewGuid().ToString().Substring(0, 8);
 
             var user = new tblUserProfile
             {
-                Email = model.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
                 UserName = model.UserName,
                 Bio = model.Bio,
                 BirthDate = model.BirthDate,
-                PhoneNumber = model.PhoneNumber
+                PhoneNumber = model.PhoneNumber,
+                ConfirmationCode = confirmationCode,
+                IsActive = false
             };
 
             _context.tblUserProfiles.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "User created successfully!" });
+            return Ok(new { message = "User created successfully", confirmationCode });
+        }
+        
+        [AllowAnonymous]
+        [HttpPost("register/confirm/{confirmation}")]
+        public async Task<IActionResult> RegisterConfirm(string confirmation)
+        {
+            var user = await _context.tblUserProfiles.FirstOrDefaultAsync(x => x.ConfirmationCode == confirmation);
+
+            if (user == null)
+            {
+                return BadRequest("Invalid confirmation code");
+            }
+            
+            user.IsActive = true;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Registration confirmed" });
         }
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public Task<IActionResult> Login([FromBody] dtoUserProfile model)
+        public Task<IActionResult> Login([FromBody] dtoLoginProfile model)
         {
-            var user = _context.tblUserProfiles.FirstOrDefault(u => u.Email == model.Email);
+            var user = _context.tblUserProfiles.FirstOrDefault(u => u.UserName == model.UserName);
 
-            if (user == null)
+            if (user!.IsActive == false)
             {
-                return Task.FromResult<IActionResult>(Unauthorized("Invalid email or password"));
+                return Task.FromResult<IActionResult>(Unauthorized("User not active"));
             }
 
             if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
-                return Task.FromResult<IActionResult>(Unauthorized("Invalid email or password"));
+                return Task.FromResult<IActionResult>(Unauthorized("Invalid password"));
             }
 
             var tokenString = GenerateJwtToken(user);
@@ -72,30 +92,28 @@ namespace VSLab.Controllers
 
         private string GenerateJwtToken(tblUserProfile user)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"] ?? throw new InvalidOperationException("LOOOL"));
-            var claims = new List<Claim>
-            {
+
+            List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
-            };
-            
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(
-                    claims, 
-                    authenticationType: JwtBearerDefaults.AuthenticationScheme),
-                Expires = DateTime.UtcNow.AddMinutes(10),
-                Issuer = _config["Jwt:Issuer"],
-                Audience = _config["Jwt:Audience"],
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature)
+                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.Role, "User"),
+                new Claim(ClaimTypes.Role, "Moderator")
             };
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                _config.GetSection("Jwt:Token").Value!));
 
-            return tokenHandler.WriteToken(token);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds
+            );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
         }
     }
 }

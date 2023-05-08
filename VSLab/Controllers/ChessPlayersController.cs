@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VSLab.Data;
 using VSLab.Data.Non_Essential;
@@ -56,6 +57,7 @@ namespace VSLab.Controllers
         }
 
         // GET: api/ChessPlayers
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<PagedResult<dtoChessPlayer>>> GettblChessPlayers([FromQuery] int page = 1, [FromQuery] int limit = 5)
         {

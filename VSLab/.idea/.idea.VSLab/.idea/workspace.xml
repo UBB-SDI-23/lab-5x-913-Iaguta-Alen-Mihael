@@ -12,38 +12,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="040547b5-1e50-4eb2-8e1a-c35fc1bae29a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Test/Test.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/Test.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Security/dtoLoginProfile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ChessPlayersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ChessPlayersController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/UserProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserProfileController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Security/dtoUserProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Security/dtoUserProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Security/tblUserProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Security/tblUserProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230506120238_Test2Migrations.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/20230506120238_Test2Migrations.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/ChessDbContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VSLab.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/VSLab.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/ref/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/ref/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/refint/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/refint/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,8 +108,17 @@
       <workItem from="1683411184164" duration="7036000" />
       <workItem from="1683454983476" duration="5829000" />
       <workItem from="1683484563796" duration="2836000" />
-      <workItem from="1683539383870" duration="6165000" />
+      <workItem from="1683539383870" duration="6591000" />
+      <workItem from="1683567796728" duration="6215000" />
     </task>
+    <task id="LOCAL-00001" summary="Tryna do sum">
+      <created>1683545848085</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683545848085</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,5 +127,7 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Tryna do sum" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tryna do sum" />
   </component>
 </project>
