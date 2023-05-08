@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Finna commit cuz mans hunger level started">
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
+    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Lam si nabijem kurac u ovo sve, se nadam da joj u redu ovo">
       <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +73,7 @@
       <workItem from="1683411010166" duration="8459000" />
       <workItem from="1683454900724" duration="9654000" />
       <workItem from="1683466596378" duration="33000" />
-      <workItem from="1683484630074" duration="9169000" />
+      <workItem from="1683484630074" duration="9422000" />
     </task>
     <task id="LOCAL-00001" summary="Again commited">
       <created>1683411037375</created>
@@ -108,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683464732268</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Lam si nabijem kurac u ovo sve, se nadam da joj u redu ovo">
+      <created>1683494025491</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683494025491</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +132,7 @@
     <MESSAGE value="Updated Front End, Still no error messages" />
     <MESSAGE value="Created Login / Register pages now only My profile page and Log out page" />
     <MESSAGE value="Finna commit cuz mans hunger level started" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finna commit cuz mans hunger level started" />
+    <MESSAGE value="Lam si nabijem kurac u ovo sve, se nadam da joj u redu ovo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lam si nabijem kurac u ovo sve, se nadam da joj u redu ovo" />
   </component>
 </project>

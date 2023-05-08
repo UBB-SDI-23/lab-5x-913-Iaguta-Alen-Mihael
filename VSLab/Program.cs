@@ -1,10 +1,25 @@
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using VSLab.Data;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
 
 // builder.Services.AddDbContext<ChessDbContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("SDIChess")));
 builder.Services.AddDbContext<ChessDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Test")));
@@ -39,6 +54,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
