@@ -100,9 +100,7 @@ namespace VSLab.Controllers
                 new Claim(ClaimTypes.Role, "Moderator")
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                _config.GetSection("Jwt:Token").Value!));
-
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Jwt:Token")!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(

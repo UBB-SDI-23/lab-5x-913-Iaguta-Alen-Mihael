@@ -29,7 +29,7 @@ def generate_champion(amount):
         consecutive_years = random.randint(0, 20)
         current = random.randint(0, 1)
         description = faker.sentence()
-        player_id = random.randint(1, 1_000_000)
+        player_id = random.randint(1, 100_000)
 
         if i % 10000 == 0 and i > 0:
             print(f"Generated {i}")
