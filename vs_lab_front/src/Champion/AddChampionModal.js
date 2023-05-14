@@ -94,7 +94,7 @@ export class AddChampionModal extends Component {
                                     </Form.Group>
 
                                     <Form.Group controlId="PlayerID">
-                                        <Form.Label>User ID</Form.Label>
+                                        <Form.Label>Player</Form.Label>
                                         <Typeahead
                                             labelKey="name"
                                             id="player-id-input"

@@ -11,7 +11,7 @@ export class Participation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            participations: [], currentPage: 1, itemsPerPage: 5, totalPages: 0,
+            participations: [], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
@@ -46,6 +46,15 @@ export class Participation extends Component {
 
     componentDidMount(){
         this.refreshList();
+        if (this.state.user === "admin") {
+            this.setState({user: 'admin'});
+        } else if (/\d/.test(this.state.user)) {
+            this.setState({user: 'mod'});
+        } else if (this.state.user !== "") {
+            this.setState({user: this.state.user});
+        } else {
+            this.setState({user: ''});
+        }
     }
 
     deleteParticipation(playerID, tournamentID){
@@ -200,11 +209,11 @@ export class Participation extends Component {
                                 <td>
                                 <ButtonToolbar>
                                     
-                                    <Button className="mr-2" onClick={() => this.setState({
+                                    <Button className="mr-1" size="sm" onClick={() => this.setState({
                                         descriptionModalShow: true,
                                         prdescription: party.description
                                     })}>
-                                        Description
+                                        <i className="bi bi-info-circle"></i>
                                     </Button>
 
                                     <DescriptionParticipationModal show={this.state.descriptionModalShow}
@@ -212,22 +221,23 @@ export class Participation extends Component {
                                         prdescription = {prdescription}
                                     />  
 
-                                    <Button className="mr-2" variant="info"
+                                    <Button className="mr-1" size="sm" variant="info"
                                         onClick={() => 
                                             this.setState({
                                                 detailsModalShow: true,
                                                 prplayer: party.chessPlayer,
                                                 prtournament: party.chessTournament })}>
-                                        Details
+                                        <i className="bi bi-info-circle"></i>
                                     </Button>
-                                        
+
                                     <DetailsParticipationModal show={this.state.detailsModalShow}
                                         onHide={detailsModalClose}
                                         prplayer={prplayer}
                                         prtournament={prtournament}
-                                    />                   
+                                    />
 
-                                    <Button className="mr-2" variant="warning"
+                                    {(this.state.user === "mod" || this.state.user === "admin") &&
+                                    <Button className="mr-1" size="sm" variant="warning"
                                     onClick={()=>this.setState({
                                     updateModalShow:true,
                                     prdate: party.dateSigned,
@@ -235,8 +245,9 @@ export class Participation extends Component {
                                     prdescription: party.description,
                                     prplayerid: party.chessPlayerID,
                                     prtournamentid: party.chessTournamentID})}>
-                                        Update
+                                        <i className="bi bi-pencil"></i>
                                     </Button>
+                                    }
 
                                     <UpdateParticipationModal show={this.state.updateModalShow}
                                     onHide={updateModalClose}
@@ -247,10 +258,12 @@ export class Participation extends Component {
                                     prtournamentid={prtournamentid}
                                     />
 
-                                    <Button className="mr-2" variant="danger" 
+                                    {(this.state.user === "mod" || this.state.user === "admin") &&
+                                    <Button className="mr-1" size="sm" variant="danger"
                                     onClick={()=>this.deleteParticipation(party.chessPlayerID, party.chessTournamentID)}>
-                                        Delete
+                                        <i className="bi bi-trash"></i>
                                     </Button>
+                                    }
 
                                 </ButtonToolbar>
                                 </td>
@@ -259,10 +272,13 @@ export class Participation extends Component {
                     </tbody>
                 </Table>
                 <ButtonToolbar>
+
+                    {this.state.user &&
                     <Button variant = 'primary'
                     onClick = {() => this.setState({addModalShow:true})}>
                         +
                     </Button>
+                    }
 
                     <AddParticipationModal show={this.state.addModalShow}
                         onHide={addModalClose}>

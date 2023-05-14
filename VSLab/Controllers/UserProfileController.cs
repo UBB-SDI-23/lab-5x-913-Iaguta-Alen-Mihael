@@ -32,12 +32,13 @@ namespace VSLab.Controllers
             {
                 return BadRequest("Username already exists");
             }
-
+            
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password);
             var confirmationCode = Guid.NewGuid().ToString().Substring(0, 8);
 
             var user = new tblUserProfile
             {
-                Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
+                Password = hashedPassword,
                 UserName = model.UserName,
                 Bio = model.Bio,
                 BirthDate = model.BirthDate,
@@ -80,14 +81,35 @@ namespace VSLab.Controllers
                 return Task.FromResult<IActionResult>(Unauthorized("User not active"));
             }
 
-            if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+            /*if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
                 return Task.FromResult<IActionResult>(Unauthorized("Invalid password"));
-            }
+            }*/
+
+            /*if (user.Password != model.Password)
+            {
+                return Task.FromResult<IActionResult>(Unauthorized("Invalid password"));
+            }*/
 
             var tokenString = GenerateJwtToken(user);
 
-            return Task.FromResult<IActionResult>(Ok(new { token = tokenString }));
+            return Task.FromResult<IActionResult>(Ok(new { token = tokenString, user }));
+        }
+        
+        [HttpGet("{id}")]
+        public async Task<ActionResult<tblChessPlayer>> GetUserID(int id)
+        {
+            var user = await _context.tblUserProfiles
+                .Include(x => x.ChessPlayers)
+                .Include(x => x.ChessTournaments)
+                .FirstOrDefaultAsync(x => x.ID == id);
+
+            if (user == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
 
         private string GenerateJwtToken(tblUserProfile user)

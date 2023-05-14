@@ -6,13 +6,14 @@ import { AddTournamentModal } from './AddTournamentModal';
 import { UpdateTournamentModal } from './UpdateTournamentModal';
 import { DetailsTournamentModal } from './DetailsTournamentModal';
 import { DescriptionTournamentModal } from './DescriptionTournamentModal';
+import {createBrowserHistory} from "history";
 
 export class Tournament extends Component{
     
     constructor(props) {
         super(props);
         this.state = {
-            tournaments: [], currentPage: 1, itemsPerPage: 5, totalPages: 0,
+            tournaments: [], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
@@ -46,6 +47,15 @@ export class Tournament extends Component{
 
     componentDidMount() {
         this.refreshList();
+        if (this.state.user === "admin") {
+            this.setState({user: 'admin'});
+        } else if (/\d/.test(this.state.user)) {
+            this.setState({user: 'mod'});
+        } else if (this.state.user !== "") {
+            this.setState({user: this.state.user});
+        } else {
+            this.setState({user: ''});
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -63,6 +73,12 @@ export class Tournament extends Component{
             })
         }
     }
+
+    handleUserNameClick = (userId) => {
+        const history = createBrowserHistory();
+        history.push('/users/' + userId);
+        window.location.reload();
+    };
 
     handlePrevPage = () => {
         const { currentPage } = this.state;
@@ -245,15 +261,24 @@ export class Tournament extends Component{
                                 <td>{tournament.prizeMoney}</td>
                                 <td>{tournament.trophy}</td>
                                 <td>{tournament.tournamentParticipations.length}</td>
-                                <td>{tournament.tblUser.userName}</td>
+                                <td>
+                                    <ButtonToolbar>
+                                        <Button
+                                            onClick={() => this.handleUserNameClick(tournament.tblUser.id)}
+                                            variant="link"
+                                        >
+                                            {tournament.tblUser.userName}
+                                        </Button>
+                                    </ButtonToolbar>
+                                </td>
                                 <td>
                                 <ButtonToolbar>
                                     
-                                <Button className="mr-2" onClick={() => this.setState({
+                                <Button className="mr-1" size="sm" onClick={() => this.setState({
                                         descriptionModalShow: true,
                                         trdescription: tournament.description
                                 })}>
-                                    Description
+                                    <i className="bi bi-info-circle"></i>
                                 </Button>
 
                                 <DescriptionTournamentModal show={this.state.descriptionModalShow}
@@ -262,12 +287,12 @@ export class Tournament extends Component{
                                 />
                                     
                                         
-                                    <Button className="mr-2" variant="info"
+                                    <Button className="mr-1" variant="info" size="sm"
                                         onClick={() => 
                                             this.setState({
                                                 detailsModalShow: true,
                                                 trparticipations: tournament.tournamentParticipations })}>
-                                        Details
+                                        <i className="bi bi-info-circle"></i>
                                     </Button>
                                         
                                     <DetailsTournamentModal show={this.state.detailsModalShow}
@@ -275,7 +300,8 @@ export class Tournament extends Component{
                                         trparticipations={trparticipations}
                                     />
 
-                                    <Button className="mr-2" variant="warning"
+                                    {((this.state.user && this.state.user === tournament.tblUser.userName) || this.state.user === "mod" || this.state.user === "admin") &&
+                                    <Button className="mr-1" variant="warning" size="sm"
                                     onClick={()=>this.setState({
                                     updateModalShow:true,
                                     trid: tournament.id,
@@ -285,13 +311,16 @@ export class Tournament extends Component{
                                     trprizemoney: tournament.prizeMoney,
                                     trtrophy: tournament.trophy,
                                     trdescription: tournament.description})}>
-                                        Update
+                                        <i className="bi bi-pencil"></i>
                                     </Button>
+                                    }
 
-                                    <Button className="mr-2" variant="danger" 
+                                    {((this.state.user && this.state.user === tournament.tblUser.userName) || this.state.user === "mod" || this.state.user === "admin") &&
+                                    <Button className="mr-1" variant="danger" size="sm"
                                     onClick={()=>this.deleteTournament(tournament.id)}>
-                                        Delete
+                                        <i className="bi bi-trash"></i>
                                     </Button>
+                                    }
 
                                     <UpdateTournamentModal show={this.state.updateModalShow}
                                     onHide={updateModalClose}
@@ -310,10 +339,12 @@ export class Tournament extends Component{
                     </tbody>
                 </Table>
                 <ButtonToolbar>
+                    {this.state.user &&
                     <Button variant = 'primary'
                     onClick = {() => this.setState({addModalShow:true})}>
                         +
                     </Button>
+                    }
 
                     <AddTournamentModal show={this.state.addModalShow}
                         onHide={addModalClose}>
