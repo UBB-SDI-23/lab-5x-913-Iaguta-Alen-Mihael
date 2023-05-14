@@ -6,12 +6,14 @@ import { AddChampionModal } from './AddChampionModal';
 import { UpdateChampionModal } from './UpdateChampionModal';
 import { DetailsChampionModal } from './DetailsChampionModal';
 import { DescriptionChampionModal } from './DescriptionChampionModal';
+import {createBrowserHistory} from "history";
+
 export class Champion extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            champions: [], currentPage: 1, itemsPerPage: 5, totalPages: 0,
+            champions: [], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
@@ -44,8 +46,23 @@ export class Champion extends Component{
           });
       }
 
+    handleUserNameClick = (userId) => {
+        const history = createBrowserHistory();
+        history.push('/users/' + userId);
+        window.location.reload();
+    };
+
     componentDidMount(){
         this.refreshList();
+        if (this.state.user === "admin") {
+            this.setState({user: 'admin'});
+        } else if (/\d/.test(this.state.user)) {
+            this.setState({user: 'mod'});
+        } else if (this.state.user !== "") {
+            this.setState({user: this.state.user});
+        } else {
+            this.setState({user: ''});
+        }
     }
 
     deleteChampion(chid){
@@ -229,11 +246,11 @@ export class Champion extends Component{
                                 <td>
                                 <ButtonToolbar>
                                     
-                                    <Button className="mr-2" onClick={() => this.setState({
+                                    <Button className="mr-1" size="sm" onClick={() => this.setState({
                                         descriptionModalShow: true,
                                         chdescription: champ.description
                                     })}>
-                                        Description
+                                        <i className="bi bi-info-circle"></i>
                                     </Button>
 
                                     <DescriptionChampionModal show={this.state.descriptionModalShow}
@@ -241,12 +258,12 @@ export class Champion extends Component{
                                         chdescription = {chdescription}
                                     />   
 
-                                    <Button className="mr-2" variant="info"
+                                    <Button className="mr-1" size="sm" variant="info"
                                         onClick={() => 
                                             this.setState({
                                                 detailsModalShow: true,
                                                 chplayer: champ.chessPlayer })}>
-                                        Details
+                                        <i className="bi bi-info-circle"></i>
                                     </Button>
                                         
                                     <DetailsChampionModal show={this.state.detailsModalShow}
@@ -254,7 +271,8 @@ export class Champion extends Component{
                                         chplayer={chplayer}
                                     />
 
-                                    <Button className="mr-2" variant="warning"
+                                    {(this.state.user === "mod" || this.state.user === "admin") &&
+                                    <Button className="mr-1" size="sm" variant="warning"
                                     onClick={()=>this.setState({
                                     updateModalShow:true,
                                     chid:champ.id,
@@ -265,13 +283,16 @@ export class Champion extends Component{
                                     chcurrent: champ.current,
                                     chdescription: champ.description,
                                     chplayerid:champ.chessPlayerID,})}>
-                                        Update
+                                        <i className="bi bi-pencil"></i>
                                     </Button>
+                                    }
 
-                                    <Button className="mr-2" variant="danger" 
-                                    onClick={()=>this.deleteChampion(champ.id)}>
-                                        Delete
+                                    {(this.state.user === "mod" || this.state.user === "admin") &&
+                                    <Button className="mr-1" size="sm" variant="danger"
+                                        onClick={()=>this.deleteChampion(champ.id)}>
+                                        <i className="bi bi-trash"></i>
                                     </Button>
+                                    }
 
                                     <UpdateChampionModal show={this.state.updateModalShow}
                                     onHide={updateModalClose}
@@ -291,10 +312,13 @@ export class Champion extends Component{
                     </tbody>
                 </Table>
                 <ButtonToolbar>
+
+                    {this.state.user &&
                     <Button variant = 'primary'
                     onClick = {() => this.setState({addModalShow:true})}>
                         +
                     </Button>
+                    }
 
                     <AddChampionModal show={this.state.addModalShow}
                         onHide={addModalClose}>

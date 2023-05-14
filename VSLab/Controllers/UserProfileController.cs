@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using VSLab.Data;
 using VSLab.Data.Security;
+
 
 namespace VSLab.Controllers
 {
@@ -10,149 +16,124 @@ namespace VSLab.Controllers
     public class UserProfilesController : ControllerBase
     {
         private readonly ChessDbContext _context;
-        public UserProfilesController(ChessDbContext context)
+        private readonly IConfiguration _config;
+
+        public UserProfilesController(ChessDbContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
-        private static dtoUserProfile UserProfileToDTO(tblUserProfile user) =>
-            new dtoUserProfile
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] dtoUserProfile model)
+        {
+            if (_context.tblUserProfiles.Any(x => x.UserName == model.UserName))
             {
-                ID = user.ID,
-                Email = user.Email,
-                Password = user.Password,
-                UserName = user.UserName,
-                Bio = user.Bio,
-                BirthDate = user.BirthDate,
-                PhoneNumber = user.PhoneNumber
+                return BadRequest("Username already exists");
+            }
+            
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password);
+            var confirmationCode = Guid.NewGuid().ToString().Substring(0, 8);
+
+            var user = new tblUserProfile
+            {
+                Password = hashedPassword,
+                UserName = model.UserName,
+                Bio = model.Bio,
+                BirthDate = model.BirthDate,
+                PhoneNumber = model.PhoneNumber,
+                ConfirmationCode = confirmationCode,
+                IsActive = false
             };
 
-        private bool UserProfileExists(long id)
-        {
-            return (_context.tblUserProfiles.Any(e => e.ID == id));
-        }
-        public class PagedResult<T>
-        {
-            public IEnumerable<T>? Data { get; set; }
-            public int TotalPages { get; set; }
-        }
+            _context.tblUserProfiles.Add(user);
+            await _context.SaveChangesAsync();
 
-        // GET: api/UserProfiles
-        [HttpGet]
-        public async Task<ActionResult<PagedResult<dtoUserProfile>>> GettblUserProfiles()
+            return Ok(new { message = "User created successfully", confirmationCode });
+        }
+        
+        [AllowAnonymous]
+        [HttpPost("register/confirm/{confirmation}")]
+        public async Task<IActionResult> RegisterConfirm(string confirmation)
         {
-            var users = await _context.tblUserProfiles
-               .Select(x => UserProfileToDTO(x))
-               .ToListAsync();
+            var user = await _context.tblUserProfiles.FirstOrDefaultAsync(x => x.ConfirmationCode == confirmation);
 
-            var result = new PagedResult<dtoUserProfile>
+            if (user == null)
             {
-                Data = users,
-                TotalPages = 0
-            };
+                return BadRequest("Invalid confirmation code");
+            }
+            
+            user.IsActive = true;
+            await _context.SaveChangesAsync();
 
-            return Ok(result);
+            return Ok(new { message = "Registration confirmed" });
         }
 
-        // GET: api/UserProfiles/5
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public Task<IActionResult> Login([FromBody] dtoLoginProfile model)
+        {
+            var user = _context.tblUserProfiles.FirstOrDefault(u => u.UserName == model.UserName);
+
+            if (user!.IsActive == false)
+            {
+                return Task.FromResult<IActionResult>(Unauthorized("User not active"));
+            }
+
+            /*if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+            {
+                return Task.FromResult<IActionResult>(Unauthorized("Invalid password"));
+            }*/
+
+            /*if (user.Password != model.Password)
+            {
+                return Task.FromResult<IActionResult>(Unauthorized("Invalid password"));
+            }*/
+
+            var tokenString = GenerateJwtToken(user);
+
+            return Task.FromResult<IActionResult>(Ok(new { token = tokenString, user }));
+        }
+        
         [HttpGet("{id}")]
-        public async Task<ActionResult<tblUserProfile>> GettblUserProfilesID(int id)
+        public async Task<ActionResult<tblChessPlayer>> GetUserID(int id)
         {
             var user = await _context.tblUserProfiles
                 .Include(x => x.ChessPlayers)
                 .Include(x => x.ChessTournaments)
                 .FirstOrDefaultAsync(x => x.ID == id);
 
-            if(user == null)
+            if (user == null) 
             {
                 return NotFound();
-            }
-
-            return user;
-        }
-        
-        [HttpGet("login/{email}/{password}")]
-        public async Task<ActionResult<tblUserProfile>> GettblUserProfilesEmailPassword(string  email, string password)
-        {
-            var user = await _context.tblUserProfiles
-                .Include(x => x.ChessPlayers)
-                .Include(x => x.ChessTournaments)
-                .FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
-
-            if(user == null)
-            {
-                return NotFound("Noting here!");
             }
 
             return Ok(user);
         }
 
-        // PUT: api/UserProfiles/5
-        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PuttblUserProfile(int id, dtoUserProfile dtoUserProfile)
+        private string GenerateJwtToken(tblUserProfile user)
         {
-            var user = await _context.tblUserProfiles.FindAsync(id);
-            if(user == null)
-            {
-                return NotFound();
-            }
 
-            user.Email = dtoUserProfile.Email;
-            user.UserName = dtoUserProfile.UserName;
-            user.Password = dtoUserProfile.Password;
-            user.Bio = dtoUserProfile.Bio;
-            user.BirthDate = dtoUserProfile.BirthDate;
-            user.PhoneNumber = dtoUserProfile.PhoneNumber;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch(DbUpdateConcurrencyException) when (!UserProfileExists(id))
-            {
-                return NotFound();
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/userProfile
-        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<dtoUserProfile>> PosttblUserProfile(dtoUserProfile dtoUserProfile)
-        {
-            var user = new tblUserProfile
-            {
-                Email = dtoUserProfile.Email,
-                UserName = dtoUserProfile.UserName,
-                Password = dtoUserProfile.Password,
-                Bio = dtoUserProfile.Bio,
-                BirthDate = dtoUserProfile.BirthDate,
-                PhoneNumber = dtoUserProfile.PhoneNumber
+            List<Claim> claims = new List<Claim> {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.Role, "User"),
+                new Claim(ClaimTypes.Role, "Moderator")
             };
 
-            _context.tblUserProfiles.Add(user);
-            await _context.SaveChangesAsync();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Jwt:Token")!));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            return CreatedAtAction(nameof(GettblUserProfilesID), new { id = user.ID }, UserProfileToDTO(user));
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds
+            );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
         }
-
-        // DELETE: api/UserProfile/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletetblUserProfile(int id)
-        {
-            var user = await _context.tblUserProfiles.FindAsync(id);
-            if(user == null)
-            {
-                return NotFound();
-            }
-
-            _context.tblUserProfiles.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-        
     }
 }

@@ -6,12 +6,15 @@ import { AddPlayerModal } from './AddPlayerModal';
 import { UpdatePlayerModal } from './UpdatePlayerModal';
 import { DetailsPlayerModal } from './DetailsPlayerModal';
 import { DescriptionPlayerModal } from './DescriptionPlayerModal';
+import {createBrowserHistory} from "history";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export class Player extends Component{
 
     constructor(props){
         super(props);
-        this.state={players:[], currentPage: 1, itemsPerPage: 5, totalPages: 0,
+        console.log(this.props.username);
+        this.state={players:[], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, descriptionModalShow:false, detailsModalShow: false
         };
     }
@@ -46,6 +49,15 @@ export class Player extends Component{
 
     componentDidMount(){
         this.refreshList();
+        if (this.state.user === "admin") {
+            this.setState({user: 'admin'});
+        } else if (/\d/.test(this.state.user)) {
+            this.setState({user: 'mod'});
+        } else if (this.state.user !== "") {
+            this.setState({user: this.state.user});
+        } else {
+            this.setState({user: ''});
+        }
     }
 
     deletePlayer(plid){
@@ -57,6 +69,12 @@ export class Player extends Component{
             })
         }
     }
+
+    handleUserNameClick = (userId) => {
+        const history = createBrowserHistory();
+        history.push('/users/' + userId);
+        window.location.reload();
+    };
 
     ratingSort(){
         let playas = this.state.players;
@@ -239,15 +257,24 @@ export class Player extends Component{
                                     <td>{player.startYear}</td>
                                     <td>{player.playerParticipations.length}</td>
                                     <td>{player.chessChampions.length}</td>
-                                    <td>{player.tblUser.userName}</td>
+                                    <td>
+                                        <ButtonToolbar>
+                                            <Button
+                                                onClick={() => this.handleUserNameClick(player.tblUser.id)}
+                                                variant="link"
+                                            >
+                                                {player.tblUser.userName}
+                                            </Button>
+                                        </ButtonToolbar>
+                                    </td>
                                     <td>
                                         <ButtonToolbar>
 
-                                            <Button className="mr-2" onClick={() => this.setState({
+                                            <Button className="mr-1" size="sm" onClick={() => this.setState({
                                                 descriptionModalShow: true,
                                                 pldescription: player.description
                                             })}>
-                                                Description
+                                                <i className="bi bi-info-circle"></i>
                                             </Button>
 
                                             <DescriptionPlayerModal show={this.state.descriptionModalShow}
@@ -255,13 +282,13 @@ export class Player extends Component{
                                                 pldescription = {pldescription}
                                             />
 
-                                            <Button className="mr-2" variant="info"
+                                            <Button className="mr-1" variant="info" size="sm"
                                                 onClick={() =>
                                                     this.setState({
                                                         detailsModalShow: true,
                                                         plchampions: player.chessChampions,
                                                         plparticipations: player.playerParticipations})}>
-                                                Details
+                                                <i className="bi bi-info-circle"></i>
                                             </Button>
 
                                             <DetailsPlayerModal show={this.state.detailsModalShow}
@@ -270,7 +297,8 @@ export class Player extends Component{
                                                 plparticipations={plparticipations}
                                             />
 
-                                            <Button className="mr-2" variant="warning"
+                                            {((this.state.user && this.state.user === player.tblUser.userName) || this.state.user === "mod" || this.state.user === "admin") &&
+                                            <Button className="mr-1" variant="warning" size="sm"
                                                 onClick={() => this.setState({
                                                     updateModalShow: true,
                                                     plid: player.id,
@@ -282,24 +310,27 @@ export class Player extends Component{
                                                     pldescription: player.description
                                                 })
                                                 }>
-                                                Update
+                                                <i className="bi bi-pencil"></i>
                                             </Button>
-
-                                            <Button className="mr-2" variant="danger"
-                                                onClick={() => this.deletePlayer(player.id)}>
-                                                Delete
-                                            </Button>
+                                            }
 
                                             <UpdatePlayerModal show={this.state.updateModalShow}
-                                                onHide={updateModalClose}
-                                                plid={plid}
-                                                plname={plname}
-                                                plcountry={plcountry}
-                                                plrating={plrating}
-                                                plismaster={plismaster}
-                                                plstartyear={plstartyear}
-                                                pldescription={pldescription}>
+                                                               onHide={updateModalClose}
+                                                               plid={plid}
+                                                               plname={plname}
+                                                               plcountry={plcountry}
+                                                               plrating={plrating}
+                                                               plismaster={plismaster}
+                                                               plstartyear={plstartyear}
+                                                               pldescription={pldescription}>
                                             </UpdatePlayerModal>
+
+                                            {((this.state.user && this.state.user === player.tblUser.userName) || this.state.user === "mod" || this.state.user === "admin") &&
+                                            <Button className="mr-1" variant="danger" size="sm"
+                                                onClick={() => this.deletePlayer(player.id)}>
+                                                <i className="bi bi-trash"></i>
+                                            </Button>
+                                            }
 
                                         </ButtonToolbar>
                                     </td>
@@ -309,10 +340,12 @@ export class Player extends Component{
                     </tbody>
                 </Table>
                 <ButtonToolbar>
+                    {this.state.user &&
                     <Button variant = 'primary' 
                     onClick = {() => this.setState({addModalShow:true})}>
                         +
                     </Button>
+                    }
 
                     <AddPlayerModal show={this.state.addModalShow}
                         onHide={addModalClose}>

@@ -24,8 +24,8 @@ def generate_participation(amount):
 
         time = faker.time()
         description = faker.sentence()
-        player_id = random.randint(1, 1_000_000)
-        tournament_id = random.randint(1, 1_000_000)
+        player_id = random.randint(1, 100_000)
+        tournament_id = random.randint(1, 100_000)
 
         if i % 10000 == 0 and i > 0:
             print(f"Generated {i}")
