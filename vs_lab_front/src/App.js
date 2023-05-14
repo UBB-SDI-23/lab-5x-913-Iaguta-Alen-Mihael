@@ -56,7 +56,7 @@ function App() {
             <Route path="/players/ratings" element={<RatingStats />} />
             <Route path="/login" element={<Login handleLogin={handleLogin} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/users/:userid" element={<User />} />
+            <Route path="/users/:userid" element={<User username={username}/>} />
           </Routes>
         </div>
       </BrowserRouter>
