@@ -15,15 +15,20 @@ import { User } from './Login/User';
 function App() {
   const [username, setUsername] = useState('');
   const [userid, setUserid] = useState('');
+  const [rows, setRows] = useState('');
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     const storedUserid = localStorage.getItem('userid');
+    const storedRows = localStorage.getItem('rows');
     if (storedUsername) {
       setUsername(storedUsername);
     }
     if (storedUserid) {
       setUserid(storedUserid);
+    }
+    if (storedRows) {
+      setUserid(storedRows);
     }
   }, []);
 
@@ -39,6 +44,13 @@ function App() {
     localStorage.removeItem('username');
     setUserid('');
     localStorage.removeItem('userid');
+    setRows(5);
+    localStorage.removeItem('rows');
+  }
+
+  function handleSelectedRows(rows) {
+    setRows(rows);
+    localStorage.setItem('rows', rows);
   }
 
   return (
@@ -48,15 +60,15 @@ function App() {
           <Navigation username={username} userid={userid} handleLogout={handleLogout} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path='/players' element={<Player username={username} />} />
-            <Route path="/champions" element={<Champion username={username} />} />
-            <Route path="/tournaments" element={<Tournament username={username} />} />
-            <Route path="/participations" element={<Participation username={username} />} />
+            <Route path='/players' element={<Player username={username} rows={rows}/>} />
+            <Route path="/champions" element={<Champion username={username} rows={rows}/>} />
+            <Route path="/tournaments" element={<Tournament username={username} rows={rows}/>} />
+            <Route path="/participations" element={<Participation username={username} rows={rows}/>} />
             <Route path="/players/trophies" element={<TrophyStats />} />
             <Route path="/players/ratings" element={<RatingStats />} />
             <Route path="/login" element={<Login handleLogin={handleLogin} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/users/:userid" element={<User username={username}/>} />
+            <Route path="/users/:userid" element={<User username={username} onSelectedRows={handleSelectedRows}/>} />
           </Routes>
         </div>
       </BrowserRouter>

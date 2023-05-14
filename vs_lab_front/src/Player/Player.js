@@ -14,7 +14,7 @@ export class Player extends Component{
     constructor(props){
         super(props);
         console.log(this.props.username);
-        this.state={players:[], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
+        this.state={players:[], currentPage: 1, itemsPerPage: this.props.rows, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, descriptionModalShow:false, detailsModalShow: false
         };
     }

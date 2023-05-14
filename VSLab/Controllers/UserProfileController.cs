@@ -111,6 +111,38 @@ namespace VSLab.Controllers
 
             return Ok(user);
         }
+        
+        [HttpGet("username/{username}")]
+        public async Task<ActionResult<tblChessPlayer>> GetUsername(string username)
+        {
+            var user = await _context.tblUserProfiles
+                .FirstOrDefaultAsync(x => x.UserName == username);
+
+            if (user == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUserProfile(int id, [FromBody] dtoUserProfile userProfileDto)
+        {
+            var userProfile = await _context.tblUserProfiles.FindAsync(id);
+
+            if (userProfile == null) 
+            {
+                return NotFound();
+            }
+
+            userProfile.UserName = userProfileDto.UserName;
+            _context.tblUserProfiles.Update(userProfile);
+            await _context.SaveChangesAsync();
+
+            return Ok(userProfile);
+        }
+
 
         private string GenerateJwtToken(tblUserProfile user)
         {

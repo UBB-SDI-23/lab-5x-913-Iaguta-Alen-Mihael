@@ -4,17 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Kazem natrak to sve ide kako treba sad, samo admina treba malko da radim na njim i extra operaciju na oba usera i admina vamosss">
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/Test.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/Test.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/Test.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/VSLab.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/VSLab.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_05_2023_00_11__Changes_1.xml" beforeDir="false" />
+    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Extra operation for User">
+      <change afterPath="$PROJECT_DIR$/src/Login/UserModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/Controllers/UserProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/Controllers/UserProfileController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/ref/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/ref/VSLab.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/refint/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/refint/VSLab.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Champion/Champion.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Champion/Champion.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Login/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Participation/Participation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/Participation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tournament/Tournament.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/Tournament.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +93,7 @@
       <workItem from="1683932122011" duration="288000" />
       <workItem from="1683933529328" duration="2298000" />
       <workItem from="1684006954932" duration="12220000" />
-      <workItem from="1684064348291" duration="13639000" />
+      <workItem from="1684064348291" duration="19685000" />
     </task>
     <task id="LOCAL-00001" summary="Again commited">
       <created>1683411037375</created>
@@ -131,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684079427212</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Extra operation for User">
+      <created>1684081119409</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684081119409</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +168,7 @@
     <MESSAGE value="Finna commit cuz mans hunger level started" />
     <MESSAGE value="Lam si nabijem kurac u ovo sve, se nadam da joj u redu ovo" />
     <MESSAGE value="Kazem natrak to sve ide kako treba sad, samo admina treba malko da radim na njim i extra operaciju na oba usera i admina vamosss" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kazem natrak to sve ide kako treba sad, samo admina treba malko da radim na njim i extra operaciju na oba usera i admina vamosss" />
+    <MESSAGE value="Extra operation for User" />
+    <option name="LAST_COMMIT_MESSAGE" value="Extra operation for User" />
   </component>
 </project>

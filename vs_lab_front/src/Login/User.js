@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, DropdownButton, Dropdown, Table } from 'react-bootstrap';
+import {Container, DropdownButton, Dropdown, Table, Form, Button, Modal} from 'react-bootstrap';
+import {UserModal} from "./UserModal";
 
 export function User(props) {
     const [user, setUser] = useState(null);
     const [selectedRows, setSelectedRows] = useState(1);
     const { userid } = useParams();
+    const [showModal, setShowModal] = useState(false);
+    const [searchName, setSearchName] = useState('');
+    const [foundUser, setFoundUser] = useState(null);
 
     useEffect(() => {
         fetch(process.env.REACT_APP_API + `userprofiles/${userid}`)
@@ -21,10 +25,36 @@ export function User(props) {
         }
     }, []);
 
+    const handleSearch = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch(
+                process.env.REACT_APP_API + `userprofiles/username/${searchName}`
+            );
+            if (response.ok) {
+                const data = await response.json();
+                setFoundUser(data);
+                setShowModal(true);
+            } else {
+                new window.Notification("User not found");
+                console.log("User not found");
+            }
+        } catch (error) {
+            new window.Notification("User not found");
+            console.log(error);
+        }
+    };
+
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
     const handleSelect = (eventKey) => {
         console.log(`Selected option ${eventKey}`);
         setSelectedRows(parseInt(eventKey));
         localStorage.setItem('selectedRows', eventKey);
+        props.onSelectedRows(parseInt(eventKey));
     };
 
     return (
@@ -79,6 +109,27 @@ export function User(props) {
                                             </Dropdown.Item>
                                         ))}
                                     </DropdownButton>
+                                </td>
+                            </tr>
+                        )}
+                        {props.username === "admin" && (
+                            <tr>
+                                <td>
+                                    <strong>Find a user:</strong>
+                                </td>
+                                <td className="text-center">
+                                    <Form onSubmit={handleSearch}>
+                                        <Form.Control type="text" placeholder="Enter username" value={searchName} onChange={(event) => setSearchName(event.target.value)} />
+                                        <Button variant="primary" type="submit" style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '0.5rem', display: 'block' }}>Search</Button>
+                                    </Form>
+                                    <Modal show={showModal} onHide={handleCloseModal}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>User Information</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <UserModal foundUser={foundUser}/>
+                                        </Modal.Body>
+                                    </Modal>
                                 </td>
                             </tr>
                         )}

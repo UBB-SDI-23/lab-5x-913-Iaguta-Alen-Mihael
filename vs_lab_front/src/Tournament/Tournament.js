@@ -13,7 +13,7 @@ export class Tournament extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            tournaments: [], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
+            tournaments: [], currentPage: 1, itemsPerPage: this.props.rows, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
