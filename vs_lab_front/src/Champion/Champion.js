@@ -13,7 +13,7 @@ export class Champion extends Component{
     constructor(props){
         super(props);
         this.state = {
-            champions: [], currentPage: 1, itemsPerPage: this.props.rows, totalPages: 0, user: this.props.username,
+            champions: [], currentPage: 1, itemsPerPage: this.props.rows ? this.props.rows : 5, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
