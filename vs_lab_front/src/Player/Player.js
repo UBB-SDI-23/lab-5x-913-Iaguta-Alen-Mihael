@@ -202,34 +202,34 @@ export class Player extends Component{
                                 Name
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell" style={{ display: 'none!important' }}>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Country
                                 </Button>
                             </th>
-                            <th>
-                                <Button variant="outline-primary" className="font-weight-bold" 
+                            <th className="d-none d-md-table-cell" style={{ display: 'none!important' }}>
+                                <Button variant="outline-primary" className="font-weight-bold"
                                 style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}
                                 onClick={() => this.ratingSort()}>
                                     Rating ⇩
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell" style={{ display: 'none!important' }}>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     IsMaster
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell" style={{ display: 'none!important' }}>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     StartYear
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-lg-table-cell" style={{ display: 'none!important' }}>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Participations
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-xl-table-cell" style={{ display: 'none!important' }}>
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Championships
                                 </Button>
@@ -251,12 +251,12 @@ export class Player extends Component{
                             return (
                                 <tr key={player.id}>
                                     <td>{player.name}</td>
-                                    <td>{player.country}</td>
-                                    <td>{player.rating}</td>
-                                    <td>{player.isMaster}</td>
-                                    <td>{player.startYear}</td>
-                                    <td>{player.playerParticipations.length}</td>
-                                    <td>{player.chessChampions.length}</td>
+                                    <td className="d-none d-md-table-cell" style={{ display: 'none!important' }}>{player.country}</td>
+                                    <td className="d-none d-md-table-cell" style={{ display: 'none!important' }}>{player.rating}</td>
+                                    <td className="d-none d-md-table-cell" style={{ display: 'none!important' }}>{player.isMaster}</td>
+                                    <td className="d-none d-md-table-cell" style={{ display: 'none!important' }}>{player.startYear}</td>
+                                    <td className="d-none d-lg-table-cell" style={{ display: 'none!important' }}>{player.playerParticipations.length}</td>
+                                    <td className="d-none d-xl-table-cell" style={{ display: 'none!important' }}>{player.chessChampions.length}</td>
                                     <td>
                                         <ButtonToolbar>
                                             <Button

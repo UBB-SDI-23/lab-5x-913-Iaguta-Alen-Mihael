@@ -215,27 +215,27 @@ export class Tournament extends Component{
                                     Name
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-sm-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Participants
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Host
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Prize Money
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-lg-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Trophy
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-lg-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Participations
                                 </Button>
@@ -256,11 +256,11 @@ export class Tournament extends Component{
                         {tournaments.map(tournament =>
                             <tr key={tournament.id}>
                                 <td>{tournament.name}</td>
-                                <td>{tournament.numParticipants}</td>
-                                <td>{tournament.host}</td>
-                                <td>{tournament.prizeMoney}</td>
-                                <td>{tournament.trophy}</td>
-                                <td>{tournament.tournamentParticipations.length}</td>
+                                <td className="d-none d-sm-table-cell">{tournament.numParticipants}</td>
+                                <td className="d-none d-md-table-cell">{tournament.host}</td>
+                                <td className="d-none d-md-table-cell">{tournament.prizeMoney}</td>
+                                <td className="d-none d-lg-table-cell">{tournament.trophy}</td>
+                                <td className="d-none d-lg-table-cell">{tournament.tournamentParticipations.length}</td>
                                 <td>
                                     <ButtonToolbar>
                                         <Button
