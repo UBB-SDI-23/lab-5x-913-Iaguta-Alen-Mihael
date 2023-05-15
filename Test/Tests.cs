@@ -1,4 +1,9 @@
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 using VSLab.Controllers;
 using VSLab.Data;
 using VSLab.Data.Non_Essential;
@@ -8,6 +13,23 @@ namespace Test
     [TestClass]
     public class Tests
     {
+        private HttpClient _httpClient;
+        private WebApplicationFactory<Program> _factory;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _factory = new WebApplicationFactory<Program>();
+            _httpClient = _factory.CreateClient();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _httpClient.Dispose();
+            _factory.Dispose();
+        }
+
         [TestMethod]
         public async Task Filter_ReturnExpectedDataTest()
         {
@@ -115,5 +137,72 @@ namespace Test
                 }
             }
         }
+
+        [TestMethod]
+        public async Task ChampionRouteReturnsChampion()
+        {
+            // Arrange
+            int championId = 903; // Specify the ID of the champion you want to retrieve
+            string requestUrl = $"/api/chesschampions/{championId}"; // Replace "yourControllerName" with the actual controller name
+
+            // Act
+            var response = await _httpClient.GetAsync(requestUrl);
+
+            // Assert
+            response.EnsureSuccessStatusCode(); // Ensure a successful HTTP status code (2xx)
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode); // Assert that the status code is OK (200)
+
+            // Deserialize the response content
+            var contentString = await response.Content.ReadAsStringAsync();
+            var champion = JsonSerializer.Deserialize<tblChessChampion>(contentString, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            // Additional assertions
+            Assert.IsNotNull(champion); // Assert that the champion object is not null
+            Assert.AreEqual(championId, champion.ID); // Assert that the champion ID matches the requested ID
+            // Add more assertions based on your specific requirements
+        }
+
+        [TestMethod]
+        public async Task ChampionRoutePostsChampion()
+        {
+            // Arrange
+            var championDto = new dtoChessChampion
+            {
+                // Set the properties of the dtoChessChampion object according to your test scenario
+                ConsecutiveYears = 3,
+                Record = "12-12-12",
+                Current = 1,
+                LastTrophy = "None",
+                MaxRating = 2500,
+                Description = "Some description",
+                ChessPlayerID = 1 // Provide a valid ChessPlayerID that exists in the database
+            };
+
+            var requestUrl = "/api/ChessChampions";
+
+            // Convert the dtoChessChampion object to JSON
+            var content = new StringContent(JsonSerializer.Serialize(championDto), Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await _httpClient.PostAsync(requestUrl, content);
+
+            // Assert
+            response.EnsureSuccessStatusCode(); // Ensure a successful HTTP status code (2xx)
+
+            // Deserialize the response content
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var createdChampionDto = JsonSerializer.Deserialize<dtoChessChampion>(responseContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            // Additional assertions
+            Assert.IsNotNull(createdChampionDto); // Assert that the created champion object is not null
+                                                  // Add more assertions based on your specific requirements
+        }
+
     }
 }

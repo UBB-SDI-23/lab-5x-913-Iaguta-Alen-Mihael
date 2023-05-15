@@ -22,6 +22,7 @@
           "Microsoft.Extensions.Identity.Core": "7.0.5",
           "Microsoft.IdentityModel.Tokens": "6.30.0",
           "Microsoft.NET.Test.Sdk": "17.5.0",
+          "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.17.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "7.0.6",
           "MySql.Data": "8.0.32.1",
           "MySql.EntityFrameworkCore": "7.0.0",
@@ -33,6 +34,7 @@
           "Swashbuckle.AspNetCore.SwaggerUI": "6.5.0",
           "System.Data.SqlClient": "4.8.5",
           "System.Diagnostics.Tools": "4.3.0",
+          "coverlet.collector": "3.2.0",
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0"
         },
         "runtime": {
@@ -81,6 +83,7 @@
           }
         }
       },
+      "coverlet.collector/3.2.0": {},
       "Google.Protobuf/3.21.9": {
         "runtime": {
           "lib/net5.0/Google.Protobuf.dll": {
@@ -1684,6 +1687,7 @@
           }
         }
       },
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.17.2": {},
       "Microsoft.VisualStudio.Web.CodeGeneration/7.0.6": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
@@ -3130,6 +3134,13 @@
       "path": "bcrypt.net-next/4.0.3",
       "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
     },
+    "coverlet.collector/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xjY8xBigSeWIYs4I7DgUHqSNoGqnHi7Fv7/7RZD02rvZyG3hlsjnQKiVKVWKgr9kRKgmV+dEfu8KScvysiC0Wg==",
+      "path": "coverlet.collector/3.2.0",
+      "hashPath": "coverlet.collector.3.2.0.nupkg.sha512"
+    },
     "Google.Protobuf/3.21.9": {
       "type": "package",
       "serviceable": true,
@@ -3766,6 +3777,13 @@
       "sha512": "sha512-X86aikwp9d4SDcBChwzQYZihTPGEtMdDk+9t64emAl7N0Tq+OmlLAoW+Rs+2FB2k6QdUicSlT4QLO2xABRokaw==",
       "path": "microsoft.testplatform.testhost/17.5.0",
       "hashPath": "microsoft.testplatform.testhost.17.5.0.nupkg.sha512"
+    },
+    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.17.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5daNXm8Hb016oETmuHXiW8jclmRR9CzM7XrOh2htYhQ/7AAYtqntZ1MrZkh09+JTtdjYdGsy2XIMPe9cg83x5w==",
+      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.17.2",
+      "hashPath": "microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512"
     },
     "Microsoft.VisualStudio.Web.CodeGeneration/7.0.6": {
       "type": "package",

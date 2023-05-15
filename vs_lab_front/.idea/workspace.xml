@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Think it's responsively good IDK">
+    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Lets'gooo">
+      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Champion/Champion.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Champion/Champion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Participation/Participation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Participation/Participation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player/Player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tournament/Tournament.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tournament/Tournament.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +81,9 @@
       <workItem from="1683933529328" duration="2298000" />
       <workItem from="1684006954932" duration="12220000" />
       <workItem from="1684064348291" duration="19771000" />
-      <workItem from="1684097108242" duration="3579000" />
+      <workItem from="1684097108242" duration="4440000" />
+      <workItem from="1684133433311" duration="141000" />
+      <workItem from="1684135487391" duration="201000" />
     </task>
     <task id="LOCAL-00001" summary="Again commited">
       <created>1683411037375</created>
@@ -156,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684100308421</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Lets'gooo">
+      <created>1684100782847</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1684100782847</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +189,7 @@
     <MESSAGE value="Extra operation for User" />
     <MESSAGE value="Laboratory 9 donzalo" />
     <MESSAGE value="Think it's responsively good IDK" />
-    <option name="LAST_COMMIT_MESSAGE" value="Think it's responsively good IDK" />
+    <MESSAGE value="Lets'gooo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lets'gooo" />
   </component>
 </project>

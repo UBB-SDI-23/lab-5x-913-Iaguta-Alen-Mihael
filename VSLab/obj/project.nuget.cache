@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "1vhR4E2MMhn+Mgv4wHtiPUZgScKJQ5chohfTM4qm5OotSPH39AdY+1nwAgv8qno2nx6x8sV46xDSftXifEaOlA==",
+  "dgSpecHash": "KugpJeNJUoEsM4J8oaQeCEhEtL6c8Bq6AQDiYwVOElEvtkGtAoSeqaojCRbdkW8TO2HkYDj4FC3Hm/qRz/CFNQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alen\\Documents\\GitHub\\lab-5x-913-Iaguta-Alen-Mihael\\VSLab\\VSLab.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alen\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\Alen\\.nuget\\packages\\coverlet.collector\\3.2.0\\coverlet.collector.3.2.0.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",
@@ -98,6 +99,7 @@
     "C:\\Users\\Alen\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.5.0\\microsoft.testplatform.objectmodel.17.5.0.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\microsoft.testplatform.testhost\\17.5.0\\microsoft.testplatform.testhost.17.5.0.nupkg.sha512",
+    "C:\\Users\\Alen\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\7.0.6\\microsoft.visualstudio.web.codegeneration.7.0.6.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\7.0.6\\microsoft.visualstudio.web.codegeneration.core.7.0.6.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.design\\7.0.6\\microsoft.visualstudio.web.codegeneration.design.7.0.6.nupkg.sha512",

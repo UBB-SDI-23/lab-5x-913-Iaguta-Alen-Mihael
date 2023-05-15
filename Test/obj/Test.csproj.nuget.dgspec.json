@@ -108,6 +108,10 @@
               "target": "Package",
               "version": "[6.5.0, )"
             },
+            "Swashbuckle.AspNetCore.ApiTesting.Xunit": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -129,6 +133,16 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.2, )"
+            },
+            "xunit.runner.console": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.2, )"
             }
           },
           "imports": [
@@ -245,6 +259,10 @@
               "target": "Package",
               "version": "[17.5.0, )"
             },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.17.2, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[7.0.6, )"
@@ -288,6 +306,12 @@
             "System.Diagnostics.Tools": {
               "target": "Package",
               "version": "[4.3.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.2.0, )"
             }
           },
           "imports": [
