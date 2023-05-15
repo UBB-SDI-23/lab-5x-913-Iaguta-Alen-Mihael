@@ -13,7 +13,7 @@ export class Champion extends Component{
     constructor(props){
         super(props);
         this.state = {
-            champions: [], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
+            champions: [], currentPage: 1, itemsPerPage: this.props.rows ? this.props.rows : 5, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
@@ -208,22 +208,22 @@ export class Champion extends Component{
                                     Last Trophy
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-sm-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Record
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Max Rating
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Consecutive Years
                                 </Button>
                             </th>
-                            <th>
+                            <th className="d-none d-md-table-cell">
                                 <Button variant="outline-primary" className="font-weight-bold" style={{ backgroundColor: 'transparent', borderColor: 'transparent', color: 'black', textShadow: 'none' }}>
                                     Current
                                 </Button>
@@ -239,10 +239,10 @@ export class Champion extends Component{
                         {champions.map(champ =>
                             <tr key={champ.id}>
                                 <td>{champ.lastTrophy}</td>
-                                <td>{champ.record}</td>
-                                <td>{champ.maxRating}</td>
-                                <td>{champ.consecutiveYears}</td>
-                                <td>{champ.current}</td>
+                                <td className="d-none d-sm-table-cell">{champ.record}</td>
+                                <td className="d-none d-md-table-cell">{champ.maxRating}</td>
+                                <td className="d-none d-md-table-cell">{champ.consecutiveYears}</td>
+                                <td className="d-none d-md-table-cell">{champ.current}</td>
                                 <td>
                                 <ButtonToolbar>
                                     

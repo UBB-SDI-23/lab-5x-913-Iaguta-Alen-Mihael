@@ -11,7 +11,7 @@ export class Participation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            participations: [], currentPage: 1, itemsPerPage: 5, totalPages: 0, user: this.props.username,
+            participations: [], currentPage: 1, itemsPerPage: this.props.rows ? this.props.rows : 5, totalPages: 0, user: this.props.username,
             addModalShow: false, updateModalShow: false, detailsModalShow: false, descriptionModalShow: false
         };
     }
