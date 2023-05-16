@@ -13,74 +13,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="040547b5-1e50-4eb2-8e1a-c35fc1bae29a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Test/Test.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/Test.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/VSLab.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/VSLab.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/ref/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/ref/Test.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/refint/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/refint/Test.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Test.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/vslab.metadata.v6.1" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/vslab.metadata.v6.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/vslab.projects.v6.1" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ProjectEvaluation/vslab.projects.v6.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/VSLab/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/FileContentIndex/2da7823a-6dfa-4662-b601-f318886abd76.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/FileContentIndex/70e261d8-dce0-4456-969d-16929a333f35.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/FileContentIndex/f96756ee-6c11-4752-9930-0dab4acee8da.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/FileContentIndex/fc21f408-820f-44e9-8049-4105ba98cbe6.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/v17/.futdcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/VSLab/v17/.futdcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/VSLab/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/VSLab/v17/TestStore/0/000.testlog" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/VSLab/v17/TestStore/0/000.testlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VSLab.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/VSLab.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VSLab.csproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/VSLab.csproj.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VSLab.sln" beforeDir="false" afterPath="$PROJECT_DIR$/VSLab.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VSLab.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/VSLab.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/VSLab.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/VSLab.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/VSLab.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/VSLab.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/ref/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/ref/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/refint/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/refint/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Release/net6.0/VSLab.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net6.0/VSLab.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Release/net6.0/VSLab.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net6.0/VSLab.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Release/net7.0/VSLab.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net7.0/VSLab.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Release/net7.0/VSLab.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net7.0/VSLab.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Release/net7.0/VSLab.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net7.0/VSLab.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/obj/VSLab.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../vs_lab_front/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,6 +131,8 @@
       <workItem from="1684181520144" duration="2419000" />
       <workItem from="1684186912689" duration="62000" />
       <workItem from="1684187011833" duration="135000" />
+      <workItem from="1684187416471" duration="92000" />
+      <workItem from="1684213630968" duration="1296000" />
     </task>
     <task id="LOCAL-00001" summary="Tryna do sum">
       <created>1683545848085</created>
@@ -206,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683574075217</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Created E2E tests and made DockerFile">
+      <created>1684187453275</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684187453275</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +166,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Tryna do sum" />
     <MESSAGE value="Kinda Jwt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kinda Jwt" />
+    <MESSAGE value="Created E2E tests and made DockerFile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created E2E tests and made DockerFile" />
   </component>
 </project>
