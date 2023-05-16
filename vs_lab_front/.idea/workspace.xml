@@ -4,28 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Lets'gooo">
-      <change beforePath="$PROJECT_DIR$/../Test/Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/bin/Debug/net7.0/Test.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/Test.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/ref/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/ref/Test.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/refint/Test.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Test/obj/Debug/net7.0/refint/Test.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.idea/.idea.VSLab/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.vs/ProjectEvaluation/vslab.metadata.v6.1" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.vs/ProjectEvaluation/vslab.metadata.v6.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.vs/ProjectEvaluation/vslab.projects.v6.1" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.vs/ProjectEvaluation/vslab.projects.v6.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.vs/VSLab/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.vs/VSLab/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/.futdcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/.futdcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/TestStore/0/000.testlog" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/.vs/VSLab/v17/TestStore/0/000.testlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/VSLab.csproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/VSLab.csproj.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/bin/Debug/net7.0/VSLab.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/obj/Debug/net7.0/VSLab.pdb" afterDir="false" />
+    <list default="true" id="1aa6a489-6ace-49dd-aaab-561e0266f5a1" name="Changes" comment="Made passwords work, for future logins">
+      <change beforePath="$PROJECT_DIR$/../VSLab/Controllers/UserProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../VSLab/Controllers/UserProfileController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +84,7 @@
       <workItem from="1684133433311" duration="141000" />
       <workItem from="1684135487391" duration="201000" />
       <workItem from="1684213626061" duration="1545000" />
-      <workItem from="1684215481899" duration="418000" />
+      <workItem from="1684215481899" duration="1040000" />
     </task>
     <task id="LOCAL-00001" summary="Again commited">
       <created>1683411037375</created>
@@ -183,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684100782847</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Made passwords work, for future logins">
+      <created>1684215981562</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1684215981562</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +198,7 @@
     <MESSAGE value="Laboratory 9 donzalo" />
     <MESSAGE value="Think it's responsively good IDK" />
     <MESSAGE value="Lets'gooo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lets'gooo" />
+    <MESSAGE value="Made passwords work, for future logins" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made passwords work, for future logins" />
   </component>
 </project>

@@ -25,14 +25,12 @@ if __name__ == '__main__':
     generate_champions_sql(champions)
     """
 
+    # particpations = generate_participation(amount)
+    # generate_participation_sql(particpations)
 
-    particpations = generate_participation(amount)
-    generate_participation_sql(particpations)
-
-    """
     users = generate_users(amount)
     generate_users_sql(users)
-    """
+
     end_time = time.time()
     time_taken = end_time - start_time
     print(time_taken)
