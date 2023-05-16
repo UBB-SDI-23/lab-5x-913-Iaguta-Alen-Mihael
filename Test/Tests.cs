@@ -203,6 +203,33 @@ namespace Test
             Assert.IsNotNull(createdChampionDto); // Assert that the created champion object is not null
                                                   // Add more assertions based on your specific requirements
         }
+        
+        [TestMethod]
+        public async Task PlayerRouteGetsPlayer()
+        {
+            // Arrange
+
+            var playerId = 1;
+            var requestUrl = $"/api/ChessPlayers/{playerId}";
+
+            // Convert the dtoChessChampion object to JSON
+            var response = await _httpClient.GetAsync(requestUrl);
+
+            // Assert
+            response.EnsureSuccessStatusCode(); // Ensure a successful HTTP status code (2xx)
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode); // Assert that the status code is OK (200)
+
+            // Deserialize the response content
+            var contentString = await response.Content.ReadAsStringAsync();
+            var player = JsonSerializer.Deserialize<tblChessPlayer>(contentString, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            // Additional assertions
+            Assert.IsNotNull(player); // Assert that the champion object is not null
+            Assert.AreEqual(playerId, player.ID);
+        }
 
     }
 }
