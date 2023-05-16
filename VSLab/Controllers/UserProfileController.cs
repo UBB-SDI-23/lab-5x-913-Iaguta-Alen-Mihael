@@ -81,15 +81,10 @@ namespace VSLab.Controllers
                 return Task.FromResult<IActionResult>(Unauthorized("User not active"));
             }
 
-            /*if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+            if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
                 return Task.FromResult<IActionResult>(Unauthorized("Invalid password"));
-            }*/
-
-            /*if (user.Password != model.Password)
-            {
-                return Task.FromResult<IActionResult>(Unauthorized("Invalid password"));
-            }*/
+            }
 
             var tokenString = GenerateJwtToken(user);
 

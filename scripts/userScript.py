@@ -1,4 +1,5 @@
 import random
+import bcrypt
 from faker import Faker
 
 
@@ -24,10 +25,10 @@ def generate_users(amount):
         date = faker.date()
         bio = faker.sentence()
         confirmation = "arsenal"
-        password = "12345678"
+        password = bcrypt.hashpw(username.encode('utf-8'), bcrypt.gensalt())
         active = True
 
-        if i % 10000 == 0 and i > 0:
+        if i % 1000 == 0 and i > 0:
             print(f"Generated {i}")
 
         users.append(User(password, username, bio, date, phone, confirmation, active))
